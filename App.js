@@ -6,44 +6,68 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from "react";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity
+} from "react-native";
+import {
+  createBottomTabNavigator,
+  createSwitchNavigator
+} from "react-navigation";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import Swiper from "react-native-swiper";
+import AboutScreen from "./screens/AboutScreen";
+import CategoriesScreen from "./screens/CategoriesScreen";
+import ContactScreen from "./screens/ContactScreen";
+import HomeScreen from "./screens/HomeScreen";
+import NewsScreen from "./screens/NewsScreen";
+import GetStartScreen from "./screens/GetStartScreen";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+const MainTabs = createBottomTabNavigator(
+  {
+    News: NewsScreen,
+    Categories: CategoriesScreen,
+    Home: HomeScreen,
+    Contact: ContactScreen,
+    About: AboutScreen
+  },
+  { initialRouteName: "Home" }
+);
+const WelcomeSwitch = createSwitchNavigator(
+  {
+    GetStart: GetStartScreen,
+    Tabs: MainTabs
+  },
+  { initialRouteName: "GetStart" }
+);
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <Provider store={store}>
+        <WelcomeSwitch />
+      </Provider>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container1: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "blue"
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  container2: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "green"
+  }
 });
