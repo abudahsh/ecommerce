@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-class ContactScreen extends Component {
-  state = {};
+class VendorDetailScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text> ContactScreen </Text>
+        <Text> VendorDetailScreen </Text>
       </View>
     );
   }
@@ -21,4 +24,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ContactScreen;
+export default VendorDetailScreen;

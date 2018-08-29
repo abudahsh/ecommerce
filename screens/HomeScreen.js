@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import ProductRow from "./../components/ProductRow";
 
-fakeData = [
+otherData = [
   {},
   {},
   {},
@@ -47,9 +47,8 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> HomeScreen </Text>
         <FlatList
-          data={fakeData}
+          data={otherData}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
           numColumns={2}
@@ -61,8 +60,7 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 30
+    flex: 1
   }
 });
 

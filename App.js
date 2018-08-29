@@ -17,7 +17,8 @@ import {
 } from "react-native";
 import {
   createBottomTabNavigator,
-  createSwitchNavigator
+  createSwitchNavigator,
+  createStackNavigator
 } from "react-navigation";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -28,16 +29,65 @@ import ContactScreen from "./screens/ContactScreen";
 import HomeScreen from "./screens/HomeScreen";
 import NewsScreen from "./screens/NewsScreen";
 import GetStartScreen from "./screens/GetStartScreen";
+import ProductDetailScreen from "./screens/ProductDetailScreen";
+import VendorDetailScreen from "./screens/VendorDetailScreen";
+
+const ProductStack = createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: {
+        title: "Home"
+      }
+    },
+    ProductDetail: {
+      screen: ProductDetailScreen,
+      navigationOptions: {
+        title: "Detail"
+      }
+    },
+    VendorDetail: {
+      screen: VendorDetailScreen,
+      navigationOptions: {
+        title: "Vendor"
+      }
+    }
+  },
+  {
+    initialRouteName: "Home",
+    navigationOptions: {
+      headerRight: (
+        <View style={{ flexDirection: "row", paddingHorizontal: 10 }}>
+          <TouchableOpacity>
+            <Text>Search</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text style={{ paddingHorizontal: 10 }}>Cart</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text>Profile</Text>
+          </TouchableOpacity>
+        </View>
+      )
+    }
+  }
+);
 
 const MainTabs = createBottomTabNavigator(
   {
     News: NewsScreen,
     Categories: CategoriesScreen,
-    Home: HomeScreen,
+    ProductStack: {
+      screen: ProductStack,
+      navigationOptions: {
+        tabBarLabel: "Home"
+      }
+    },
     Contact: ContactScreen,
     About: AboutScreen
   },
-  { initialRouteName: "Home" }
+  { initialRouteName: "ProductStack" }
 );
 const WelcomeSwitch = createSwitchNavigator(
   {
