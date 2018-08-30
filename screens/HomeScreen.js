@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, Dimensions } from "react-native";
 import ProductRow from "./../components/ProductRow";
 
 otherData = [
@@ -33,13 +33,25 @@ otherData = [
   {},
   {}
 ];
-
+sWidth = Dimensions.get("window").width;
+sHeight = Dimensions.get("window").height;
 class HomeScreen extends Component {
   state = {};
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
-      style={{ borderColor: "gray", borderWidth: StyleSheet.hairlineWidth }}
+      style={{
+        backgroundColor: "white",
+        borderColor: "#e5e5e5",
+        borderRightWidth: 2,
+        borderBottomWidth: 2,
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15,
+        borderTopColor: "#e5e5e5",
+        borderRadius: 15,
+        marginHorizontal: 0.025 * sWidth,
+        marginVertical: 8
+      }}
     >
       <ProductRow {...item} />
     </View>
@@ -60,7 +72,8 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#fcfcfc"
   }
 });
 
