@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { getStarted } from "./../redux/actions";
+import { _getStarted } from "./../redux/actions";
 import { store } from "./../redux/store";
 import Swiper from "react-native-swiper";
-
 class GetStartScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   handleClick = () => {
-    this.props.getStarted();
-    console.log("state" + store.getState().user.gotStarted);
+    this.props._getStarted();
+    console.log("state" + store.getState().client.gotStarted);
 
     this.props.navigation.navigate("Tabs");
   };
@@ -22,7 +21,7 @@ class GetStartScreen extends Component {
       <Swiper
         index={2}
         loop={false}
-        showsPagination={!store.getState().user.gotStarted}
+        showsPagination={!store.getState().client.gotStarted}
       >
         <View style={styles.container1}>
           <Text>WE CAME</Text>
@@ -68,9 +67,9 @@ const styles = StyleSheet.create({
   }
 });
 const mapStateToProps = state => ({
-  gotStarted: state.user.gotStarted
+  gotStarted: state.client.gotStarted
 });
 export default connect(
   mapStateToProps,
-  { getStarted }
+  { _getStarted }
 )(GetStartScreen);

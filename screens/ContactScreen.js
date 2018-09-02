@@ -48,46 +48,46 @@ class ContactScreen extends Component {
           >
             <Text>ENVAIR</Text>
           </TouchableOpacity>
-          <Text>Information</Text>
-          <ImageBackground
-            source={require("./../assets/Rectangle.png")}
-            style={{ padding: 10 }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                paddingVertical: 10,
-                alignItems: "center",
-                justifyContent: "space-around"
-              }}
-            >
-              <Icon name="map-marker" size={45} color={"#4b2727"} />
-              <Text>blah blah blah blah blah blah</Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                paddingVertical: 10,
-                alignItems: "center",
-                justifyContent: "space-around"
-              }}
-            >
-              <Icon name="phone" size={45} color={"#4b2727"} />
-              <Text>blah blah blah blah blah blah</Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                paddingVertical: 10,
-                alignItems: "center",
-                justifyContent: "space-around"
-              }}
-            >
-              <Icon name="send" size={35} color={"#4b2727"} />
-              <Text>blah blah blah blah blah blah</Text>
-            </View>
-          </ImageBackground>
         </KeyboardAvoidingView>
+        <Text>Information</Text>
+        <ImageBackground
+          source={require("./../assets/Rectangle.png")}
+          style={{ padding: 10 }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              paddingVertical: 10,
+              alignItems: "center",
+              justifyContent: "space-around"
+            }}
+          >
+            <Icon name="map-marker" size={45} color={"#4b2727"} />
+            <Text>blah blah blah blah blah blah</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              paddingVertical: 10,
+              alignItems: "center",
+              justifyContent: "space-around"
+            }}
+          >
+            <Icon name="phone" size={45} color={"#4b2727"} />
+            <Text>blah blah blah blah blah blah</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              paddingVertical: 10,
+              alignItems: "center",
+              justifyContent: "space-around"
+            }}
+          >
+            <Icon name="send" size={35} color={"#4b2727"} />
+            <Text>blah blah blah blah blah blah</Text>
+          </View>
+        </ImageBackground>
       </ScrollView>
     );
   }

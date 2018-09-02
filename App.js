@@ -23,7 +23,6 @@ import {
 } from "react-navigation";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-import Swiper from "react-native-swiper";
 import AboutScreen from "./screens/AboutScreen";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import ContactScreen from "./screens/ContactScreen";
@@ -32,6 +31,10 @@ import NewsScreen from "./screens/NewsScreen";
 import GetStartScreen from "./screens/GetStartScreen";
 import ProductDetailScreen from "./screens/ProductDetailScreen";
 import VendorDetailScreen from "./screens/VendorDetailScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import CartScreen from "./screens/CartScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 
 sHeight = Dimensions.get("window").height;
 
@@ -54,45 +57,35 @@ const ProductStack = createStackNavigator(
       navigationOptions: {
         title: "Vendor"
       }
+    },
+    Login: {
+      screen: LoginScreen,
+      navigationOptions: {
+        title: "Login"
+      }
+    },
+    Register: {
+      screen: RegisterScreen,
+      navigationOptions: {
+        title: "Register"
+      }
+    },
+    Cart: {
+      screen: CartScreen,
+      navigationOptions: {
+        title: "Cart"
+      }
+    },
+    Profile: {
+      screen: ProfileScreen,
+      navigationOptions: {
+        title: "Profile"
+      }
     }
   },
   {
     initialRouteName: "Home",
     navigationOptions: {
-      headerRight: (
-        <View
-          style={{
-            flexDirection: "row",
-            paddingHorizontal: 10
-          }}
-        >
-          <TouchableOpacity>
-            <Image
-              source={require("./assets/Icons/arrow.png")}
-              style={{ width: 25, height: 25 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={require("./assets/Icons/search.png")}
-              style={{ width: 25, height: 25, marginHorizontal: 10 }}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Image
-              source={require("./assets/Icons/cart.png")}
-              style={{ width: 25, height: 25, marginRight: 10 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={require("./assets/Icons/account.png")}
-              style={{ width: 25, height: 25 }}
-            />
-          </TouchableOpacity>
-        </View>
-      ),
       headerStyle: {
         backgroundColor: "#4b2727",
         height: 0.06 * sHeight

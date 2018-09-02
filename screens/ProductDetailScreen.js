@@ -21,6 +21,16 @@ class ProductDetailScreen extends Component {
     />
   );
   render() {
+    const { navigation } = this.props;
+    const name = navigation.getParam("name", "Product Name");
+    const describtion = navigation.getParam(
+      "describtion",
+      "Product's describtion"
+    );
+    const price = navigation.getParam("price", "00.0");
+    const vendorName = navigation.getParam("vendorName", "vendor name");
+    const vendorDesc = navigation.getParam("vendorDesc", "The best place ever");
+
     return (
       <View style={styles.container}>
         <View style={{ height: "45%" }}>
@@ -37,9 +47,13 @@ class ProductDetailScreen extends Component {
             justifyContent: "space-between"
           }}
         >
-          <Text>Price: 900 L.E</Text>
+          <Text>{"price: " + price}</Text>
           <Text>Num: 1</Text>
         </View>
+        <Text>{name}</Text>
+        <Text>{describtion}</Text>
+        <Text>{vendorName}</Text>
+        <Text>{vendorDesc}</Text>
       </View>
     );
   }

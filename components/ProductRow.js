@@ -14,8 +14,16 @@ class ProductRow extends React.Component {
   render() {
     return (
       <View>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("ProductDetail")}
+        <TouchableWithoutFeedback
+          onPress={() =>
+            this.props.navigation.navigate("ProductDetail", {
+              name: "Awesome Product",
+              describtion: "This product is the best in our city, try it",
+              price: 1299,
+              vendorName: "Oddaa",
+              vendorDesc: "WE are working since 1932"
+            })
+          }
         >
           <View>
             <Image
@@ -76,7 +84,7 @@ class ProductRow extends React.Component {
               </View>
             </View>
           </View>
-        </TouchableOpacity>
+        </TouchableWithoutFeedback>
       </View>
     );
   }
