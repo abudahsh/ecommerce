@@ -35,7 +35,8 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import CartScreen from "./screens/CartScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-
+import Icon from "react-native-vector-icons/FontAwesome";
+import CategoryDetailScreen from "./screens/CategoryDetailScreen";
 sHeight = Dimensions.get("window").height;
 
 const ProductStack = createStackNavigator(
@@ -95,30 +96,54 @@ const ProductStack = createStackNavigator(
   }
 );
 
+const CatStack = createStackNavigator(
+  {
+    CategoriesList: {
+      screen: CategoriesScreen,
+      navigationOptions: {
+        title: "Categories"
+      }
+    },
+    CategoryDetail: {
+      screen: CategoryDetailScreen,
+      navigationOptions: {
+        title: "Category Detail"
+      }
+    }
+  },
+  {
+    initialRouteName: "CategoriesList",
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: "#4b2727",
+        height: 0.06 * sHeight
+      },
+      headerTintColor: "#e48d31"
+    }
+  }
+);
 const MainTabs = createBottomTabNavigator(
   {
     News: {
       screen: NewsScreen,
       navigationOptions: {
         tabBarLabel: () => null,
-        tabBarIcon: (
-          <Image
-            source={require("./assets/Icons/news1.png")}
-            style={{ height: 35, width: 40 }}
+        tabBarIcon: ({ focused }) => (
+          <Icon
+            name="newspaper-o"
+            size={25}
+            color={focused ? "#e48d31" : "white"}
           />
         )
       }
     },
     Categories: {
-      screen: CategoriesScreen,
+      screen: CatStack,
 
       navigationOptions: {
         tabBarLabel: () => null,
-        tabBarIcon: (
-          <Image
-            source={require("./assets/Icons/categ1.png")}
-            style={{ height: 35, width: 40 }}
-          />
+        tabBarIcon: ({ focused }) => (
+          <Icon name="list" size={25} color={focused ? "#e48d31" : "white"} />
         )
       }
     },
@@ -126,11 +151,8 @@ const MainTabs = createBottomTabNavigator(
       screen: ProductStack,
       navigationOptions: {
         tabBarLabel: () => null,
-        tabBarIcon: (
-          <Image
-            source={require("./assets/Icons/home1.png")}
-            style={{ height: 35, width: 35 }}
-          />
+        tabBarIcon: ({ focused }) => (
+          <Icon name="home" size={30} color={focused ? "#e48d31" : "white"} />
         )
       }
     },
@@ -138,10 +160,12 @@ const MainTabs = createBottomTabNavigator(
       screen: ContactScreen,
       navigationOptions: {
         tabBarLabel: () => null,
-        tabBarIcon: (
-          <Image
-            source={require("./assets/Icons/mail1.png")}
-            style={{ height: 35, width: 40 }}
+
+        tabBarIcon: ({ focused }) => (
+          <Icon
+            name="envelope-o"
+            size={25}
+            color={focused ? "#e48d31" : "white"}
           />
         )
       }
@@ -150,10 +174,11 @@ const MainTabs = createBottomTabNavigator(
       screen: AboutScreen,
       navigationOptions: {
         tabBarLabel: () => null,
-        tabBarIcon: (
-          <Image
-            source={require("./assets/Icons/about1.png")}
-            style={{ height: 35, width: 40 }}
+        tabBarIcon: ({ focused }) => (
+          <Icon
+            name="info-circle"
+            size={25}
+            color={focused ? "#e48d31" : "white"}
           />
         )
       }
@@ -161,9 +186,13 @@ const MainTabs = createBottomTabNavigator(
   },
   {
     initialRouteName: "ProductStack",
+
     tabBarOptions: {
       activeBackgroundColor: "white",
-      inactiveBackgroundColor: "#4b2727"
+      inactiveBackgroundColor: "#4b2727",
+      style: {
+        height: 0.06 * sHeight
+      }
     }
   }
 );

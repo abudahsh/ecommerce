@@ -8,15 +8,71 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Image,
-  ImageBackground
+  ImageBackground,
+  Dimensions
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { store } from "./../redux/store";
+
+sWidth = Dimensions.get("window").width;
+sHeight = Dimensions.get("window").height;
 class ContactScreen extends Component {
   state = {};
 
   render() {
     return (
       <ScrollView>
+        <View
+          style={{
+            flexDirection: "row",
+            paddingHorizontal: 10,
+            height: 0.06 * sHeight,
+            backgroundColor: "#4b2727",
+            justifyContent: "flex-end",
+            alignItems: "center"
+          }}
+        >
+          <TouchableOpacity>
+            <Image
+              source={require("./../assets/Icons/arrow.png")}
+              style={{ width: 25, height: 25 }}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Image
+              source={require("./../assets/Icons/search.png")}
+              style={{ width: 25, height: 25, marginHorizontal: 10 }}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
+              if (store.getState().client.isAuthenticated) {
+                this.props.navigation.navigate("Cart");
+              }
+              this.props.navigation.navigate("Login");
+            }}
+          >
+            <Image
+              source={require("./../assets/Icons/cart.png")}
+              style={{ width: 25, height: 25, marginRight: 10 }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              if (store.getState().client.isAuthenticated) {
+                this.props.navigation.navigate("Profile");
+              }
+              this.props.navigation.navigate("Login");
+            }}
+          >
+            <Image
+              source={require("./../assets/Icons/account.png")}
+              style={{ width: 25, height: 25 }}
+            />
+          </TouchableOpacity>
+        </View>
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
           <Text style={{ color: "#4b2727", fontSize: 25 }}>Asunto</Text>
           <TextInput
@@ -49,45 +105,55 @@ class ContactScreen extends Component {
             <Text>ENVAIR</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
-        <Text>Information</Text>
-        <ImageBackground
-          source={require("./../assets/Rectangle.png")}
-          style={{ padding: 10 }}
+        <View
+          style={{
+            padding: 10,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
         >
-          <View
-            style={{
-              flexDirection: "row",
-              paddingVertical: 10,
-              alignItems: "center",
-              justifyContent: "space-around"
-            }}
+          <Text style={{ fontWeight: "bold", paddingVertical: 10 }}>
+            Information
+          </Text>
+          <ImageBackground
+            source={require("./../assets/Rectangle.png")}
+            style={{ width: 0.8 * sWidth, height: 0.3 * sHeight }}
           >
-            <Icon name="map-marker" size={45} color={"#4b2727"} />
-            <Text>blah blah blah blah blah blah</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              paddingVertical: 10,
-              alignItems: "center",
-              justifyContent: "space-around"
-            }}
-          >
-            <Icon name="phone" size={45} color={"#4b2727"} />
-            <Text>blah blah blah blah blah blah</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              paddingVertical: 10,
-              alignItems: "center",
-              justifyContent: "space-around"
-            }}
-          >
-            <Icon name="send" size={35} color={"#4b2727"} />
-            <Text>blah blah blah blah blah blah</Text>
-          </View>
-        </ImageBackground>
+            <View
+              style={{
+                flexDirection: "row",
+                paddingVertical: 10,
+                alignItems: "center",
+                justifyContent: "space-around"
+              }}
+            >
+              <Icon name="map-marker" size={45} color={"#4b2727"} />
+              <Text>blah blah blah blah blah blah</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                paddingVertical: 10,
+                alignItems: "center",
+                justifyContent: "space-around"
+              }}
+            >
+              <Icon name="phone" size={45} color={"#4b2727"} />
+              <Text>blah blah blah blah blah blah</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                paddingVertical: 10,
+                alignItems: "center",
+                justifyContent: "space-around"
+              }}
+            >
+              <Icon name="send" size={35} color={"#4b2727"} />
+              <Text>blah blah blah blah blah blah</Text>
+            </View>
+          </ImageBackground>
+        </View>
       </ScrollView>
     );
   }

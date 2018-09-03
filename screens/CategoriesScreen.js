@@ -1,6 +1,18 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Image
+} from "react-native";
 import CategoryRow from "./../components/CategoryRow";
+import { store } from "./../redux/store";
+import { _fetchCategories } from "./../redux/actions";
+import { connect } from "react-redux";
+import HeaderBar from "../components/HeaderBar";
+
 anotherData = [
   {},
   {},
@@ -39,6 +51,11 @@ anotherData = [
 ];
 
 class CategoriesScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: <HeaderBar />
+    };
+  };
   state = {};
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
@@ -49,11 +66,14 @@ class CategoriesScreen extends Component {
     </View>
   );
 
+  componentDidMount() {
+    this.props._fetchCategories();
+  }
   render() {
     return (
       <View style={styles.container}>
         <FlatList
-          data={anotherData}
+          data={this.props.categories}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
           numColumns={2}
@@ -71,4 +91,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CategoriesScreen;
+const mapStateToProps = state => ({
+  categories: state.categories,
+  isLoading: state.client.isLoading
+});
+const mapDispatchToProps = dispatch => ({
+  _fetchCategories: () => dispatch(_fetchCategories())
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CategoriesScreen);

@@ -4,12 +4,19 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Text
+  Text,
+  Image
 } from "react-native";
 import { _loginUser } from "./../redux/actions";
 import { connect } from "react-redux";
 import { store } from "./../redux/store";
+import HeaderBar from "../components/HeaderBar";
 class LoginScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: <HeaderBar />
+    };
+  };
   state = {
     email: "",
     Password: ""
@@ -19,7 +26,7 @@ class LoginScreen extends React.Component {
   };
   componentWillUpdate() {
     if (store.getState().client.isAuthenticated) {
-      this.props.navigation.navigate("Cart");
+      this.props.navigation.goBack();
     }
   }
   render() {

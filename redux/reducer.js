@@ -37,8 +37,16 @@ const userReducer = (state = initialState.user, action) => {
 
 const productReducer = (state = initialState.products, action) => {
   switch (action.type) {
-    case "FETCHING_SUCCESS":
+    case "FETCHING_PROS_SUCCESS":
       return action.payload.products;
+  }
+  return state;
+};
+
+const categoriesReducer = (state = initialState.categories, action) => {
+  switch (action.type) {
+    case "FETCHING_CATS_SUCCESS":
+      return action.payload.categories;
   }
   return state;
 };
@@ -46,7 +54,8 @@ const productReducer = (state = initialState.products, action) => {
 const reducer = combineReducers({
   client: clientReducer,
   user: userReducer,
-  products: productReducer
+  products: productReducer,
+  categories: categoriesReducer
 });
 
 export default reducer;

@@ -29,22 +29,42 @@ export const _loginUser = (username, password) => dispatch => {
   });
 };
 
-export const _fetchProducts = token => dispatch => {
+export const _fetchProducts = () => dispatch => {
   dispatch({
-    type: "FETCHING_STARTED",
+    type: "FETCHING_PROS_STARTED",
     payload: {
       isLoading: true,
       message: "Fetching request is in progress"
     }
   });
-  results = fetchProducts(token);
+  results = fetchProducts();
   lolo = results.otherData;
   dispatch({
-    type: "FETCHING_SUCCESS",
+    type: "FETCHING_PROS_SUCCESS",
     payload: {
       isLoading: false,
       products: lolo,
       message: "Fetching products finished successfully"
+    }
+  });
+};
+
+export const _fetchCategories = () => dispatch => {
+  dispatch({
+    type: "FETCHING_CATS_STARTED",
+    payload: {
+      isLoading: true,
+      message: "Fetching request is in progress"
+    }
+  });
+  results = fetchCategories();
+  lolo = results.otherData;
+  dispatch({
+    type: "FETCHING_CATS_SUCCESS",
+    payload: {
+      isLoading: false,
+      categories: lolo,
+      message: "Fetching categories finished successfully"
     }
   });
 };

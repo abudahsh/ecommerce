@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { store } from "./../redux/store";
+import HeaderBar from "../components/HeaderBar";
 
 class ProfileScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: <HeaderBar />
+    };
+  };
+  state = {};
 
   render() {
     return (

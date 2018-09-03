@@ -1,34 +1,4 @@
-otherData = [
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {}
-];
+otherData = [{}, {}, {}];
 export const login = (username, password) => {
   token = "kjlerweryhierywerywriuyrwuyrwrrw776r7wr7w";
   results = { token: token, username: username };
@@ -40,7 +10,7 @@ export const register = (username, password) => {
   return username, token;
 };
 
-export const fetchProducts = token => {
+export const fetchProducts = () => {
   results = { otherData: otherData };
   return results;
 };

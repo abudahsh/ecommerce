@@ -6,69 +6,25 @@ import {
   FlatList,
   Dimensions,
   TouchableOpacity,
-  Image
+  Image,
+  TextInput,
+  Animated
 } from "react-native";
 import { connect } from "react-redux";
 import ProductRow from "./../components/ProductRow";
 import { _fetchProducts } from "./../redux/actions";
 import { store } from "./../redux/store";
+import HeaderBar from "../components/HeaderBar";
 
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerRight: (
-        <View
-          style={{
-            flexDirection: "row",
-            paddingHorizontal: 10
-          }}
-        >
-          <TouchableOpacity>
-            <Image
-              source={require("./../assets/Icons/arrow.png")}
-              style={{ width: 25, height: 25 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Image
-              source={require("./../assets/Icons/search.png")}
-              style={{ width: 25, height: 25, marginHorizontal: 10 }}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => {
-              if (store.getState().client.isAuthenticated) {
-                navigation.navigate("Cart");
-              }
-              navigation.navigate("Login");
-            }}
-          >
-            <Image
-              source={require("./../assets/Icons/cart.png")}
-              style={{ width: 25, height: 25, marginRight: 10 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (store.getState().client.isAuthenticated) {
-                navigation.navigate("Profile");
-              }
-              navigation.navigate("Login");
-            }}
-          >
-            <Image
-              source={require("./../assets/Icons/account.png")}
-              style={{ width: 25, height: 25 }}
-            />
-          </TouchableOpacity>
-        </View>
-      )
+      headerRight: <HeaderBar />
     };
   };
-  state = {};
+
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
@@ -89,7 +45,7 @@ class HomeScreen extends Component {
     </View>
   );
   componentDidMount() {
-    this.props._fetchProducts("kjlerweryhierywerywriuyrwuyrwrrw776r7wr7w");
+    this.props._fetchProducts();
     console.log(store.getState());
     console.log(this.props.products);
     console.log(this.props.isLoading);
