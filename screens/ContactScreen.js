@@ -13,66 +13,20 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { store } from "./../redux/store";
-
+import HeaderBar from "./../components/HeaderBar";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 class ContactScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: <HeaderBar />
+    };
+  };
   state = {};
 
   render() {
     return (
       <ScrollView>
-        <View
-          style={{
-            flexDirection: "row",
-            paddingHorizontal: 10,
-            height: 0.06 * sHeight,
-            backgroundColor: "#4b2727",
-            justifyContent: "flex-end",
-            alignItems: "center"
-          }}
-        >
-          <TouchableOpacity>
-            <Image
-              source={require("./../assets/Icons/arrow.png")}
-              style={{ width: 25, height: 25 }}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Image
-              source={require("./../assets/Icons/search.png")}
-              style={{ width: 25, height: 25, marginHorizontal: 10 }}
-            />
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => {
-              if (store.getState().client.isAuthenticated) {
-                this.props.navigation.navigate("Cart");
-              }
-              this.props.navigation.navigate("Login");
-            }}
-          >
-            <Image
-              source={require("./../assets/Icons/cart.png")}
-              style={{ width: 25, height: 25, marginRight: 10 }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              if (store.getState().client.isAuthenticated) {
-                this.props.navigation.navigate("Profile");
-              }
-              this.props.navigation.navigate("Login");
-            }}
-          >
-            <Image
-              source={require("./../assets/Icons/account.png")}
-              style={{ width: 25, height: 25 }}
-            />
-          </TouchableOpacity>
-        </View>
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
           <Text style={{ color: "#4b2727", fontSize: 25 }}>Asunto</Text>
           <TextInput
@@ -88,6 +42,7 @@ class ContactScreen extends Component {
           />
           <Text style={{ color: "#4b2727", fontSize: 25 }}>Mensaje</Text>
           <TextInput
+            multiline={true}
             style={{ width: "70%", height: 120 }}
             placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
           Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "

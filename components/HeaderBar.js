@@ -25,6 +25,7 @@ class HeaderBar extends React.Component {
       })
     ]).start();
   };
+
   render() {
     return (
       <Animated.View

@@ -14,14 +14,15 @@ sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 class AboutScreen extends Component {
   static navigationOptions = ({ navigation }) => {
-    return {};
+    return {
+      headerRight: <HeaderBar />
+    };
   };
   state = {};
 
   render() {
     return (
       <View style={styles.container}>
-        <HeaderBar />
         <Text> AboutScreen </Text>
       </View>
     );

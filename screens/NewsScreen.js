@@ -3,15 +3,16 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
 class NewsScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: <HeaderBar />
+    };
+  };
+  state = {};
 
   render() {
     return (
       <View style={styles.container}>
-        <HeaderBar />
         <Text> NewsScreen </Text>
       </View>
     );
