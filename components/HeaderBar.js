@@ -60,7 +60,7 @@ class HeaderBar extends React.Component {
             if (store.getState().client.isAuthenticated) {
               this.props.navigation.navigate("Cart");
             }
-            this.props.navigation.navigate("Login");
+            this.props.navigation.navigate("Auth");
           }}
         >
           <Image
@@ -73,7 +73,7 @@ class HeaderBar extends React.Component {
             if (store.getState().client.isAuthenticated) {
               this.props.navigation.navigate("Profile");
             }
-            this.props.navigation.navigate("Login");
+            this.props.navigation.navigate("Auth");
           }}
         >
           <Image

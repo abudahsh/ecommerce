@@ -5,12 +5,17 @@ import {
   TouchableOpacity,
   StyleSheet,
   Text,
-  Image
+  Image,
+  Dimensions
 } from "react-native";
 import { _loginUser } from "./../redux/actions";
 import { connect } from "react-redux";
 import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
+
+import { withNavigation } from "react-navigation";
+sWidth = Dimensions.get("window").width;
+
 class LoginScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -26,35 +31,49 @@ class LoginScreen extends React.Component {
   };
   componentWillUpdate() {
     if (store.getState().client.isAuthenticated) {
-      this.props.navigation.goBack();
+      this.props.navigation.navigate("Home");
     }
   }
   render() {
     return (
       <View style={styles.loginContainer}>
         <TextInput
-          style={{ width: "60%" }}
+          style={{
+            width: 0.6 * sWidth,
+            borderRadius: 10,
+            height: 40,
+            backgroundColor: "#e4e4e4",
+            marginBottom: 5
+          }}
           placeholder="Email"
           onChangeText={email => this.setState({ email })}
+          underlineColorAndroid="transparent"
         />
         <TextInput
-          style={{ width: "60%" }}
+          style={{
+            width: 0.6 * sWidth,
+            borderRadius: 10,
+            height: 40,
+            backgroundColor: "#e4e4e4"
+          }}
           placeholder="Password"
           onChangeText={Password => this.setState({ Password })}
           secureTextEntry={true}
+          underlineColorAndroid="transparent"
         />
         <TouchableOpacity
-          style={{ backgroundColor: "purple" }}
+          style={{
+            backgroundColor: "#4b2727",
+            width: 0.4 * sWidth,
+            height: 30,
+            borderRadius: 15,
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 10
+          }}
           onPress={this.handleLogin}
         >
-          <Text>Login</Text>
-        </TouchableOpacity>
-
-        <Text>If you don't have account, you can</Text>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("Register")}
-        >
-          <Text style={{ fontWeight: "bold" }}>Register</Text>
+          <Text style={{ color: "#e48d31", fontWeight: "bold" }}>Login</Text>
         </TouchableOpacity>
       </View>
     );
@@ -73,7 +92,7 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginScreen);
+)(withNavigation(LoginScreen));
 const styles = StyleSheet.create({
   loginContainer: {
     flex: 1,

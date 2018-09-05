@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
+import HeaderBar from "../components/HeaderBar";
 
 class CategoryDetailScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: <HeaderBar />
+    };
+  };
+
+  state = {};
 
   render() {
     return (

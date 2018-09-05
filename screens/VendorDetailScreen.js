@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import HeaderBar from "../components/HeaderBar";
 
 class VendorDetailScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: <HeaderBar />
+    };
+  };
+
+  state = {};
 
   render() {
     return (

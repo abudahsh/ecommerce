@@ -18,6 +18,8 @@ const clientReducer = (state = initialState.client, action) => {
 
     case "LOG_IN_SUCCESS":
       return { ...state, isAuthenticated: action.payload.isAuthenticated };
+    case "REGISTER_SUCCESS":
+      return { ...state, isAuthenticated: action.payload.isAuthenticated };
   }
   return state;
 };
@@ -25,6 +27,13 @@ const clientReducer = (state = initialState.client, action) => {
 const userReducer = (state = initialState.user, action) => {
   switch (action.type) {
     case "LOG_IN_SUCCESS":
+      return {
+        ...state,
+        email: action.payload.email,
+        token: action.payload.token,
+        message: action.payload.message
+      };
+    case "REGISTER_SUCCESS":
       return {
         ...state,
         email: action.payload.email,

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Animated, Dimensions } from "react-native";
+import { Animated, Dimensions, View } from "react-native";
 import {
   createBottomTabNavigator,
   createSwitchNavigator,
@@ -15,12 +15,12 @@ import NewsScreen from "./screens/NewsScreen";
 import GetStartScreen from "./screens/GetStartScreen";
 import ProductDetailScreen from "./screens/ProductDetailScreen";
 import VendorDetailScreen from "./screens/VendorDetailScreen";
-import LoginScreen from "./screens/LoginScreen";
-import RegisterScreen from "./screens/RegisterScreen";
+
 import CartScreen from "./screens/CartScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import Icon from "react-native-vector-icons/FontAwesome";
 import CategoryDetailScreen from "./screens/CategoryDetailScreen";
+import AuthScreen from "./screens/AuthScreen";
 sHeight = Dimensions.get("window").height;
 
 const NewsStack = createStackNavigator(
@@ -88,22 +88,17 @@ const ProductStack = createStackNavigator(
         title: "Vendor"
       }
     },
-    Login: {
-      screen: LoginScreen,
-      navigationOptions: {
-        title: "Login"
-      }
-    },
-    Register: {
-      screen: RegisterScreen,
-      navigationOptions: {
-        title: "Register"
-      }
-    },
+
     Cart: {
       screen: CartScreen,
       navigationOptions: {
         title: "Cart"
+      }
+    },
+    Auth: {
+      screen: AuthScreen,
+      navigationOptions: {
+        title: "Profile"
       }
     },
     Profile: {

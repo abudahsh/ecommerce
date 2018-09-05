@@ -29,6 +29,24 @@ export const _loginUser = (username, password) => dispatch => {
   });
 };
 
+export const _registerUser = (username, password) => dispatch => {
+  dispatch({ type: "LOGIN_SENT", payload: { isLoading: true } });
+  results = register(username, password);
+
+  const username = results.username;
+  const token = results.token;
+  dispatch({
+    type: "REGISTER_SUCCESS",
+    payload: {
+      isLoading: false,
+      isAuthenticated: true,
+      token: token,
+      email: username,
+      message: "Registered successfully"
+    }
+  });
+};
+
 export const _fetchProducts = () => dispatch => {
   dispatch({
     type: "FETCHING_PROS_STARTED",

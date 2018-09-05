@@ -6,12 +6,23 @@ import {
   ScrollView,
   FlatList,
   Image,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from "react-native";
 import Swiper from "react-native-swiper";
+import HeaderBar from "../components/HeaderBar";
+import Icon from "react-native-vector-icons/FontAwesome";
+import ProdctTabs from "../components/ProductTabs";
 sWidth = Dimensions.get("window").width;
+sHeight = Dimensions.get("window").height;
 fakeData = [{}, {}, {}, {}];
 class ProductDetailScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: <HeaderBar />
+    };
+  };
+
   state = {};
 
   _renderItem = () => (
@@ -50,6 +61,40 @@ class ProductDetailScreen extends Component {
           <Text>{"price: " + price}</Text>
           <Text>Num: 1</Text>
         </View>
+        <View
+          style={{
+            flexDirection: "row",
+            height: 0.1 * sHeight,
+
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <TouchableOpacity>
+            <View
+              style={{
+                padding: 15,
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#e48d31",
+                width: 0.4 * sWidth,
+                height: 0.06 * sHeight,
+                borderRadius: 15,
+                paddingVertical: 12
+              }}
+            >
+              <Icon name="shopping-bag" size={20} color="white" />
+              <Text
+                style={{ fontWeight: "bold", paddingLeft: 6, color: "white" }}
+              >
+                Add to cart
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <ProdctTabs />
+
         <Text>{name}</Text>
         <Text>{describtion}</Text>
         <Text>{vendorName}</Text>
