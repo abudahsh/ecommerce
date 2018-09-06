@@ -43,9 +43,9 @@ class ProductDetailScreen extends Component {
     const vendorDesc = navigation.getParam("vendorDesc", "The best place ever");
 
     return (
-      <View style={styles.container}>
-        <View style={{ height: "45%" }}>
-          <Swiper style={{ flex: 1 }} width={sWidth}>
+      <ScrollView style={styles.container}>
+        <View style={{ height: 0.3 * sHeight }}>
+          <Swiper width={sWidth}>
             {fakeData.map(data => (
               <Image source={require("./../assets/product2.jpg")} />
             ))}
@@ -93,13 +93,21 @@ class ProductDetailScreen extends Component {
             </View>
           </TouchableOpacity>
         </View>
-        <ProdctTabs />
+        <View style={{ flexDirection: "row", flex: 1, height: 150 }}>
+          <ProdctTabs />
+        </View>
 
         <Text>{name}</Text>
         <Text>{describtion}</Text>
-        <Text>{vendorName}</Text>
+        <TouchableOpacity
+          style={{ backgroundColor: "#e48d31" }}
+          onPress={() => this.props.navigation.navigate("VendorDetail")}
+        >
+          <Text style={{ fontWeight: "bold" }}>{vendorName}</Text>
+        </TouchableOpacity>
+
         <Text>{vendorDesc}</Text>
-      </View>
+      </ScrollView>
     );
   }
 }

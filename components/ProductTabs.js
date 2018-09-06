@@ -9,8 +9,10 @@ import {
   Image
 } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-const FirstRoute = () => <View />;
-const SecondRoute = () => <View />;
+import ProductAttributes from "./ProductAttributes";
+import ProductDesc from "./ProductDesc";
+const FirstRoute = () => <ProductDesc />;
+const SecondRoute = () => <ProductAttributes />;
 
 export default class ProdctTabs extends React.Component {
   state = {
@@ -35,7 +37,7 @@ export default class ProdctTabs extends React.Component {
             const color = props.position.interpolate({
               inputRange,
               outputRange: inputRange.map(
-                inputIndex => (inputIndex === i ? "#e48d31" : "white")
+                inputIndex => (inputIndex === i ? "#e48d31" : "gray")
               )
             });
             return (

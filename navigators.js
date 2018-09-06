@@ -213,7 +213,10 @@ const MainTabs = createBottomTabNavigator(
 
     tabBarOptions: {
       activeBackgroundColor: "white",
-      inactiveBackgroundColor: "#4b2727"
+      inactiveBackgroundColor: "#4b2727",
+      style: {
+        height: 0.06 * sHeight
+      }
     }
   }
 );

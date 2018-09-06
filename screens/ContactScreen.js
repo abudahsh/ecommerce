@@ -57,7 +57,7 @@ class ContactScreen extends Component {
               justifyContent: "center"
             }}
           >
-            <Text>ENVAIR</Text>
+            <Text style={{ fontWeight: "bold", color: "#e48d31" }}>ENVAIR</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
         <View

@@ -6,6 +6,8 @@ import {
   Animated,
   TextInput
 } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
+import Ionicon from "react-native-vector-icons/Ionicons";
 import { store } from "./../redux/store";
 import { withNavigation } from "react-navigation";
 class HeaderBar extends React.Component {
@@ -31,14 +33,16 @@ class HeaderBar extends React.Component {
       <Animated.View
         style={{
           flexDirection: "row",
-          paddingHorizontal: 10,
+          paddingHorizontal: 15,
           alignItems: "center"
         }}
       >
-        <TouchableOpacity>
-          <Image
-            source={require("./../assets/Icons/arrow.png")}
-            style={{ width: 25, height: 25 }}
+        <TouchableOpacity style={{ marginRight: 2 }}>
+          <Ionicon
+            name="ios-arrow-down"
+            size={35}
+            color="white"
+            style={{ paddingTop: 3 }}
           />
         </TouchableOpacity>
         <TextInput
@@ -48,14 +52,35 @@ class HeaderBar extends React.Component {
             opacity: this.state.searchOpacity
           }}
         />
-        <TouchableOpacity onPress={this.searchClicked}>
-          <Image
-            source={require("./../assets/Icons/search.png")}
-            style={{ width: 25, height: 25, marginHorizontal: 10 }}
+        <TouchableOpacity
+          onPress={this.searchClicked}
+          style={{
+            backgroundColor: "white",
+            width: 26,
+            height: 26,
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 13
+          }}
+        >
+          <Icon
+            name="search"
+            size={17}
+            color="#4b2727"
+            style={{ paddingBottom: 2 }}
           />
         </TouchableOpacity>
 
         <TouchableOpacity
+          style={{
+            backgroundColor: "white",
+            marginHorizontal: 10,
+            width: 26,
+            height: 26,
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 13
+          }}
           onPress={() => {
             if (store.getState().client.isAuthenticated) {
               this.props.navigation.navigate("Cart");
@@ -63,12 +88,22 @@ class HeaderBar extends React.Component {
             this.props.navigation.navigate("Auth");
           }}
         >
-          <Image
-            source={require("./../assets/Icons/cart.png")}
-            style={{ width: 25, height: 25, marginRight: 10 }}
+          <Icon
+            name="shopping-bag"
+            size={17}
+            color="#4b2727"
+            style={{ paddingBottom: 2 }}
           />
         </TouchableOpacity>
         <TouchableOpacity
+          style={{
+            backgroundColor: "white",
+            width: 26,
+            height: 26,
+            justifyContent: "center",
+            alignItems: "center",
+            borderRadius: 13
+          }}
           onPress={() => {
             if (store.getState().client.isAuthenticated) {
               this.props.navigation.navigate("Profile");
@@ -76,10 +111,7 @@ class HeaderBar extends React.Component {
             this.props.navigation.navigate("Auth");
           }}
         >
-          <Image
-            source={require("./../assets/Icons/account.png")}
-            style={{ width: 25, height: 25 }}
-          />
+          <Icon name="user" size={20} color="#4b2727" />
         </TouchableOpacity>
       </Animated.View>
     );

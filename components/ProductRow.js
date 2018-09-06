@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   Dimensions
 } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 import { withNavigation } from "react-navigation";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
@@ -66,12 +67,19 @@ class ProductRow extends React.Component {
                     backgroundColor: "#e48d31",
                     paddingLeft: 10,
                     borderBottomLeftRadius: 25,
-                    borderTopLeftRadius: 25
+                    borderTopLeftRadius: 25,
+                    justifyContent: "center"
                   }}
                 >
-                  <Image
-                    source={require("./../assets/Icons/cart.png")}
-                    style={{ height: 30, width: 30, marginRight: 10 }}
+                  <Icon
+                    name="shopping-bag"
+                    size={20}
+                    color="white"
+                    style={{
+                      paddingRight: 10,
+                      paddingVertical: 5,
+                      paddingLeft: 3
+                    }}
                   />
                 </TouchableOpacity>
               </View>
