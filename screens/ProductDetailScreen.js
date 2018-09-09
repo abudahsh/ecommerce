@@ -10,6 +10,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import Swiper from "react-native-swiper";
+import StarRating from "react-native-star-rating";
 import HeaderBar from "../components/HeaderBar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ProdctTabs from "../components/ProductTabs";
@@ -23,7 +24,9 @@ class ProductDetailScreen extends Component {
     };
   };
 
-  state = {};
+  state = {
+    starCount: 3.5
+  };
 
   _renderItem = () => (
     <Image
@@ -31,13 +34,16 @@ class ProductDetailScreen extends Component {
       style={{ width: 150, height: 200 }}
     />
   );
+
+  //enables users to change rating, remove it in this page and keep it only in vendor screen
+  onStarRatingPress(rating) {
+    this.setState({
+      starCount: rating
+    });
+  }
   render() {
     const { navigation } = this.props;
-    const name = navigation.getParam("name", "Product Name");
-    const describtion = navigation.getParam(
-      "describtion",
-      "Product's describtion"
-    );
+
     const price = navigation.getParam("price", "00.0");
     const vendorName = navigation.getParam("vendorName", "vendor name");
     const vendorDesc = navigation.getParam("vendorDesc", "The best place ever");
@@ -97,16 +103,77 @@ class ProductDetailScreen extends Component {
           <ProdctTabs />
         </View>
 
-        <Text>{name}</Text>
-        <Text>{describtion}</Text>
-        <TouchableOpacity
-          style={{ backgroundColor: "#e48d31" }}
-          onPress={() => this.props.navigation.navigate("VendorDetail")}
-        >
-          <Text style={{ fontWeight: "bold" }}>{vendorName}</Text>
-        </TouchableOpacity>
+        <Text style={{ fontWeight: "bold", color: "#4b2727" }}>
+          Vendor Information
+        </Text>
 
-        <Text>{vendorDesc}</Text>
+        <View style={{ flexDirection: "row", flex: 1, margin: 10 }}>
+          <View>
+            <Image
+              source={require("./../assets/product3.jpg")}
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 35,
+                borderWidth: 1,
+                borderColor: "orange"
+              }}
+            />
+          </View>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <View style={{ flexDirection: "row" }}>
+              <Text
+                style={{ fontWeight: "bold", fontSize: 16, color: "#4b2727" }}
+              >
+                {vendorName}
+              </Text>
+              <StarRating
+                disabled={true}
+                emptyStar={"ios-star-outline"}
+                fullStar={"ios-star"}
+                halfStar={"ios-star-half"}
+                iconSet={"Ionicons"}
+                maxStars={5}
+                rating={this.state.starCount}
+                selectedStar={rating => this.onStarRatingPress(rating)}
+                fullStarColor={"#ffd203"}
+                starSize={25}
+              />
+            </View>
+
+            <View
+              style={{
+                borderBottomColor: "gray",
+                borderRightColor: "gray",
+                borderBottomEndRadius: 7,
+                borderRightWidth: 1,
+                borderBottomWidth: 1,
+                borderBottomRightRadius: 7,
+                width: 0.75 * sWidth,
+                minHeight: 50,
+                borderTopRightRadius: 7,
+                borderTopColor: "white",
+                borderBottomLeftRadius: 7,
+                borderLeftColor: "white",
+                borderTopLeftRadius: -30
+              }}
+            >
+              <Text style={{ paddingHorizontal: 6 }}>{vendorDesc}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <TouchableOpacity
+            style={{
+              height: 30,
+              width: 0.2 * sWidth,
+              backgroundColor: "#e48d31"
+            }}
+            onPress={() => this.props.navigation.navigate("VendorDetail")}
+          >
+            <Text>Visit Profile</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     );
   }

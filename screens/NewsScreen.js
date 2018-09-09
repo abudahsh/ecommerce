@@ -1,19 +1,43 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  FlatList
+} from "react-native";
 import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
+import NewsRow from "./../components/NewsRow";
+
+fakeData = [{}, {}, {}];
 class NewsScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: <HeaderBar />
     };
   };
-  state = {};
-
+  state = {
+    isOpen: false,
+    isDisabled: false,
+    swipeToClose: true,
+    sliderValue: 0.3
+  };
+  _keyExtractor = (item, index) => item.id;
+  _renderItem = ({ item }) => (
+    <View>
+      <NewsRow {...item} />
+    </View>
+  );
   render() {
     return (
       <View style={styles.container}>
-        <Text> NewsScreen </Text>
+        <FlatList
+          data={fakeData}
+          renderItem={this._renderItem}
+          keyExtractor={this._keyExtractor}
+        />
       </View>
     );
   }

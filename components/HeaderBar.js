@@ -37,7 +37,7 @@ class HeaderBar extends React.Component {
           alignItems: "center"
         }}
       >
-        <TouchableOpacity style={{ marginRight: 2 }}>
+        <TouchableOpacity style={{ marginRight: 10 }}>
           <Ionicon
             name="ios-arrow-down"
             size={35}

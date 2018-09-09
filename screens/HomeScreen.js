@@ -46,14 +46,8 @@ class HomeScreen extends Component {
   );
   componentDidMount() {
     this.props._fetchProducts();
-    console.log(store.getState());
-    console.log(this.props.products);
-    console.log(this.props.isLoading);
   }
-  componentWillUnmount() {
-    console.log(this.props.products);
-    console.log(this.props.isLoading);
-  }
+
   render() {
     if (!this.props.products) {
       return (

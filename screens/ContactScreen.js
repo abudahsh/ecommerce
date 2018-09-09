@@ -11,6 +11,7 @@ import {
   ImageBackground,
   Dimensions
 } from "react-native";
+
 import Icon from "react-native-vector-icons/FontAwesome";
 import { store } from "./../redux/store";
 import HeaderBar from "./../components/HeaderBar";

@@ -5,7 +5,8 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Image
+  Image,
+  ScrollView
 } from "react-native";
 import CategoryRow from "./../components/CategoryRow";
 import { store } from "./../redux/store";
@@ -76,7 +77,6 @@ class CategoriesScreen extends Component {
           data={this.props.categories}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
-          numColumns={2}
         />
       </View>
     );
