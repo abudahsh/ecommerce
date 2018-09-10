@@ -61,7 +61,7 @@ class CategoriesScreen extends Component {
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
-      style={{ borderColor: "gray", borderWidth: StyleSheet.hairlineWidth }}
+      style={{ borderColor: "#D3D3D3", borderWidth: StyleSheet.hairlineWidth }}
     >
       <CategoryRow {...item} />
     </View>

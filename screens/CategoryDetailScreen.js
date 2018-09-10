@@ -1,9 +1,16 @@
 import React, { Component } from "react";
-import { View, Text, FlatList, ScrollView, Image } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  ScrollView,
+  ImageBackground
+} from "react-native";
 import HeaderBar from "../components/HeaderBar";
 import { connect } from "react-redux";
 import ProductRow from "./../components/ProductRow";
 import { _fetchProducts } from "./../redux/actions";
+import { store } from "./../redux/store";
 class CategoryDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -37,21 +44,55 @@ class CategoryDetailScreen extends Component {
   }
 
   render() {
-    if (!this.props.products) {
+    if (store.getState().client.isLoading) {
       return (
-        <View style={styles.container}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "black"
+          }}
+        >
           <Text>Loading...</Text>
         </View>
       );
     } else {
       return (
-        <View style={{ flex: 1 }}>
-          <ScrollView horizontal={true}>
+        <ScrollView style={{ flex: 1 }}>
+          <ScrollView
+            horizontal={true}
+            alwaysBounceHorizontal={true}
+            stickyHeaderIndices={true}
+            style={{
+              paddingBottom: 5,
+              borderBottomColor: "#D3D3D3",
+              borderBottomWidth: 1
+            }}
+          >
             {anotherData.map(data => (
-              <Image
+              <ImageBackground
                 source={require("./../assets/product3.jpg")}
-                style={{ width: 80, height: 60 }}
-              />
+                style={{
+                  width: 90,
+                  height: 45,
+                  marginHorizontal: 10,
+                  marginTop: 5
+                }}
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    backgroundColor: "rgba(75,39,39, 0.4)",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <View style={{ borderWidth: 1, borderColor: "white" }}>
+                    <Text style={{ color: "white" }}>Clothes</Text>
+                  </View>
+                </View>
+              </ImageBackground>
             ))}
           </ScrollView>
           <FlatList
@@ -60,7 +101,7 @@ class CategoryDetailScreen extends Component {
             keyExtractor={this._keyExtractor}
             numColumns={2}
           />
-        </View>
+        </ScrollView>
       );
     }
   }

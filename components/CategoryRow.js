@@ -35,7 +35,7 @@ class CategoryRow extends React.Component {
               alignItems: "center"
             }}
           >
-            <View style={{ borderWidth: 2, borderColor: "white" }}>
+            <View style={{ borderWidth: 1, borderColor: "white" }}>
               <Text
                 style={{ fontWeight: "bold", color: "white", fontSize: 32 }}
               >

@@ -82,10 +82,10 @@ class HeaderBar extends React.Component {
             borderRadius: 13
           }}
           onPress={() => {
-            if (store.getState().client.isAuthenticated) {
-              this.props.navigation.navigate("Cart");
+            if (!store.getState().client.isAuthenticated) {
+              this.props.navigation.navigate("Auth");
             }
-            this.props.navigation.navigate("Auth");
+            this.props.navigation.navigate("Cart");
           }}
         >
           <Icon
@@ -105,10 +105,10 @@ class HeaderBar extends React.Component {
             borderRadius: 13
           }}
           onPress={() => {
-            if (store.getState().client.isAuthenticated) {
-              this.props.navigation.navigate("Profile");
+            if (!store.getState().client.isAuthenticated) {
+              this.props.navigation.navigate("Auth");
             }
-            this.props.navigation.navigate("Auth");
+            this.props.navigation.navigate("Profile");
           }}
         >
           <Icon name="user" size={20} color="#4b2727" />

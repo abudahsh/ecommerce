@@ -23,8 +23,8 @@ class NewsRow extends React.Component {
       <View
         style={{
           backgroundColor: "white",
-          borderBottomColor: "gray",
-          borderRightColor: "gray",
+          borderBottomColor: "#D3D3D3",
+          borderRightColor: "#D3D3D3",
           borderBottomRightRadius: 7,
           borderTopRightRadius: 7,
           borderRadius: 7,

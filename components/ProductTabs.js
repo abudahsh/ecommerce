@@ -37,7 +37,7 @@ export default class ProdctTabs extends React.Component {
             const color = props.position.interpolate({
               inputRange,
               outputRange: inputRange.map(
-                inputIndex => (inputIndex === i ? "#e48d31" : "gray")
+                inputIndex => (inputIndex === i ? "#e48d31" : "#b7a195")
               )
             });
             return (

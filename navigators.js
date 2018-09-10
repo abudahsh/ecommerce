@@ -209,7 +209,7 @@ const MainTabs = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "ProductStack",
+    initialRouteName: "Categories",
 
     tabBarOptions: {
       activeBackgroundColor: "white",

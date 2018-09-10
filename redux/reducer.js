@@ -1,13 +1,18 @@
 import { combineReducers } from "redux";
 
 initialState = {
-  user: {},
+  user: {
+    email: "example@yahoo.com",
+    firstName: "Mohammed",
+    surName: "Salah",
+    phone: "0102023231"
+  },
   products: [],
   categories: [],
   client: {
     IsLoading: false,
-    isAuthenticated: false,
-    gotStarted: false,
+    isAuthenticated: true,
+    gotStarted: true,
     message: "zZZZZ"
   }
 };
@@ -20,6 +25,15 @@ const clientReducer = (state = initialState.client, action) => {
       return { ...state, isAuthenticated: action.payload.isAuthenticated };
     case "REGISTER_SUCCESS":
       return { ...state, isAuthenticated: action.payload.isAuthenticated };
+
+    case "LOGIN_SENT":
+    case "FETCHING_PROS_STARTED":
+    case "FETCHING_CATS_STARTED":
+      return { ...state, IsLoading: true };
+
+    case "FETCHING_PROS_SUCCESS":
+    case "FETCHING_CATS_SUCCESS":
+      return { ...state, IsLoading: false };
   }
   return state;
 };

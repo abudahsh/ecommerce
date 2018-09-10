@@ -9,6 +9,12 @@ class GetStartScreen extends Component {
     super(props);
     this.state = {};
   }
+
+  componentWillMount() {
+    if (store.getState().client.gotStarted) {
+      this.props.navigation.navigate("Tabs");
+    }
+  }
   handleClick = () => {
     this.props._getStarted();
     console.log("state" + store.getState().client.gotStarted);

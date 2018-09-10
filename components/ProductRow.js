@@ -22,7 +22,8 @@ class ProductRow extends React.Component {
               describtion: "This product is the best in our city, try it",
               price: 1299,
               vendorName: "Oddaa",
-              vendorDesc: "WE are working since 1932"
+              vendorDesc:
+                "WE are working since 1932 WE are working since 1932 WE are working since 1932 WE are working since 1932 WE are working since 1932 "
             })
           }
         >

@@ -7,7 +7,8 @@ import {
   FlatList,
   Image,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  TextInput
 } from "react-native";
 import Swiper from "react-native-swiper";
 import StarRating from "react-native-star-rating";
@@ -16,7 +17,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import ProdctTabs from "../components/ProductTabs";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
-fakeData = [{}, {}, {}, {}];
+falseData = [{}, {}, {}, {}];
 class ProductDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -25,7 +26,8 @@ class ProductDetailScreen extends Component {
   };
 
   state = {
-    starCount: 3.5
+    starCount: 3.5,
+    num: "1"
   };
 
   _renderItem = () => (
@@ -46,13 +48,16 @@ class ProductDetailScreen extends Component {
 
     const price = navigation.getParam("price", "00.0");
     const vendorName = navigation.getParam("vendorName", "vendor name");
-    const vendorDesc = navigation.getParam("vendorDesc", "The best place ever");
+    const vendorDesc = navigation.getParam(
+      "vendorDesc",
+      "The best place ever "
+    );
 
     return (
       <ScrollView style={styles.container}>
         <View style={{ height: 0.3 * sHeight }}>
           <Swiper width={sWidth}>
-            {fakeData.map(data => (
+            {falseData.map(data => (
               <Image source={require("./../assets/product2.jpg")} />
             ))}
           </Swiper>
@@ -65,7 +70,41 @@ class ProductDetailScreen extends Component {
           }}
         >
           <Text>{"price: " + price}</Text>
-          <Text>Num: 1</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between"
+            }}
+          >
+            <Text>Num: </Text>
+            <TextInput
+              value={this.state.num}
+              onChangeText={num => this.setState({ num })}
+              style={{
+                width: 30,
+                height: 40,
+                backgroundColor: "white",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            />
+            <View>
+              <TouchableOpacity
+                onPress={() =>
+                  this.setState({ num: String(Number(this.state.num) + 1) })
+                }
+              >
+                <Icon name="arrow-up" size={15} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  this.setState({ num: String(Number(this.state.num) - 1) })
+                }
+              >
+                <Icon name="arrow-down" size={15} />
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
         <View
           style={{
@@ -102,78 +141,80 @@ class ProductDetailScreen extends Component {
         <View style={{ flexDirection: "row", flex: 1, height: 150 }}>
           <ProdctTabs />
         </View>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            borderBottomColor: "#b7a195",
+            borderBottomWidth: 2,
+            marginHorizontal: 25
+          }}
+        >
+          <Text style={{ fontWeight: "bold", color: "#4b2727" }}>
+            Vendor Information
+          </Text>
+        </View>
 
-        <Text style={{ fontWeight: "bold", color: "#4b2727" }}>
-          Vendor Information
-        </Text>
-
-        <View style={{ flexDirection: "row", flex: 1, margin: 10 }}>
-          <View>
-            <Image
-              source={require("./../assets/product3.jpg")}
-              style={{
-                width: 70,
-                height: 70,
-                borderRadius: 35,
-                borderWidth: 1,
-                borderColor: "orange"
-              }}
-            />
-          </View>
-          <View style={{ justifyContent: "center", alignItems: "center" }}>
-            <View style={{ flexDirection: "row" }}>
-              <Text
-                style={{ fontWeight: "bold", fontSize: 16, color: "#4b2727" }}
-              >
-                {vendorName}
-              </Text>
-              <StarRating
-                disabled={true}
-                emptyStar={"ios-star-outline"}
-                fullStar={"ios-star"}
-                halfStar={"ios-star-half"}
-                iconSet={"Ionicons"}
-                maxStars={5}
-                rating={this.state.starCount}
-                selectedStar={rating => this.onStarRatingPress(rating)}
-                fullStarColor={"#ffd203"}
-                starSize={25}
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("VendorDetail")}
+        >
+          <View style={{ flexDirection: "row", flex: 1, margin: 10 }}>
+            <View>
+              <Image
+                source={require("./../assets/product3.jpg")}
+                style={{
+                  width: 70,
+                  height: 70,
+                  borderRadius: 35,
+                  borderWidth: 1,
+                  borderColor: "orange"
+                }}
               />
             </View>
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <View style={{ flexDirection: "row", paddingBottom: 5 }}>
+                <Text
+                  style={{ fontWeight: "bold", fontSize: 16, color: "#4b2727" }}
+                >
+                  {vendorName}
+                </Text>
+                <StarRating
+                  disabled={true}
+                  emptyStar={"ios-star-outline"}
+                  fullStar={"ios-star"}
+                  halfStar={"ios-star-half"}
+                  iconSet={"Ionicons"}
+                  maxStars={5}
+                  rating={this.state.starCount}
+                  selectedStar={rating => this.onStarRatingPress(rating)}
+                  fullStarColor={"#ffd203"}
+                  starSize={25}
+                />
+              </View>
 
-            <View
-              style={{
-                borderBottomColor: "gray",
-                borderRightColor: "gray",
-                borderBottomEndRadius: 7,
-                borderRightWidth: 1,
-                borderBottomWidth: 1,
-                borderBottomRightRadius: 7,
-                width: 0.75 * sWidth,
-                minHeight: 50,
-                borderTopRightRadius: 7,
-                borderTopColor: "white",
-                borderBottomLeftRadius: 7,
-                borderLeftColor: "white",
-                borderTopLeftRadius: -30
-              }}
-            >
-              <Text style={{ paddingHorizontal: 6 }}>{vendorDesc}</Text>
+              <View
+                style={{
+                  borderBottomColor: "#D3D3D3",
+                  borderRightColor: "#D3D3D3",
+                  borderBottomEndRadius: 7,
+                  borderRightWidth: 2,
+                  borderBottomWidth: 2,
+                  borderBottomRightRadius: 7,
+                  width: 0.75 * sWidth,
+                  minHeight: 50,
+                  borderTopRightRadius: 7,
+                  borderTopColor: "white",
+                  borderBottomLeftRadius: 7,
+                  borderLeftColor: "white",
+                  borderTopLeftRadius: -30,
+                  backgroundColor: "#f7f7f7"
+                }}
+              >
+                <Text style={{ paddingHorizontal: 6 }}>{vendorDesc}</Text>
+              </View>
             </View>
           </View>
-        </View>
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <TouchableOpacity
-            style={{
-              height: 30,
-              width: 0.2 * sWidth,
-              backgroundColor: "#e48d31"
-            }}
-            onPress={() => this.props.navigation.navigate("VendorDetail")}
-          >
-            <Text>Visit Profile</Text>
-          </TouchableOpacity>
-        </View>
+        </TouchableOpacity>
       </ScrollView>
     );
   }
