@@ -32,7 +32,9 @@ const NewsStack = createStackNavigator(
     navigationOptions: {
       headerStyle: {
         backgroundColor: "#4b2727",
-        height: 0.06 * sHeight
+        height: 0.06 * sHeight,
+        minHeight: 30,
+        marginBottom: 5
       },
       headerTintColor: "#e48d31"
     }
@@ -47,7 +49,9 @@ const AboutStack = createStackNavigator(
     navigationOptions: {
       headerStyle: {
         backgroundColor: "#4b2727",
-        height: 0.06 * sHeight
+        height: 0.06 * sHeight,
+        minHeight: 30,
+        marginBottom: 5
       },
       headerTintColor: "#e48d31"
     }
@@ -62,7 +66,9 @@ const ContactStack = createStackNavigator(
     navigationOptions: {
       headerStyle: {
         backgroundColor: "#4b2727",
-        height: 0.06 * sHeight
+        height: 0.06 * sHeight,
+        minHeight: 30,
+        marginBottom: 5
       },
       headerTintColor: "#e48d31"
     }
@@ -109,11 +115,13 @@ const ProductStack = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: "VendorDetail",
     navigationOptions: {
       headerStyle: {
         backgroundColor: "#4b2727",
-        height: 0.06 * sHeight
+        height: 0.06 * sHeight,
+        minHeight: 30,
+        marginBottom: 5
       },
       headerTintColor: "#e48d31"
     }
@@ -140,7 +148,9 @@ const CatStack = createStackNavigator(
     navigationOptions: {
       headerStyle: {
         backgroundColor: "#4b2727",
-        height: 0.06 * sHeight
+        height: 0.06 * sHeight,
+        minHeight: 30,
+        marginBottom: 5
       },
       headerTintColor: "#e48d31"
     }
@@ -209,13 +219,14 @@ const MainTabs = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "Categories",
+    initialRouteName: "ProductStack",
 
     tabBarOptions: {
       activeBackgroundColor: "white",
       inactiveBackgroundColor: "#4b2727",
       style: {
-        height: 0.06 * sHeight
+        height: 0.06 * sHeight,
+        minHeight: 30
       }
     }
   }

@@ -10,6 +10,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Ionicon from "react-native-vector-icons/Ionicons";
 import { store } from "./../redux/store";
 import { withNavigation } from "react-navigation";
+import { connect } from "react-redux";
 class HeaderBar extends React.Component {
   state = {
     searchWidth: new Animated.Value(0),
@@ -82,10 +83,11 @@ class HeaderBar extends React.Component {
             borderRadius: 13
           }}
           onPress={() => {
-            if (!store.getState().client.isAuthenticated) {
+            if (this.props.isAuthenticated == true) {
+              this.props.navigation.navigate("Cart");
+            } else if (this.props.isAuthenticated == false) {
               this.props.navigation.navigate("Auth");
             }
-            this.props.navigation.navigate("Cart");
           }}
         >
           <Icon
@@ -105,10 +107,11 @@ class HeaderBar extends React.Component {
             borderRadius: 13
           }}
           onPress={() => {
-            if (!store.getState().client.isAuthenticated) {
+            if (this.props.isAuthenticated == true) {
+              this.props.navigation.navigate("Profile");
+            } else if (this.props.isAuthenticated == false) {
               this.props.navigation.navigate("Auth");
             }
-            this.props.navigation.navigate("Profile");
           }}
         >
           <Icon name="user" size={20} color="#4b2727" />
@@ -118,4 +121,8 @@ class HeaderBar extends React.Component {
   }
 }
 
-export default withNavigation(HeaderBar);
+const mapStateToProps = state => ({
+  isAuthenticated: state.client.isAuthenticated
+});
+
+export default connect(mapStateToProps)(withNavigation(HeaderBar));

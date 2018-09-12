@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import {
-  View,
+  ScrollView,
   Text,
   StyleSheet,
   Image,
   TouchableOpacity,
   TextInput
 } from "react-native";
+import { connect } from "react-redux";
 import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
 
@@ -22,10 +23,15 @@ class ProfileScreen extends Component {
     surName: store.getState().user.surName,
     phone: store.getState().user.phone
   };
+  componentWillMount() {
+    if (this.props.isAuthenticated == false) {
+      this.props.navigation.navigate("Auth");
+    }
+  }
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text> ProfileScreen </Text>
         <TextInput
           style={styles.textInputStyle}
@@ -52,19 +58,25 @@ class ProfileScreen extends Component {
           onChangeText={phone => this.setState({ phone })}
         />
 
-        <TouchableOpacity style={{ backgroundColor: "orange" }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "orange",
+            width: 100,
+            height: 30,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
           <Text>Save</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    flex: 1
   },
   textInputStyle: {
     backgroundColor: "white",
@@ -74,5 +86,8 @@ const styles = StyleSheet.create({
     width: 250
   }
 });
+const mapStateToProps = state => ({
+  isAuthenticated: state.client.isAuthenticated
+});
 
-export default ProfileScreen;
+export default connect(mapStateToProps)(ProfileScreen);
