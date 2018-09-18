@@ -12,7 +12,6 @@ import StarRating from "react-native-star-rating";
 import HeaderBar from "../components/HeaderBar";
 import VendorProductRow from "../components/VendorProductRow";
 
-sWidth = Dimensions.get("window").width;
 fakeData = [{}, {}, {}, {}, {}, {}, {}];
 class VendorDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -20,12 +19,19 @@ class VendorDetailScreen extends Component {
       headerRight: <HeaderBar />
     };
   };
+  onLayout = e => {
+    const { width, height } = Dimensions.get("window");
+    this.setState({ width, height });
+    console.warn(width, height);
+  };
 
   state = {
-    starCount: 3.5
+    starCount: 3.5,
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
   };
   _renderItem = ({ item }) => (
-    <View style={{ marginLeft: 0.02 * sWidth, marginBottom: 6 }}>
+    <View style={{ marginLeft: 0.02 * this.state.width, marginBottom: 6 }}>
       <VendorProductRow {...item} />
     </View>
   );
@@ -34,10 +40,14 @@ class VendorDetailScreen extends Component {
       starCount: rating
     });
   }
+
   render() {
     return (
       <ScrollView style={styles.container}>
-        <View style={{ flexDirection: "row", padding: 10 }}>
+        <View
+          style={{ flexDirection: "row", padding: 10 }}
+          onLayout={this.onLayout}
+        >
           <View>
             <Image
               source={require("./../assets/product3.jpg")}

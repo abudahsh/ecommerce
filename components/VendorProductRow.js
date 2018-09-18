@@ -1,15 +1,20 @@
 import React, { Component } from "react";
 import { View, Text, Image, Dimensions } from "react-native";
-sWidth = Dimensions.get("window").width;
 class VendorProductRow extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  onLayout = e => {
+    const { width, height } = Dimensions.get("window");
+    this.setState({ width, height });
+    console.warn(width, height);
+  };
 
+  state = {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
+  };
   render() {
     return (
       <View
+        onLayout={this.onLayout}
         style={{
           borderColor: "black",
           borderWidth: 1,
@@ -20,7 +25,11 @@ class VendorProductRow extends Component {
       >
         <Image
           source={require("./../assets/product2.jpg")}
-          style={{ width: 0.3 * sWidth, height: 100, borderRadius: 50 }}
+          style={{
+            width: 0.3 * this.state.width,
+            height: 100,
+            borderRadius: 50
+          }}
         />
         <Text>Product Name</Text>
         <Text>$ 60.00</Text>

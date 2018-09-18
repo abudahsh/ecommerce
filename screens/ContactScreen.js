@@ -13,6 +13,7 @@ import {
 } from "react-native";
 
 import Icon from "react-native-vector-icons/FontAwesome";
+import LottieView from "lottie-react-native";
 import { store } from "./../redux/store";
 import HeaderBar from "./../components/HeaderBar";
 sWidth = Dimensions.get("window").width;
@@ -24,11 +25,21 @@ class ContactScreen extends Component {
     };
   };
   state = {};
-
+  componentDidMount() {
+    this.animation.play(0, 100);
+  }
   render() {
     return (
       <ScrollView>
         <KeyboardAvoidingView behavior="padding" style={styles.container}>
+          <LottieView
+            source={require("./../assets/messagea7a.json")}
+            ref={animation => {
+              this.animation = animation;
+            }}
+            autoPlay
+            style={{ width: 300, height: 300 }}
+          />
           <Text style={{ color: "#4b2727", fontSize: 25 }}>Asunto</Text>
           <TextInput
             placeholder="servicio al cliente"

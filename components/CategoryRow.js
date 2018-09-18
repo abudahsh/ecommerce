@@ -9,20 +9,29 @@ import {
   Dimensions,
   TouchableWithoutFeedback
 } from "react-native";
-sWidth = Dimensions.get("window").width;
-sHeight = Dimensions.get("window").height;
 
 class CategoryRow extends React.Component {
+  onLayout = e => {
+    const { width, height } = Dimensions.get("window");
+    this.setState({ width, height });
+    console.warn(width, height);
+  };
+
+  state = {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
+  };
   render() {
     return (
       <TouchableOpacity
+        onLayout={this.onLayout}
         onPress={() => this.props.navigation.navigate("CategoryDetail")}
       >
         <ImageBackground
           source={require("./../assets/category1.jpg")}
           style={{
-            width: sWidth,
-            height: 0.2 * sHeight,
+            width: this.state.width,
+            height: 0.2 * this.state.height,
 
             marginBottom: 5
           }}
