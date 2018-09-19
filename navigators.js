@@ -21,6 +21,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import Icon from "react-native-vector-icons/FontAwesome";
 import CategoryDetailScreen from "./screens/CategoryDetailScreen";
 import AuthScreen from "./screens/AuthScreen";
+import VendorListScreen from "./screens/VendorsListScreen";
 sHeight = Dimensions.get("window").height;
 
 const NewsStack = createStackNavigator(
@@ -112,10 +113,16 @@ const ProductStack = createStackNavigator(
       navigationOptions: {
         title: "Profile"
       }
+    },
+    Vendors: {
+      screen: VendorListScreen,
+      navigationOptions: {
+        title: "Vendors"
+      }
     }
   },
   {
-    initialRouteName: "VendorDetail",
+    initialRouteName: "Home",
     navigationOptions: {
       headerStyle: {
         backgroundColor: "#4b2727",
@@ -219,7 +226,7 @@ const MainTabs = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "ProductStack",
+    initialRouteName: "About",
 
     tabBarOptions: {
       activeBackgroundColor: "white",

@@ -23,7 +23,25 @@ class AboutScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> AboutScreen </Text>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate("Vendors")}
+          style={{
+            backgroundColor: "blue",
+            height: 0.44 * sHeight,
+            borderBottomWidth: 50,
+            borderRightWidth: 50,
+            borderBottomColor: "black",
+            borderRightColor: "black"
+          }}
+        >
+          <Text style={{ color: "white" }}>Hi</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{ backgroundColor: "red", height: 0.44 * sHeight }}
+        >
+          <Text style={{ color: "white" }}>Hi</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -31,7 +49,8 @@ class AboutScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: "center"
   }
 });
 
