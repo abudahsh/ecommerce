@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { View, Text, Image, Dimensions } from "react-native";
+import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
+import { withNavigation } from "react-navigation";
 class VendorProductRow extends Component {
   onLayout = e => {
     const { width, height } = Dimensions.get("window");
@@ -13,29 +14,36 @@ class VendorProductRow extends Component {
   };
   render() {
     return (
-      <View
+      <TouchableOpacity
+        onPress={() => this.props.navigation.navigate("ProductDetail")}
         onLayout={this.onLayout}
         style={{
-          borderColor: "black",
-          borderWidth: 1,
+          borderColor: "#b7a195",
+          borderWidth: 2,
           justifyContent: "center",
           alignItems: "center",
-          borderRadius: 8
+          borderRadius: 8,
+          width: 0.47 * this.state.width,
+          height: 0.6 * this.state.width,
+          backgroundColor: "white"
         }}
       >
         <Image
           source={require("./../assets/product2.jpg")}
           style={{
-            width: 0.3 * this.state.width,
-            height: 100,
-            borderRadius: 50
+            width: 0.35 * this.state.width,
+            height: 0.35 * this.state.width,
+            borderRadius: 0.175 * this.state.width,
+            marginBottom: 20
           }}
         />
-        <Text>Product Name</Text>
-        <Text>$ 60.00</Text>
-      </View>
+        <Text style={{ fontWeight: "bold", color: "#4b2727" }}>
+          Product Name
+        </Text>
+        <Text style={{ color: "#4b2727" }}>$ 60.00</Text>
+      </TouchableOpacity>
     );
   }
 }
 
-export default VendorProductRow;
+export default withNavigation(VendorProductRow);

@@ -12,7 +12,7 @@ initialState = {
   client: {
     IsLoading: false,
     isAuthenticated: false,
-    gotStarted: true,
+    gotStarted: false,
     message: "zZZZZ"
   }
 };

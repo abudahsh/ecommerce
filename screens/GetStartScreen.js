@@ -28,6 +28,9 @@ class GetStartScreen extends Component {
         index={2}
         loop={false}
         showsPagination={!store.getState().client.gotStarted}
+        activeDotStyle={{
+          backgroundColor: "#e48d31"
+        }}
       >
         <View style={styles.container1}>
           <Text>WE CAME</Text>

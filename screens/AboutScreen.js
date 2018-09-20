@@ -6,7 +6,7 @@ import {
   Platform,
   Dimensions,
   TouchableOpacity,
-  Image
+  ImageBackground
 } from "react-native";
 import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
@@ -23,25 +23,65 @@ class AboutScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate("Vendors")}
-          style={{
-            backgroundColor: "blue",
-            height: 0.44 * sHeight,
-            borderBottomWidth: 50,
-            borderRightWidth: 50,
-            borderBottomColor: "black",
-            borderRightColor: "black"
-          }}
+        <ImageBackground
+          source={require("./../assets/about.jpg")}
+          style={{ width: sWidth, height: 0.9 * sHeight }}
         >
-          <Text style={{ color: "white" }}>Hi</Text>
-        </TouchableOpacity>
+          <View
+            style={{
+              height: 0.45 * sHeight,
+              justifyContent: "center",
+              alignItems: "flex-end",
+              marginRight: 20
+            }}
+          >
+            <Text style={{ color: "white" }}>
+              Get to know all Boyaca team now!
+            </Text>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate("Programmers")}
+              style={{
+                borderColor: "#e48d31",
+                borderRadius: 15,
+                height: 35,
+                borderWidth: 2,
+                justifyContent: "center",
+                paddingHorizontal: 7
+              }}
+            >
+              <Text style={{ color: "white", fontWeight: "bold" }}>
+                Programa Artesanias de Boyaca
+              </Text>
+            </TouchableOpacity>
+          </View>
 
-        <TouchableOpacity
-          style={{ backgroundColor: "red", height: 0.44 * sHeight }}
-        >
-          <Text style={{ color: "white" }}>Hi</Text>
-        </TouchableOpacity>
+          <View
+            style={{
+              height: 0.45 * sHeight,
+              justifyContent: "center",
+              alignItems: "flex-start",
+              marginLeft: 20
+            }}
+          >
+            <Text style={{ color: "white" }}>Get to see all our vendors</Text>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate("Vendors")}
+              style={{
+                borderColor: "#e48d31",
+                borderRadius: 15,
+                height: 35,
+                borderWidth: 2,
+                justifyContent: "center",
+                paddingHorizontal: 7,
+                marginLeft: 35
+              }}
+            >
+              <Text style={{ color: "white", fontWeight: "bold" }}>
+                P r e f i l e s
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
       </View>
     );
   }

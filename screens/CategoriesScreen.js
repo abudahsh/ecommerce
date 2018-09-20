@@ -6,7 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from "react-native";
 import CategoryRow from "./../components/CategoryRow";
 import { store } from "./../redux/store";
@@ -52,12 +53,20 @@ anotherData = [
 ];
 
 class CategoriesScreen extends Component {
+  onLayout = e => {
+    const { width, height } = Dimensions.get("window");
+    this.setState({ width, height });
+    console.warn(width, height);
+  };
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: <HeaderBar />
     };
   };
-  state = {};
+  state = {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
+  };
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
@@ -72,7 +81,10 @@ class CategoriesScreen extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View
+        style={{ flex: 1, width: this.state.width }}
+        onLayout={this.onLayout}
+      >
         <FlatList
           data={this.props.categories}
           renderItem={this._renderItem}
@@ -85,9 +97,7 @@ class CategoriesScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
+    flex: 1
   }
 });
 

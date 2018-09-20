@@ -83,14 +83,23 @@ class VendorDetailScreen extends Component {
           </Text>
         </View>
         <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <Text style={{ fontWeight: "bold" }}>Products</Text>
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 22,
+              color: "#4b2727",
+              marginBottom: 10
+            }}
+          >
+            Products
+          </Text>
         </View>
 
         <FlatList
           data={fakeData}
           renderItem={this._renderItem}
           kkeyExtractor={this._keyExtractor}
-          numColumns={3}
+          numColumns={2}
         />
       </ScrollView>
     );

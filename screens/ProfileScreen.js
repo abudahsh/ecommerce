@@ -32,7 +32,6 @@ class ProfileScreen extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text> ProfileScreen </Text>
         <TextInput
           style={styles.textInputStyle}
           underlineColorAndroid="transparent"

@@ -13,13 +13,13 @@ import { withNavigation } from "react-navigation";
 import { connect } from "react-redux";
 class HeaderBar extends React.Component {
   state = {
-    searchWidth: new Animated.Value(0),
-    searchOpacity: new Animated.Value(0)
+    searchWidth: new Animated.Value(10),
+    searchOpacity: new Animated.Value(1)
   };
   searchClicked = () => {
     Animated.parallel([
       Animated.timing(this.state.searchWidth, {
-        toValue: 50,
+        toValue: 100,
         duration: 500
       }),
       Animated.timing(this.state.searchOpacity, {
@@ -46,13 +46,16 @@ class HeaderBar extends React.Component {
             style={{ paddingTop: 3 }}
           />
         </TouchableOpacity>
-        <TextInput
-          placeholder="Search"
+        <Animated.View
           style={{
+            position: "absolute",
             width: this.state.searchWidth,
             opacity: this.state.searchOpacity
           }}
-        />
+        >
+          <TextInput placeholder="Search" />
+        </Animated.View>
+
         <TouchableOpacity
           onPress={this.searchClicked}
           style={{

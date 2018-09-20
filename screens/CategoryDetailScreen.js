@@ -4,7 +4,8 @@ import {
   Text,
   FlatList,
   ScrollView,
-  ImageBackground
+  ImageBackground,
+  Dimensions
 } from "react-native";
 import HeaderBar from "../components/HeaderBar";
 import { connect } from "react-redux";
@@ -12,13 +13,22 @@ import ProductRow from "./../components/ProductRow";
 import { _fetchProducts } from "./../redux/actions";
 import { store } from "./../redux/store";
 class CategoryDetailScreen extends Component {
+  onLayout = e => {
+    const { width, height } = Dimensions.get("window");
+    this.setState({ width, height });
+    console.warn(width, height);
+  };
+
+  state = {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height
+  };
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: <HeaderBar />
     };
   };
 
-  state = {};
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
@@ -59,7 +69,7 @@ class CategoryDetailScreen extends Component {
       );
     } else {
       return (
-        <ScrollView style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }} onLayout={this.onLayout}>
           <ScrollView
             horizontal={true}
             alwaysBounceHorizontal={true}

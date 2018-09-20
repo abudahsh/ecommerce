@@ -15,6 +15,7 @@ import StarRating from "react-native-star-rating";
 import HeaderBar from "../components/HeaderBar";
 import Icon from "react-native-vector-icons/FontAwesome";
 import ProdctTabs from "../components/ProductTabs";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 falseData = [{}, {}, {}, {}];
@@ -56,36 +57,69 @@ class ProductDetailScreen extends Component {
     return (
       <ScrollView style={styles.container}>
         <View style={{ height: 0.3 * sHeight }}>
-          <Swiper width={sWidth}>
+          <Swiper
+            width={sWidth}
+            dotStyle={{ backgroundColor: "white" }}
+            activeDotStyle={{
+              backgroundColor: "#e48d31"
+            }}
+          >
             {falseData.map(data => (
-              <Image source={require("./../assets/product2.jpg")} />
+              <Image
+                source={require("./../assets/product2.jpg")}
+                style={{ width: sWidth }}
+              />
             ))}
           </Swiper>
         </View>
         <View
           style={{
-            padding: 20,
+            paddingHorizontal: 20,
+            paddingTop: 4,
             flexDirection: "row",
-            justifyContent: "space-between"
+            justifyContent: "space-between",
+            alignItems: "center"
           }}
         >
-          <Text>{"price: " + price}</Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text
+              style={{
+                fontWeight: "bold",
+                fontSize: 20,
+                color: "#e48d31",
+                paddingRight: 10
+              }}
+            >
+              Price
+            </Text>
+            <Text
+              style={{ fontWeight: "bold", fontSize: 20, color: "#e48d31" }}
+            >
+              {price}
+            </Text>
+          </View>
+
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "space-between"
+              justifyContent: "space-between",
+              alignItems: "center",
+              borderWidth: 1,
+              borderColor: "#e48d31",
+              borderRadius: 5
             }}
           >
-            <Text>Num: </Text>
             <TextInput
               value={this.state.num}
               onChangeText={num => this.setState({ num })}
               style={{
                 width: 30,
                 height: 40,
-                backgroundColor: "white",
+
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
+                borderRadius: 15,
+                paddingLeft: 10
               }}
             />
             <View>
@@ -94,14 +128,22 @@ class ProductDetailScreen extends Component {
                   this.setState({ num: String(Number(this.state.num) + 1) })
                 }
               >
-                <Icon name="arrow-up" size={15} />
+                <MaterialIcons
+                  name="keyboard-arrow-up"
+                  size={15}
+                  color="#e48d31"
+                />
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() =>
                   this.setState({ num: String(Number(this.state.num) - 1) })
                 }
               >
-                <Icon name="arrow-down" size={15} />
+                <MaterialIcons
+                  name="keyboard-arrow-down"
+                  size={15}
+                  color="#e48d31"
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -207,7 +249,8 @@ class ProductDetailScreen extends Component {
                   borderBottomLeftRadius: 7,
                   borderLeftColor: "white",
                   borderTopLeftRadius: -30,
-                  backgroundColor: "#f7f7f7"
+                  backgroundColor: "#f7f7f7",
+                  marginLeft: 2
                 }}
               >
                 <Text style={{ paddingHorizontal: 6 }}>{vendorDesc}</Text>

@@ -22,11 +22,17 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import CategoryDetailScreen from "./screens/CategoryDetailScreen";
 import AuthScreen from "./screens/AuthScreen";
 import VendorListScreen from "./screens/VendorsListScreen";
+import ProgrammersScreen from "./screens/ProgrammersScreen";
 sHeight = Dimensions.get("window").height;
 
 const NewsStack = createStackNavigator(
   {
-    News: { screen: NewsScreen }
+    News: {
+      screen: NewsScreen,
+      navigationOptions: {
+        title: "News"
+      }
+    }
   },
   {
     initialRouteName: "News",
@@ -43,7 +49,12 @@ const NewsStack = createStackNavigator(
 );
 const AboutStack = createStackNavigator(
   {
-    About: { screen: AboutScreen }
+    About: {
+      screen: AboutScreen,
+      navigationOptions: {
+        title: "About"
+      }
+    }
   },
   {
     initialRouteName: "About",
@@ -60,7 +71,12 @@ const AboutStack = createStackNavigator(
 );
 const ContactStack = createStackNavigator(
   {
-    Contact: { screen: ContactScreen }
+    Contact: {
+      screen: ContactScreen,
+      navigationOptions: {
+        title: "Contact"
+      }
+    }
   },
   {
     initialRouteName: "Contact",
@@ -118,6 +134,12 @@ const ProductStack = createStackNavigator(
       screen: VendorListScreen,
       navigationOptions: {
         title: "Vendors"
+      }
+    },
+    Programmers: {
+      screen: ProgrammersScreen,
+      navigationOptions: {
+        title: "Programmers"
       }
     }
   },

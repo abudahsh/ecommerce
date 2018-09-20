@@ -21,6 +21,11 @@ class CategoryRow extends React.Component {
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height
   };
+  shouldComponentUpdate(nextState) {
+    if (this.state.width !== nextState.width) {
+      return true;
+    }
+  }
   render() {
     return (
       <TouchableOpacity
