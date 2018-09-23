@@ -11,8 +11,8 @@ initialState = {
   categories: [],
   client: {
     IsLoading: false,
-    isAuthenticated: false,
-    gotStarted: false,
+    isAuthenticated: true,
+    gotStarted: true,
     message: "zZZZZ"
   }
 };

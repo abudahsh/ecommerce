@@ -14,7 +14,7 @@ import { connect } from "react-redux";
 class HeaderBar extends React.Component {
   state = {
     searchWidth: new Animated.Value(10),
-    searchOpacity: new Animated.Value(1)
+    searchOpacity: new Animated.Value(0)
   };
   searchClicked = () => {
     Animated.parallel([
