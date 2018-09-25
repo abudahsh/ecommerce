@@ -85,17 +85,17 @@ class ProductDetailScreen extends Component {
             <Text
               style={{
                 fontWeight: "bold",
-                fontSize: 20,
+                fontSize: 17,
                 color: "#e48d31",
                 paddingRight: 10
               }}
             >
-              Price
+              Price :
             </Text>
             <Text
-              style={{ fontWeight: "bold", fontSize: 20, color: "#e48d31" }}
+              style={{ fontWeight: "bold", fontSize: 17, color: "#e48d31" }}
             >
-              {price}
+              {price} $
             </Text>
           </View>
 
@@ -114,7 +114,7 @@ class ProductDetailScreen extends Component {
               onChangeText={num => this.setState({ num })}
               style={{
                 width: 30,
-                height: 40,
+                height: 36,
 
                 justifyContent: "center",
                 alignItems: "center",

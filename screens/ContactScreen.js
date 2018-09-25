@@ -43,34 +43,38 @@ class ContactScreen extends Component {
           <Text style={{ color: "#4b2727", fontSize: 25 }}>Asunto</Text>
           <TextInput
             placeholder="servicio al cliente"
-            style={{ width: "70%" }}
+            style={{ width: 0.8 * sWidth }}
           />
           <Text style={{ color: "#4b2727", fontSize: 25 }}>
             Correo electronico
           </Text>
           <TextInput
             placeholder="example@website.com"
-            style={{ width: "70%" }}
+            style={{ width: 0.8 * sWidth }}
           />
           <Text style={{ color: "#4b2727", fontSize: 25 }}>Mensaje</Text>
           <TextInput
             multiline={true}
-            style={{ width: "70%", height: 120 }}
+            style={{ width: 0.8 * sWidth, height: 120 }}
             placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
           Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. "
           />
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#4b2727",
-              borderRadius: 30,
-              width: "40%",
-              height: 30,
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Text style={{ fontWeight: "bold", color: "#e48d31" }}>ENVAIR</Text>
-          </TouchableOpacity>
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#4b2727",
+                borderRadius: 30,
+                width: "40%",
+                height: 30,
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <Text style={{ fontWeight: "bold", color: "#e48d31" }}>
+                ENVAIR
+              </Text>
+            </TouchableOpacity>
+          </View>
         </KeyboardAvoidingView>
         <View
           style={{

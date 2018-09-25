@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import { View, Text, FlatList } from "react-native";
 import VendorRow from "../components/VendorRow";
+import HeaderBar from "./../components/HeaderBar";
 wrongData = [{}, {}, {}, {}];
 class VendorListScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: <HeaderBar />
+    };
+  };
   constructor(props) {
     super(props);
     this.state = {};

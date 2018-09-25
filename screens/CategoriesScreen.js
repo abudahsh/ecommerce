@@ -14,7 +14,8 @@ import { store } from "./../redux/store";
 import { _fetchCategories } from "./../redux/actions";
 import { connect } from "react-redux";
 import HeaderBar from "../components/HeaderBar";
-
+sWidth = Dimensions.get("window").width;
+sheight = Dimensions.get("window").height;
 anotherData = [
   {},
   {},
@@ -53,20 +54,12 @@ anotherData = [
 ];
 
 class CategoriesScreen extends Component {
-  onLayout = e => {
-    const { width, height } = Dimensions.get("window");
-    this.setState({ width, height });
-    console.warn(width, height);
-  };
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: <HeaderBar />
     };
   };
-  state = {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
-  };
+  state = {};
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
@@ -81,10 +74,7 @@ class CategoriesScreen extends Component {
   }
   render() {
     return (
-      <View
-        style={{ flex: 1, width: this.state.width }}
-        onLayout={this.onLayout}
-      >
+      <View style={{ flex: 1, width: sWidth }}>
         <FlatList
           data={this.props.categories}
           renderItem={this._renderItem}

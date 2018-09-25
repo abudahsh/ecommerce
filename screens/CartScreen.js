@@ -7,10 +7,13 @@ import {
   TouchableOpacity,
   FlatList,
   ScrollView,
-  TextInput
+  TextInput,
+  Dimensions
 } from "react-native";
 import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
+import CartItem from "../components/CartItem";
+sWidth = Dimensions.get("window").width;
 cartOtems = [
   {},
   {},
@@ -49,51 +52,7 @@ class CartScreen extends Component {
   };
   state = {};
   _renderItem = () => {
-    return (
-      <View
-        style={{
-          flexDirection: "row",
-          flex: 1,
-          marginHorizontal: 20,
-          justifyContent: "space-around",
-          backgroundColor: "white",
-          borderColor: "#5e5b5b",
-          borderRightWidth: 1,
-          borderBottomWidth: 1,
-          borderTopLeftRadius: 15,
-
-          borderTopColor: "#5e5b5b",
-          borderRadius: 15,
-          marginHorizontal: 15,
-          marginVertical: 8,
-          paddingLeft: 15
-        }}
-      >
-        <View>
-          <Image
-            source={require("./../assets/product4.jpg")}
-            style={{ width: 60, height: 50 }}
-          />
-        </View>
-        <View>
-          <Text style={{ fontWeight: "bold", color: "#4b2727" }}>
-            Item Label
-          </Text>
-          <Text style={{ color: "#4b2727" }}>Vendor Label</Text>
-          <Text style={{ color: "orange" }}>300$</Text>
-        </View>
-        <View>
-          <TextInput
-            placeholder="1"
-            value={1}
-            style={{ width: 40, height: 30 }}
-          />
-          <View style={{ backgroundColor: "orange" }}>
-            <Text>600$</Text>
-          </View>
-        </View>
-      </View>
-    );
+    return <CartItem />;
   };
   _keyExtractor = (item, index) => item.id;
   render() {
@@ -111,14 +70,47 @@ class CartScreen extends Component {
             zIndex: 100,
             bottom: 0,
             left: 0,
-            backgroundColor: "red",
-            opacity: 0.1,
-            width: 365,
+            backgroundColor: "#dadada",
+            opacity: 0.8,
+            width: sWidth,
             height: 100,
-            borderTopRightRadius: 30,
-            borderTopLeftRadius: 30
+            borderTopRightRadius: 50,
+            borderTopLeftRadius: 50,
+            paddingHorizontal: 50,
+            paddingTop: 20
           }}
-        />
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center"
+            }}
+          >
+            <Text style={styles.textStyle}>SUBTOTAL</Text>
+            <Text style={styles.textStyle}>1800$</Text>
+          </View>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={styles.textStyle}>IVA</Text>
+            <Text style={styles.textStyle}>0$</Text>
+          </View>
+          <View
+            style={{
+              height: 2,
+              width: 0.72 * sWidth,
+              backgroundColor: "#4b2727",
+              justifyContent: "center"
+            }}
+          />
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={styles.textStyle}>Total</Text>
+            <Text style={styles.textStyle}>1800$</Text>
+          </View>
+        </View>
       </View>
     );
   }
@@ -129,6 +121,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  textStyle: {
+    color: "#4b2727"
   }
 });
 

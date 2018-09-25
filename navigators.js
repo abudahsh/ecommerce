@@ -40,8 +40,7 @@ const NewsStack = createStackNavigator(
       headerStyle: {
         backgroundColor: "#4b2727",
         height: 0.06 * sHeight,
-        minHeight: 30,
-        marginBottom: 5
+        minHeight: 30
       },
       headerTintColor: "#e48d31"
     }
@@ -62,8 +61,7 @@ const AboutStack = createStackNavigator(
       headerStyle: {
         backgroundColor: "#4b2727",
         height: 0.06 * sHeight,
-        minHeight: 30,
-        marginBottom: 5
+        minHeight: 30
       },
       headerTintColor: "#e48d31"
     }
@@ -84,8 +82,7 @@ const ContactStack = createStackNavigator(
       headerStyle: {
         backgroundColor: "#4b2727",
         height: 0.06 * sHeight,
-        minHeight: 30,
-        marginBottom: 5
+        minHeight: 30
       },
       headerTintColor: "#e48d31"
     }
@@ -149,8 +146,7 @@ const ProductStack = createStackNavigator(
       headerStyle: {
         backgroundColor: "#4b2727",
         height: 0.06 * sHeight,
-        minHeight: 30,
-        marginBottom: 5
+        minHeight: 30
       },
       headerTintColor: "#e48d31"
     }
@@ -178,8 +174,7 @@ const CatStack = createStackNavigator(
       headerStyle: {
         backgroundColor: "#4b2727",
         height: 0.06 * sHeight,
-        minHeight: 30,
-        marginBottom: 5
+        minHeight: 30
       },
       headerTintColor: "#e48d31"
     }

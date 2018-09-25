@@ -12,17 +12,10 @@ import { connect } from "react-redux";
 import ProductRow from "./../components/ProductRow";
 import { _fetchProducts } from "./../redux/actions";
 import { store } from "./../redux/store";
+sWidth = Dimensions.get("window").width;
+sHeight = Dimensions.get("window").height;
 class CategoryDetailScreen extends Component {
-  onLayout = e => {
-    const { width, height } = Dimensions.get("window");
-    this.setState({ width, height });
-    console.warn(width, height);
-  };
-
-  state = {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
-  };
+  state = {};
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: <HeaderBar />
@@ -69,11 +62,10 @@ class CategoryDetailScreen extends Component {
       );
     } else {
       return (
-        <ScrollView style={{ flex: 1 }} onLayout={this.onLayout}>
+        <ScrollView style={{ flex: 1 }}>
           <ScrollView
             horizontal={true}
             alwaysBounceHorizontal={true}
-            stickyHeaderIndices={true}
             style={{
               paddingBottom: 5,
               borderBottomColor: "#D3D3D3",

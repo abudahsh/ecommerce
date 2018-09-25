@@ -5,7 +5,8 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  View
 } from "react-native";
 import { connect } from "react-redux";
 import { store } from "./../redux/store";
@@ -31,43 +32,46 @@ class ProfileScreen extends Component {
 
   render() {
     return (
-      <ScrollView style={styles.container}>
-        <TextInput
-          style={styles.textInputStyle}
-          underlineColorAndroid="transparent"
-          value={this.state.email}
-          onChangeText={email => this.setState({ email })}
-        />
-        <TextInput
-          style={styles.textInputStyle}
-          underlineColorAndroid="transparent"
-          value={this.state.firstName}
-          onChangeText={firstName => this.setState({ firstName })}
-        />
-        <TextInput
-          style={styles.textInputStyle}
-          underlineColorAndroid="transparent"
-          value={this.state.surName}
-          onChangeText={surName => this.setState({ surName })}
-        />
-        <TextInput
-          style={styles.textInputStyle}
-          underlineColorAndroid="transparent"
-          value={this.state.phone}
-          onChangeText={phone => this.setState({ phone })}
-        />
+      <ScrollView style={{ flex: 1 }}>
+        <View style={styles.container}>
+          <TextInput
+            style={styles.textInputStyle}
+            underlineColorAndroid="transparent"
+            value={this.state.email}
+            onChangeText={email => this.setState({ email })}
+          />
+          <TextInput
+            style={styles.textInputStyle}
+            underlineColorAndroid="transparent"
+            value={this.state.firstName}
+            onChangeText={firstName => this.setState({ firstName })}
+          />
+          <TextInput
+            style={styles.textInputStyle}
+            underlineColorAndroid="transparent"
+            value={this.state.surName}
+            onChangeText={surName => this.setState({ surName })}
+          />
+          <TextInput
+            style={styles.textInputStyle}
+            underlineColorAndroid="transparent"
+            value={this.state.phone}
+            onChangeText={phone => this.setState({ phone })}
+          />
 
-        <TouchableOpacity
-          style={{
-            backgroundColor: "orange",
-            width: 100,
-            height: 30,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <Text>Save</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#e48d31",
+              width: 100,
+              height: 30,
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 15
+            }}
+          >
+            <Text style={{ color: "white" }}>Save</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     );
   }
@@ -75,7 +79,9 @@ class ProfileScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    marginTop: 30,
+    alignItems: "center"
   },
   textInputStyle: {
     backgroundColor: "white",

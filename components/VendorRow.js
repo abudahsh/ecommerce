@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+  TouchableWithoutFeedback
+} from "react-native";
 import StarRating from "react-native-star-rating";
 import { withNavigation } from "react-navigation";
 sHight = Dimensions.get("screen").height;
@@ -18,12 +25,13 @@ class VendorRow extends Component {
           minHeight: 0.2 * sHight,
           padding: 8,
           borderBottomColor: "#b7a195",
-          borderBottomWidth: 1
+          borderBottomWidth: 1,
+          maxHeight: 0.25 * sHight
         }}
       >
-        <View
+        <TouchableWithoutFeedback
+          onPress={() => this.props.navigation.navigate("VendorDetail")}
           style={{
-            paddingRight: 10,
             paddingBottom: 5,
             justifyContent: "center"
           }}
@@ -31,12 +39,13 @@ class VendorRow extends Component {
           <Image
             source={require("./../assets/product4.jpg")}
             style={{
-              height: 0.2 * sHight,
-              width: 0.2 * sHight,
-              borderRadius: 12
+              height: 0.35 * sWidth,
+              width: 0.35 * sWidth,
+              borderRadius: 19,
+              marginRight: 10
             }}
           />
-        </View>
+        </TouchableWithoutFeedback>
         <View style={{ width: 0.55 * sWidth }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <TouchableOpacity

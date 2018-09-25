@@ -1,40 +1,32 @@
 import React, { Component } from "react";
 import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
 import { withNavigation } from "react-navigation";
+sWidth = Dimensions.get("window").width;
+sHeight = Dimensions.get("window").height;
 class VendorProductRow extends Component {
-  onLayout = e => {
-    const { width, height } = Dimensions.get("window");
-    this.setState({ width, height });
-    console.warn(width, height);
-  };
-
-  state = {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
-  };
+  state = {};
   render() {
     return (
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate("ProductDetail")}
-        onLayout={this.onLayout}
         style={{
           borderColor: "#b7a195",
           borderWidth: 2,
           justifyContent: "center",
           alignItems: "center",
           borderRadius: 8,
-          width: 0.47 * this.state.width,
-          height: 0.6 * this.state.width,
+          width: 0.35 * sWidth,
+          height: 0.45 * sWidth,
           backgroundColor: "white"
         }}
       >
         <Image
-          source={require("./../assets/product2.jpg")}
+          source={require("./../assets/product4.jpg")}
           style={{
-            width: 0.35 * this.state.width,
-            height: 0.35 * this.state.width,
-            borderRadius: 0.175 * this.state.width,
-            marginBottom: 20
+            width: 0.25 * sWidth,
+            height: 0.25 * sWidth,
+            borderRadius: 0.175 * sWidth,
+            marginVertical: 9
           }}
         />
         <Text style={{ fontWeight: "bold", color: "#4b2727" }}>

@@ -12,7 +12,8 @@ import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import LoginScreen from "./LoginScreen";
 import RegisterScreen from "./RegisterScreen";
 import HeaderBar from "../components/HeaderBar";
-
+sHight = Dimensions.get("screen").height;
+sWidth = Dimensions.get("screen").width;
 const FirstRoute = () => <LoginScreen />;
 const SecondRoute = () => <RegisterScreen />;
 
@@ -39,7 +40,7 @@ export default class AuthScreen extends React.Component {
     _renderIndicator = () => ({});
 
     return (
-      <View style={{ paddingTop: 20, backgroundColor: "#4b2727" }}>
+      <View style={{ paddingTop: 10, backgroundColor: "#4b2727" }}>
         <View
           style={{
             justifyContent: "center",
@@ -47,7 +48,14 @@ export default class AuthScreen extends React.Component {
             alignSelf: "stretch"
           }}
         >
-          <Image source={require("./../assets/logo2.png")} />
+          <Image
+            source={require("./../assets/Logodouble.png")}
+            style={{
+              width: 0.8 * sWidth,
+              height: 0.4 * sWidth,
+              marginLeft: 20
+            }}
+          />
         </View>
 
         <View style={styles.tabBar}>

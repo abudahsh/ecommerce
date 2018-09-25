@@ -12,20 +12,11 @@ import { withNavigation } from "react-navigation";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 class ProductRow extends React.Component {
-  onLayout = e => {
-    const { width, height } = Dimensions.get("window");
-    this.setState({ width, height });
-    console.warn(width, height);
-  };
-
-  state = {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height
-  };
+  state = {};
 
   render() {
     return (
-      <View onLayout={this.onLayout}>
+      <View>
         <TouchableWithoutFeedback
           onPress={() =>
             this.props.navigation.navigate("ProductDetail", {
@@ -42,8 +33,8 @@ class ProductRow extends React.Component {
             <Image
               source={require("./../assets/product3.jpg")}
               style={{
-                width: 0.46 * this.state.width,
-                height: 0.28 * this.state.height,
+                width: 0.46 * sWidth,
+                height: 0.28 * sHeight,
                 borderTopRightRadius: 15,
                 borderTopLeftRadius: 15
               }}
