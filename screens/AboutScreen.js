@@ -36,7 +36,7 @@ class AboutScreen extends Component {
             }}
           >
             <Text style={{ color: "white" }}>
-              Get to know all Boyaca team now!
+              ¡Conoce a todo el equipo de Boyacá ahora!
             </Text>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate("Programmers")}
@@ -63,7 +63,7 @@ class AboutScreen extends Component {
               marginLeft: 20
             }}
           >
-            <Text style={{ color: "white" }}>Get to see all our vendors</Text>
+            <Text style={{ color: "white" }}>ver todos los vendedores</Text>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate("Vendors")}
               style={{

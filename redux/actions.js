@@ -3,7 +3,9 @@ import {
   register,
   fetchCategories,
   fetchProducts,
-  fetchVendors
+  fetchVendors,
+  fetchOneVendor,
+  fetchCart
 } from "./../components/apis";
 
 export const _getStarted = () => ({
@@ -17,16 +19,20 @@ export const _loginUser = (username, password) => dispatch => {
 
   const username = results.username;
   const token = results.token;
-  dispatch({
-    type: "LOG_IN_SUCCESS",
-    payload: {
-      isLoading: false,
-      isAuthenticated: true,
-      token: token,
-      email: username,
-      message: "Loged in successfully"
-    }
-  });
+  setTimeout(
+    () =>
+      dispatch({
+        type: "LOG_IN_SUCCESS",
+        payload: {
+          isLoading: false,
+          isAuthenticated: true,
+          token: token,
+          email: username,
+          message: "Loged in successfully"
+        }
+      }),
+    3000
+  );
 };
 
 export const _registerUser = (username, password) => dispatch => {
@@ -55,15 +61,15 @@ export const _fetchProducts = () => dispatch => {
       message: "Fetching request is in progress"
     }
   });
-  results = fetchProducts();
-  lolo = results.otherData;
-  dispatch({
-    type: "FETCHING_PROS_SUCCESS",
-    payload: {
-      isLoading: false,
-      products: lolo,
-      message: "Fetching products finished successfully"
-    }
+  fetchProducts().then(results => {
+    dispatch({
+      type: "FETCHING_PROS_SUCCESS",
+      payload: {
+        isLoading: false,
+        products: results,
+        message: "Fetching products finished successfully"
+      }
+    });
   });
 };
 
@@ -75,14 +81,53 @@ export const _fetchCategories = () => dispatch => {
       message: "Fetching request is in progress"
     }
   });
-  results = fetchCategories();
+  fetchCategories().then(results => {
+    dispatch({
+      type: "FETCHING_CATS_SUCCESS",
+      payload: {
+        isLoading: false,
+        categories: results,
+        message: "Fetching categories finished successfully"
+      }
+    });
+  });
+};
+
+export const _fetchVendors = () => dispatch => {
+  dispatch({
+    type: "FETCHING_VENDORS_STARTED",
+    payload: {
+      isLoading: true,
+      message: "Fetching request is in progress"
+    }
+  });
+  fetchVendors().then(results => {
+    dispatch({
+      type: "FETCHING_VENDORS_SUCCESS",
+      payload: {
+        isLoading: false,
+        vendors: results,
+        message: "Fetching Vendors finished successfully"
+      }
+    });
+  });
+};
+export const _fetchOneVendor = () => dispatch => {
+  dispatch({
+    type: "FETCHING_CATS_STARTED",
+    payload: {
+      isLoading: true,
+      message: "Fetching vendor request is in progress"
+    }
+  });
+  results = fetchOneVendor();
   lolo = results.otherData;
   dispatch({
-    type: "FETCHING_CATS_SUCCESS",
+    type: "FETCHING_ONE_Vendor_SUCCESS",
     payload: {
       isLoading: false,
-      categories: lolo,
-      message: "Fetching categories finished successfully"
+      vendor: lolo,
+      message: "Fetching vendor finished successfully"
     }
   });
 };

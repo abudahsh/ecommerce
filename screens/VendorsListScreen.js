@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, FlatList } from "react-native";
+import { connect } from "react-redux";
+import { _fetchVendors } from "./../redux/actions";
 import VendorRow from "../components/VendorRow";
 import HeaderBar from "./../components/HeaderBar";
 wrongData = [{}, {}, {}, {}];
@@ -19,11 +21,15 @@ class VendorListScreen extends Component {
       <VendorRow {...item} />
     </View>
   );
+  componentDidMount() {
+    this.props._fetchVendors();
+  }
+
   render() {
     return (
       <View>
         <FlatList
-          data={wrongData}
+          data={this.props.vendors}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
         />
@@ -32,4 +38,14 @@ class VendorListScreen extends Component {
   }
 }
 
-export default VendorListScreen;
+const mapStateToProps = state => ({
+  vendors: state.vendors,
+  isLoading: state.client.isLoading
+});
+const mapDispatchToProps = dispatch => ({
+  _fetchVendors: () => dispatch(_fetchVendors())
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VendorListScreen);

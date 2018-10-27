@@ -6,7 +6,7 @@ class ProductDesc extends React.Component {
     return (
       <View style={{ paddingHorizontal: 25 }}>
         <Text style={{ color: "#4b2727" }}>
-          This product is the best in our city, try it
+          Este producto es el mejor en nuestra ciudad, pruébalo.
         </Text>
       </View>
     );

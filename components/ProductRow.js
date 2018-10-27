@@ -20,12 +20,11 @@ class ProductRow extends React.Component {
         <TouchableWithoutFeedback
           onPress={() =>
             this.props.navigation.navigate("ProductDetail", {
-              name: "Awesome Product",
-              describtion: "This product is the best in our city, try it",
-              price: 1299,
-              vendorName: "Oddaa",
-              vendorDesc:
-                "WE are working since 1932 WE are working since 1932 WE are working since 1932 WE are working since 1932 WE are working since 1932 "
+              name: this.props.p_name,
+              describtion: this.props.description,
+              price: this.props.price,
+              vendorName: this.props.name,
+              vendorDesc: "Somos el artesano más antiguo de la ciudad. "
             })
           }
         >
@@ -52,7 +51,7 @@ class ProductRow extends React.Component {
                     fontWeight: "bold"
                   }}
                 >
-                  Product blah
+                  {this.props.p_name}
                 </Text>
               </View>
               <View
@@ -63,7 +62,7 @@ class ProductRow extends React.Component {
                 }}
               >
                 <Text style={{ color: "black", paddingTop: 5, paddingLeft: 7 }}>
-                  900 $
+                  {this.props.price} $
                 </Text>
                 <TouchableOpacity
                   style={{
@@ -91,7 +90,9 @@ class ProductRow extends React.Component {
                   source={require("./../assets/Icons/profile.png")}
                   style={{ height: 15, width: 15 }}
                 />
-                <Text style={{ fontSize: 12, color: "black" }}>Vendor</Text>
+                <Text style={{ fontSize: 12, color: "black" }}>
+                  {this.props.name}
+                </Text>
               </View>
             </View>
           </View>

@@ -41,11 +41,11 @@ class NewsRow extends React.Component {
             style={{ width: sWidth - 52, height: 0.2 * sHeight, margin: 5 }}
           />
           <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-            Mo salah scored 2 goals!!
+            Mo Salah anotó dos goles!!
           </Text>
           <Text style={{ marginHorizontal: 5 }}>
-            In today's game with Manchester United, salah managed to score 2
-            goals and made 4 assists
+            En el juego de hoy con el Manchester United, Salah logró anotar 2. y
+            2 asistencias
           </Text>
         </TouchableOpacity>
 
@@ -66,32 +66,24 @@ class NewsRow extends React.Component {
             />
             <Text>Mo salah scored 2 goals!!</Text>
             <Text style={{ marginHorizontal: 5 }}>
-              In today's game with Manchester United, salah managed to score 2
-              goals and made 4 assists In today's game with Manchester United,
-              salah managed to score 2 goals and made 4 assists In today's game
-              with Manchester United, salah managed to score 2 goals and made 4
-              assists In today's game with Manchester United, salah managed to
-              score 2 goals and made 4 assists In today's game with Manchester
-              United, salah managed to score 2 goals and made 4 assists In
-              today's game with Manchester United, salah managed to score 2
-              goals and made 4 assists In today's game with Manchester United,
-              salah managed to score 2 goals and made 4 assists In today's game
-              with Manchester United, salah managed to score 2 goals and made 4
-              assists In today's game with Manchester United, salah managed to
-              score 2 goals and made 4 assists In today's game with Manchester
-              United, salah managed to score 2 goals and made 4 assists In
-              today's game with Manchester United, salah managed to score 2
-              goals and made 4 assists In today's game with Manchester United,
-              salah managed to score 2 goals and made 4 assists In today's game
-              with Manchester United, salah managed to score 2 goals and made 4
-              assists In today's game with Manchester United, salah managed to
-              score 2 goals and made 4 assists In today's game with Manchester
-              United, salah managed to score 2 goals and made 4 assists In
-              today's game with Manchester United, salah managed to score 2
-              goals and made 4 assists In today's game with Manchester United,
-              salah managed to score 2 goals and made 4 assists In today's game
-              with Manchester United, salah managed to score 2 goals and made 4
-              assists
+              En el juego de hoy con el Manchester United, Salah logró anotar 2.
+              y 2 asistenciasEn el juego de hoy con el Manchester United, Salah
+              logró anotar 2. y 2 asistenciasEn el juego de hoy con el
+              Manchester United, Salah logró anotar 2. y 2 asistenciasEn el
+              juego de hoy con el Manchester United, Salah logró anotar 2. y 2
+              asistenciasEn el juego de hoy con el Manchester United, Salah
+              logró anotar 2. y 2 asistenciasEn el juego de hoy con el
+              Manchester United, Salah logró anotar 2. y 2 asistenciasEn el
+              juego de hoy con el Manchester United, Salah logró anotar 2. y 2
+              asistenciasEn el juego de hoy con el Manchester United, Salah
+              logró anotar 2. y 2 asistenciasEn el juego de hoy con el
+              Manchester United, Salah logró anotar 2. y 2 asistenciasEn el
+              juego de hoy con el Manchester United, Salah logró anotar 2. y 2
+              asistenciasEn el juego de hoy con el Manchester United, Salah
+              logró anotar 2. y 2 asistenciasEn el juego de hoy con el
+              Manchester United, Salah logró anotar 2. y 2 asistenciasEn el
+              juego de hoy con el Manchester United, Salah logró anotar 2. y 2
+              asistencias
             </Text>
           </ScrollView>
         </Modal>

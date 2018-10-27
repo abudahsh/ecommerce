@@ -32,17 +32,37 @@ export const register = (username, password) => {
   return username, token;
 };
 
-export const fetchProducts = () => {
+export const fetchProducts = async () => {
+  request = await fetch(
+    "http://ecommerce-ricardo.herokuapp.com/public/api/products"
+  );
+  response = await request.json();
+  mo = await response.data.data;
+  return mo;
+};
+
+export const fetchVendors = async () => {
+  request = await fetch(
+    "http://ecommerce-ricardo.herokuapp.com/public/api/sellers"
+  );
+  response = await request.json();
+  results = await response.data;
+  return results;
+};
+export const fetchOneVendor = () => {
   results = { otherData: otherData };
   return results;
 };
-
-export const fetchVendors = () => {
+export const fetchCart = () => {
   results = { otherData: otherData };
   return results;
 };
+export const fetchCategories = async () => {
+  request = await fetch(
+    "http://ecommerce-ricardo.herokuapp.com/public/api/categories"
+  );
+  response = await request.json();
+  results = await response.data;
 
-export const fetchCategories = () => {
-  results = { otherData: otherData };
   return results;
 };

@@ -75,11 +75,15 @@ class CategoriesScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1, width: sWidth }}>
-        <FlatList
-          data={this.props.categories}
-          renderItem={this._renderItem}
-          keyExtractor={this._keyExtractor}
-        />
+        {this.props.categories ? (
+          <FlatList
+            data={this.props.categories}
+            renderItem={this._renderItem}
+            keyExtractor={this._keyExtractor}
+          />
+        ) : (
+          <Text>Loading ....</Text>
+        )}
       </View>
     );
   }

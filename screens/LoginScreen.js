@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Text,
   Image,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from "react-native";
 import { _loginUser } from "./../redux/actions";
 import { connect } from "react-redux";
@@ -24,7 +25,8 @@ class LoginScreen extends React.Component {
   };
   state = {
     email: "",
-    Password: ""
+    Password: "",
+    isLoading: false
   };
   handleLogin = () => {
     this.props._loginUser(this.state.email, this.state.Password);
@@ -34,49 +36,58 @@ class LoginScreen extends React.Component {
       this.props.navigation.navigate("Home");
     }
   }
+
   render() {
-    return (
-      <View style={styles.loginContainer}>
-        <TextInput
-          style={{
-            width: 0.6 * sWidth,
-            borderRadius: 10,
-            height: 40,
-            backgroundColor: "#e4e4e4",
-            marginBottom: 5
-          }}
-          placeholder="Email"
-          onChangeText={email => this.setState({ email })}
-          underlineColorAndroid="transparent"
-        />
-        <TextInput
-          style={{
-            width: 0.6 * sWidth,
-            borderRadius: 10,
-            height: 40,
-            backgroundColor: "#e4e4e4"
-          }}
-          placeholder="Password"
-          onChangeText={Password => this.setState({ Password })}
-          secureTextEntry={true}
-          underlineColorAndroid="transparent"
-        />
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#4b2727",
-            width: 0.4 * sWidth,
-            height: 30,
-            borderRadius: 15,
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 10
-          }}
-          onPress={this.handleLogin}
-        >
-          <Text style={{ color: "#e48d31", fontWeight: "bold" }}>Login</Text>
-        </TouchableOpacity>
-      </View>
-    );
+    if (store.getState().client.isLoading) {
+      return (
+        <View style={styles.loading}>
+          <ActivityIndicator size="large" />
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.loginContainer}>
+          <TextInput
+            style={{
+              width: 0.6 * sWidth,
+              borderRadius: 10,
+              height: 40,
+              backgroundColor: "#e4e4e4",
+              marginBottom: 5
+            }}
+            placeholder="Email"
+            onChangeText={email => this.setState({ email })}
+            underlineColorAndroid="transparent"
+          />
+          <TextInput
+            style={{
+              width: 0.6 * sWidth,
+              borderRadius: 10,
+              height: 40,
+              backgroundColor: "#e4e4e4"
+            }}
+            placeholder="Password"
+            onChangeText={Password => this.setState({ Password })}
+            secureTextEntry={true}
+            underlineColorAndroid="transparent"
+          />
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#4b2727",
+              width: 0.4 * sWidth,
+              height: 30,
+              borderRadius: 15,
+              justifyContent: "center",
+              alignItems: "center",
+              marginTop: 10
+            }}
+            onPress={this.handleLogin}
+          >
+            <Text style={{ color: "#e48d31", fontWeight: "bold" }}>Entrar</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
   }
 }
 
@@ -98,5 +109,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  loading: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center"
   }
 });

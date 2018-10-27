@@ -59,7 +59,7 @@ class VendorRow extends Component {
                   marginRight: 5
                 }}
               >
-                Vendor Name
+                {this.props.name}
               </Text>
             </TouchableOpacity>
             <StarRating
@@ -78,10 +78,7 @@ class VendorRow extends Component {
           </View>
 
           <Text style={{ color: "#e48d31", height: 0.2 * sHight }}>
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters
+            {this.props.description}
           </Text>
         </View>
       </View>

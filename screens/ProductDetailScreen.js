@@ -90,7 +90,7 @@ class ProductDetailScreen extends Component {
                 paddingRight: 10
               }}
             >
-              Price :
+              Precio :
             </Text>
             <Text
               style={{ fontWeight: "bold", fontSize: 17, color: "#e48d31" }}
@@ -175,7 +175,7 @@ class ProductDetailScreen extends Component {
               <Text
                 style={{ fontWeight: "bold", paddingLeft: 6, color: "white" }}
               >
-                Add to cart
+                añadir a la cesta
               </Text>
             </View>
           </TouchableOpacity>
@@ -193,7 +193,7 @@ class ProductDetailScreen extends Component {
           }}
         >
           <Text style={{ fontWeight: "bold", color: "#4b2727" }}>
-            Vendor Information
+            Información del vendedor
           </Text>
         </View>
 

@@ -40,7 +40,7 @@ class CategoryRow extends React.Component {
               <Text
                 style={{ fontWeight: "bold", color: "white", fontSize: 32 }}
               >
-                Clothes
+                {this.props.name}
               </Text>
             </View>
           </View>

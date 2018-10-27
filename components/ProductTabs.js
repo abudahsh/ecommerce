@@ -18,8 +18,8 @@ export default class ProdctTabs extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: "first", title: "Description" },
-      { key: "second", title: "Details" }
+      { key: "first", title: "descripción" },
+      { key: "second", title: "detalles " }
     ]
   };
 

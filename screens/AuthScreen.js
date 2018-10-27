@@ -27,8 +27,8 @@ export default class AuthScreen extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: "first", title: "Login" },
-      { key: "second", title: "Register" }
+      { key: "first", title: "Iniciar Sesion" },
+      { key: "second", title: "Registro" }
     ]
   };
 

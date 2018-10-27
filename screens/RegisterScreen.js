@@ -103,7 +103,7 @@ class RegisterScreen extends React.Component {
             alignItems: "center"
           }}
         >
-          <Text style={{ color: "#e48d31", fontWeight: "bold" }}>Register</Text>
+          <Text style={{ color: "#e48d31", fontWeight: "bold" }}>Guardor</Text>
         </TouchableOpacity>
       </View>
     );

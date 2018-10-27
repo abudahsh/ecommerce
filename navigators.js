@@ -25,6 +25,14 @@ import VendorListScreen from "./screens/VendorsListScreen";
 import ProgrammersScreen from "./screens/ProgrammersScreen";
 sHeight = Dimensions.get("window").height;
 
+stackNav = {
+  headerStyle: {
+    backgroundColor: "#4b2727",
+    height: 0.06 * sHeight,
+    minHeight: 30
+  },
+  headerTintColor: "#e48d31"
+};
 const NewsStack = createStackNavigator(
   {
     News: {
@@ -36,14 +44,7 @@ const NewsStack = createStackNavigator(
   },
   {
     initialRouteName: "News",
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: "#4b2727",
-        height: 0.06 * sHeight,
-        minHeight: 30
-      },
-      headerTintColor: "#e48d31"
-    }
+    navigationOptions: stackNav
   }
 );
 const AboutStack = createStackNavigator(
@@ -57,14 +58,7 @@ const AboutStack = createStackNavigator(
   },
   {
     initialRouteName: "About",
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: "#4b2727",
-        height: 0.06 * sHeight,
-        minHeight: 30
-      },
-      headerTintColor: "#e48d31"
-    }
+    navigationOptions: stackNav
   }
 );
 const ContactStack = createStackNavigator(
@@ -78,14 +72,7 @@ const ContactStack = createStackNavigator(
   },
   {
     initialRouteName: "Contact",
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: "#4b2727",
-        height: 0.06 * sHeight,
-        minHeight: 30
-      },
-      headerTintColor: "#e48d31"
-    }
+    navigationOptions: stackNav
   }
 );
 const ProductStack = createStackNavigator(
@@ -93,63 +80,56 @@ const ProductStack = createStackNavigator(
     Home: {
       screen: HomeScreen,
       navigationOptions: {
-        title: "Home"
+        title: "Inicio"
       }
     },
     ProductDetail: {
       screen: ProductDetailScreen,
       navigationOptions: {
-        title: "Detail"
+        title: "detalle"
       }
     },
     VendorDetail: {
       screen: VendorDetailScreen,
       navigationOptions: {
-        title: "Vendor"
+        title: "Artesano"
       }
     },
 
     Cart: {
       screen: CartScreen,
       navigationOptions: {
-        title: "Cart"
+        title: "carrito"
       }
     },
     Auth: {
       screen: AuthScreen,
       navigationOptions: {
-        title: "Profile"
+        title: "Autenticación"
       }
     },
     Profile: {
       screen: ProfileScreen,
       navigationOptions: {
-        title: "Profile"
+        title: "perfil"
       }
     },
     Vendors: {
       screen: VendorListScreen,
       navigationOptions: {
-        title: "Vendors"
+        title: "Artesanos "
       }
     },
     Programmers: {
       screen: ProgrammersScreen,
       navigationOptions: {
-        title: "Programmers"
+        title: "Programa"
       }
     }
   },
   {
     initialRouteName: "Home",
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: "#4b2727",
-        height: 0.06 * sHeight,
-        minHeight: 30
-      },
-      headerTintColor: "#e48d31"
-    }
+    navigationOptions: stackNav
   }
 );
 
@@ -158,26 +138,19 @@ const CatStack = createStackNavigator(
     CategoriesList: {
       screen: CategoriesScreen,
       navigationOptions: {
-        title: "Categories"
+        title: "categorías"
       }
     },
     CategoryDetail: {
       screen: CategoryDetailScreen,
       navigationOptions: {
-        title: "CategoryDetail"
+        title: "detalle de categorias"
       }
     }
   },
   {
     initialRouteName: "CategoriesList",
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: "#4b2727",
-        height: 0.06 * sHeight,
-        minHeight: 30
-      },
-      headerTintColor: "#e48d31"
-    }
+    navigationOptions: stackNav
   }
 );
 const MainTabs = createBottomTabNavigator(
@@ -243,7 +216,7 @@ const MainTabs = createBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "About",
+    initialRouteName: "ProductStack",
 
     tabBarOptions: {
       activeBackgroundColor: "white",
