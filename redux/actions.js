@@ -5,7 +5,9 @@ import {
   fetchProducts,
   fetchVendors,
   fetchOneVendor,
-  fetchCart
+  fetchCart,
+  fetchNews,
+  fetchOneProduct
 } from "./../components/apis";
 
 export const _getStarted = () => ({
@@ -112,22 +114,62 @@ export const _fetchVendors = () => dispatch => {
     });
   });
 };
-export const _fetchOneVendor = () => dispatch => {
+export const _fetchOneVendor = id => dispatch => {
   dispatch({
-    type: "FETCHING_CATS_STARTED",
+    type: "FETCHING_ONE_VENDOR_STARTED",
     payload: {
       isLoading: true,
       message: "Fetching vendor request is in progress"
     }
   });
-  results = fetchOneVendor();
-  lolo = results.otherData;
+  fetchOneVendor(id).then(results => {
+    dispatch({
+      type: "FETCHING_ONE_VENDOR_SUCCESS",
+      payload: {
+        isLoading: false,
+        vendor: results,
+        message: "Fetching news finished successfully"
+      }
+    });
+  });
+};
+
+export const _fetchNews = () => dispatch => {
   dispatch({
-    type: "FETCHING_ONE_Vendor_SUCCESS",
+    type: "FETCHING_NEWS_STARTED",
     payload: {
-      isLoading: false,
-      vendor: lolo,
-      message: "Fetching vendor finished successfully"
+      isLoading: true,
+      message: "Fetching request is in progress"
     }
+  });
+  fetchNews().then(results => {
+    dispatch({
+      type: "FETCHING_NEWS_SUCCESS",
+      payload: {
+        isLoading: false,
+        news: results,
+        message: "Fetching news finished successfully"
+      }
+    });
+  });
+};
+
+export const _fetchOneProduct = id => dispatch => {
+  dispatch({
+    type: "FETCHING_ONE_PRODUCT_STARTED",
+    payload: {
+      isLoading: true,
+      message: "Fetching product request is in progress"
+    }
+  });
+  fetchOneProduct(id).then(results => {
+    dispatch({
+      type: "FETCHING_ONE_PRODUCT_SUCCESS",
+      payload: {
+        isLoading: false,
+        product: results,
+        message: "Fetching product finished successfully"
+      }
+    });
   });
 };

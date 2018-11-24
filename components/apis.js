@@ -34,11 +34,11 @@ export const register = (username, password) => {
 
 export const fetchProducts = async () => {
   request = await fetch(
-    "http://ecommerce-ricardo.herokuapp.com/public/api/products"
+    "http://ricardoooo123123123.pythonanywhere.com/products/api/productlist/"
   );
   response = await request.json();
-  mo = await response.data.data;
-  return mo;
+
+  return response;
 };
 
 export const fetchVendors = async () => {
@@ -49,9 +49,12 @@ export const fetchVendors = async () => {
   results = await response.data;
   return results;
 };
-export const fetchOneVendor = () => {
-  results = { otherData: otherData };
-  return results;
+export const fetchOneVendor = async id => {
+  request = await fetch(
+    `http://ricardoooo123123123.pythonanywhere.com/userprofile/api/seller/${id}/`
+  );
+  response = await request.json();
+  return response;
 };
 export const fetchCart = () => {
   results = { otherData: otherData };
@@ -65,4 +68,22 @@ export const fetchCategories = async () => {
   results = await response.data;
 
   return results;
+};
+
+export const fetchNews = async () => {
+  request = await fetch(
+    "http://ricardoooo123123123.pythonanywhere.com/news/api/postlist/"
+  );
+  response = await request.json();
+
+  return response;
+};
+
+export const fetchOneProduct = async id => {
+  request = await fetch(
+    `http://ricardoooo123123123.pythonanywhere.com/products/api/product/${id}/`
+  );
+  response = await request.json();
+  console.log("results", response);
+  return response;
 };

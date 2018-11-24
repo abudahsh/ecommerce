@@ -10,6 +10,7 @@ initialState = {
   products: [],
   categories: [],
   vendors: [],
+  news: [],
   client: {
     isLoading: false,
     isAuthenticated: false,
@@ -35,11 +36,15 @@ const clientReducer = (state = initialState.client, action) => {
     case "FETCHING_PROS_STARTED":
     case "FETCHING_CATS_STARTED":
     case "FETCHING_VENDORS_STARTED":
+    case "FETCHING_ONE_PRODUCT_STARTED":
+    case "FETCHING_ONE_VENDOR_STARTED":
       return { ...state, isLoading: true };
 
     case "FETCHING_PROS_SUCCESS":
     case "FETCHING_CATS_SUCCESS":
     case "FETCHING_VENDORS_SUCCESS":
+    case "FETCHING_ONE_PRODUCT_SUCCESS":
+    case "FETCHING_ONE_VENDOR_SUCCESS":
       return { ...state, isLoading: false };
   }
   return state;
@@ -87,12 +92,36 @@ const vendorsReducer = (state = initialState.vendors, action) => {
   }
   return state;
 };
+const newsReducer = (state = initialState.news, action) => {
+  switch (action.type) {
+    case "FETCHING_NEWS_SUCCESS":
+      return action.payload.news;
+  }
+  return state;
+};
+const currentProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FETCHING_ONE_PRODUCT_SUCCESS":
+      return action.payload.product;
+  }
+  return state;
+};
+const currentVendorReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FETCHING_ONE_VENDOR_SUCCESS":
+      return action.payload.vendor;
+  }
+  return state;
+};
 const reducer = combineReducers({
   client: clientReducer,
   user: userReducer,
   products: productReducer,
   categories: categoriesReducer,
-  vendors: vendorsReducer
+  vendors: vendorsReducer,
+  news: newsReducer,
+  currentProduct: currentProductReducer,
+  currentVendor: currentVendorReducer
 });
 
 export default reducer;

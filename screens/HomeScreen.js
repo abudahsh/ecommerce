@@ -81,7 +81,7 @@ const mapStateToProps = state => ({
   isLoading: state.client.isLoading
 });
 const mapDispatchToProps = dispatch => ({
-  _fetchProducts: token => dispatch(_fetchProducts())
+  _fetchProducts: () => dispatch(_fetchProducts())
 });
 export default connect(
   mapStateToProps,

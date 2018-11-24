@@ -37,15 +37,14 @@ class NewsRow extends React.Component {
       >
         <TouchableOpacity onPress={() => this.refs.modal1.open()}>
           <Image
-            source={require("./../assets/salah1.jpg")}
+            source={{ uri: this.props.image }}
             style={{ width: sWidth - 52, height: 0.2 * sHeight, margin: 5 }}
           />
           <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-            Mo Salah anotó dos goles!!
+            {this.props.title}
           </Text>
           <Text style={{ marginHorizontal: 5 }}>
-            En el juego de hoy con el Manchester United, Salah logró anotar 2. y
-            2 asistencias
+            {this.props.details.substring(0, 100)}
           </Text>
         </TouchableOpacity>
 
@@ -59,32 +58,13 @@ class NewsRow extends React.Component {
           onClosingState={this.onClosingState}
         >
           <ScrollView style={styles.modal}>
-            <Text style={styles.text}>Basic modal</Text>
+            <Text style={styles.text}>{this.props.title}</Text>
             <Image
-              source={require("./../assets/salah1.jpg")}
+              source={{ uri: this.props.image }}
               style={{ width: sWidth, height: 0.4 * sHeight }}
             />
-            <Text>Mo salah scored 2 goals!!</Text>
-            <Text style={{ marginHorizontal: 5 }}>
-              En el juego de hoy con el Manchester United, Salah logró anotar 2.
-              y 2 asistenciasEn el juego de hoy con el Manchester United, Salah
-              logró anotar 2. y 2 asistenciasEn el juego de hoy con el
-              Manchester United, Salah logró anotar 2. y 2 asistenciasEn el
-              juego de hoy con el Manchester United, Salah logró anotar 2. y 2
-              asistenciasEn el juego de hoy con el Manchester United, Salah
-              logró anotar 2. y 2 asistenciasEn el juego de hoy con el
-              Manchester United, Salah logró anotar 2. y 2 asistenciasEn el
-              juego de hoy con el Manchester United, Salah logró anotar 2. y 2
-              asistenciasEn el juego de hoy con el Manchester United, Salah
-              logró anotar 2. y 2 asistenciasEn el juego de hoy con el
-              Manchester United, Salah logró anotar 2. y 2 asistenciasEn el
-              juego de hoy con el Manchester United, Salah logró anotar 2. y 2
-              asistenciasEn el juego de hoy con el Manchester United, Salah
-              logró anotar 2. y 2 asistenciasEn el juego de hoy con el
-              Manchester United, Salah logró anotar 2. y 2 asistenciasEn el
-              juego de hoy con el Manchester United, Salah logró anotar 2. y 2
-              asistencias
-            </Text>
+            <Text>{this.props.modified_at}</Text>
+            <Text style={{ marginHorizontal: 5 }}>{this.props.details}</Text>
           </ScrollView>
         </Modal>
       </View>

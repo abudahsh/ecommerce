@@ -20,17 +20,18 @@ class ProductRow extends React.Component {
         <TouchableWithoutFeedback
           onPress={() =>
             this.props.navigation.navigate("ProductDetail", {
-              name: this.props.p_name,
-              describtion: this.props.description,
+              id: this.props.id,
+              name: this.props.name,
+              // describtion: this.props.description,
               price: this.props.price,
-              vendorName: this.props.name,
+              vendorName: this.props.seller_name,
               vendorDesc: "Somos el artesano más antiguo de la ciudad. "
             })
           }
         >
           <View>
             <Image
-              source={require("./../assets/product3.jpg")}
+              source={{ uri: this.props.first_image }}
               style={{
                 width: 0.46 * sWidth,
                 height: 0.28 * sHeight,
@@ -51,7 +52,7 @@ class ProductRow extends React.Component {
                     fontWeight: "bold"
                   }}
                 >
-                  {this.props.p_name}
+                  {this.props.name}
                 </Text>
               </View>
               <View
@@ -91,7 +92,7 @@ class ProductRow extends React.Component {
                   style={{ height: 15, width: 15 }}
                 />
                 <Text style={{ fontSize: 12, color: "black" }}>
-                  {this.props.name}
+                  {this.props.seller_name}
                 </Text>
               </View>
             </View>

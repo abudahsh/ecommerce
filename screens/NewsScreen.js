@@ -10,6 +10,8 @@ import {
 import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
 import NewsRow from "./../components/NewsRow";
+import { connect } from "react-redux";
+import { _fetchNews } from "../redux/actions";
 
 fakeData = [{}, {}, {}];
 class NewsScreen extends Component {
@@ -30,11 +32,14 @@ class NewsScreen extends Component {
       <NewsRow {...item} />
     </View>
   );
+  componentDidMount() {
+    this.props._fetchNews();
+  }
   render() {
     return (
       <View style={styles.container}>
         <FlatList
-          data={fakeData}
+          data={this.props.news}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
         />
@@ -48,5 +53,14 @@ const styles = StyleSheet.create({
     flex: 1
   }
 });
-
-export default NewsScreen;
+const mapStateToProps = state => ({
+  news: state.news,
+  isLoading: state.client.isLoading
+});
+const mapDispatchToProps = dispatch => ({
+  _fetchNews: () => dispatch(_fetchNews())
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewsScreen);

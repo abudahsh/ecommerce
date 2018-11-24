@@ -8,7 +8,9 @@ class VendorProductRow extends Component {
   render() {
     return (
       <TouchableOpacity
-        onPress={() => this.props.navigation.navigate("ProductDetail")}
+        onPress={() =>
+          this.props.navigation.navigate("ProductDetail", { id: this.props.id })
+        }
         style={{
           borderColor: "#b7a195",
           borderWidth: 2,
@@ -21,7 +23,7 @@ class VendorProductRow extends Component {
         }}
       >
         <Image
-          source={require("./../assets/product4.jpg")}
+          source={{ uri: this.props.image }}
           style={{
             width: 0.25 * sWidth,
             height: 0.25 * sWidth,
@@ -30,9 +32,9 @@ class VendorProductRow extends Component {
           }}
         />
         <Text style={{ fontWeight: "bold", color: "#4b2727" }}>
-          Product Name
+          {this.props.name}
         </Text>
-        <Text style={{ color: "#4b2727" }}>$ 60.00</Text>
+        <Text style={{ color: "#4b2727" }}>$ {this.props.price}</Text>
       </TouchableOpacity>
     );
   }
