@@ -8,42 +8,18 @@ import {
   FlatList,
   ScrollView,
   TextInput,
-  Dimensions
+  Dimensions,
+  ActivityIndicator,
+  Platform
 } from "react-native";
 import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
 import CartItem from "../components/CartItem";
+import { connect } from "react-redux";
+import { _fetchCart } from "../redux/actions";
+
 sWidth = Dimensions.get("window").width;
-cartOtems = [
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {}
-];
+
 class CartScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -55,11 +31,26 @@ class CartScreen extends Component {
     return <CartItem />;
   };
   _keyExtractor = (item, index) => item.id;
+  componentDidMount() {
+    this.props._fetchCart();
+  }
   render() {
+    if (this.props.isLoading) {
+      return (
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <ActivityIndicator
+            size={Platform.OS === "android" ? 30 : 1}
+            color="orange"
+          />
+        </View>
+      );
+    }
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
         <FlatList
-          data={cartOtems}
+          data={this.props.cart}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
         />
@@ -127,4 +118,14 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CartScreen;
+const mapStateToProps = state => ({
+  cart: state.cart,
+  isLoading: state.client.isLoading
+});
+const mapDispatchToProps = dispatch => ({
+  _fetchCart: () => dispatch(_fetchCart())
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CartScreen);

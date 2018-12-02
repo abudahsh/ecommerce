@@ -1,16 +1,21 @@
 import React, { Component } from "react";
 import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
 import { withNavigation } from "react-navigation";
+
+import { _fetchOneProduct } from "./../redux/actions";
+import { connect } from "react-redux";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 class VendorProductRow extends Component {
   state = {};
+  handlePress = () => {
+    this.props._fetchOneProduct(this.props.id);
+    this.props.navigation.navigate("ProductDetail");
+  };
   render() {
     return (
       <TouchableOpacity
-        onPress={() =>
-          this.props.navigation.navigate("ProductDetail", { id: this.props.id })
-        }
+        onPress={this.handlePress}
         style={{
           borderColor: "#b7a195",
           borderWidth: 2,
@@ -40,4 +45,10 @@ class VendorProductRow extends Component {
   }
 }
 
-export default withNavigation(VendorProductRow);
+const mapDispatchToProps = dispatch => ({
+  _fetchOneProduct: id => dispatch(_fetchOneProduct(id))
+});
+export default connect(
+  null,
+  mapDispatchToProps
+)(withNavigation(VendorProductRow));

@@ -3,7 +3,8 @@ import { Animated, Dimensions, View } from "react-native";
 import {
   createBottomTabNavigator,
   createSwitchNavigator,
-  createStackNavigator
+  createStackNavigator,
+  createAppContainer
 } from "react-navigation";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
@@ -44,7 +45,7 @@ const NewsStack = createStackNavigator(
   },
   {
     initialRouteName: "News",
-    navigationOptions: stackNav
+    defaultNavigationOptions: stackNav
   }
 );
 const AboutStack = createStackNavigator(
@@ -58,7 +59,7 @@ const AboutStack = createStackNavigator(
   },
   {
     initialRouteName: "About",
-    navigationOptions: stackNav
+    defaultNavigationOptions: stackNav
   }
 );
 const ContactStack = createStackNavigator(
@@ -72,7 +73,7 @@ const ContactStack = createStackNavigator(
   },
   {
     initialRouteName: "Contact",
-    navigationOptions: stackNav
+    defaultNavigationOptions: stackNav
   }
 );
 const ProductStack = createStackNavigator(
@@ -129,7 +130,7 @@ const ProductStack = createStackNavigator(
   },
   {
     initialRouteName: "Home",
-    navigationOptions: stackNav
+    defaultNavigationOptions: stackNav
   }
 );
 
@@ -150,7 +151,7 @@ const CatStack = createStackNavigator(
   },
   {
     initialRouteName: "CategoriesList",
-    navigationOptions: stackNav
+    defaultNavigationOptions: stackNav
   }
 );
 const MainTabs = createBottomTabNavigator(
@@ -236,4 +237,4 @@ const WelcomeSwitch = createSwitchNavigator(
   { initialRouteName: "GetStart" }
 );
 
-export default WelcomeSwitch;
+export default createAppContainer(WelcomeSwitch);

@@ -173,3 +173,23 @@ export const _fetchOneProduct = id => dispatch => {
     });
   });
 };
+
+export const _fetchCart = () => dispatch => {
+  dispatch({
+    type: "FETCHING_CART_STARTED",
+    payload: {
+      isLoading: true,
+      message: "Fetching request is in progress"
+    }
+  });
+  fetchCart().then(results => {
+    dispatch({
+      type: "FETCHING_CART_SUCCESS",
+      payload: {
+        isLoading: false,
+        cart: results,
+        message: "Fetching Cart finished successfully"
+      }
+    });
+  });
+};

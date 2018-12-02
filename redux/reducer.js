@@ -11,6 +11,7 @@ initialState = {
   categories: [],
   vendors: [],
   news: [],
+
   client: {
     isLoading: false,
     isAuthenticated: false,
@@ -92,6 +93,13 @@ const vendorsReducer = (state = initialState.vendors, action) => {
   }
   return state;
 };
+const cartReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FETCHING_VENDORS_SUCCESS":
+      return action.payload.cart;
+  }
+  return state;
+};
 const newsReducer = (state = initialState.news, action) => {
   switch (action.type) {
     case "FETCHING_NEWS_SUCCESS":
@@ -121,7 +129,8 @@ const reducer = combineReducers({
   vendors: vendorsReducer,
   news: newsReducer,
   currentProduct: currentProductReducer,
-  currentVendor: currentVendorReducer
+  currentVendor: currentVendorReducer,
+  cart: cartReducer
 });
 
 export default reducer;
