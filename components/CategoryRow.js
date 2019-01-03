@@ -9,15 +9,20 @@ import {
   Dimensions,
   TouchableWithoutFeedback
 } from "react-native";
+import { _fetchProducts, _fetchSubCategories, _fetchProductsBySubCat } from "./../redux/actions";
+import { connect } from "react-redux";
 (sWidth = Dimensions.get("window").width),
   (sHeight = Dimensions.get("window").height);
 class CategoryRow extends React.Component {
   state = {};
+  handleClick=()=>{
+    this.props.navigation.navigate("CategoryDetail", {id:this.props.id, firstSub:this.props.first_subcat_id})
+  }
 
   render() {
     return (
       <TouchableOpacity
-        onPress={() => this.props.navigation.navigate("CategoryDetail")}
+        onPress={this.handleClick}
       >
         <ImageBackground
           source={require("./../assets/category1.jpg")}
@@ -49,5 +54,8 @@ class CategoryRow extends React.Component {
     );
   }
 }
-
-export default withNavigation(CategoryRow);
+const mapDispatchToProps = dispatch => ({
+  //need to be changed with category products fetch
+  _fetchSubCategories : (id) => dispatch(_fetchSubCategories(id))
+});
+export default connect(null, mapDispatchToProps) (withNavigation(CategoryRow));

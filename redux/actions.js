@@ -7,7 +7,10 @@ import {
   fetchOneVendor,
   fetchCart,
   fetchNews,
-  fetchOneProduct
+  fetchOneProduct,
+  addToCart,
+  fetchSubCategories,
+  fetchProductsBySubCat
 } from "./../components/apis";
 
 export const _getStarted = () => ({
@@ -15,43 +18,53 @@ export const _getStarted = () => ({
   payload: { gotStarted: true }
 });
 
-export const _loginUser = (username, password) => dispatch => {
+export const _loginUser = (email, password) => dispatch => {
   dispatch({ type: "LOGIN_SENT", payload: { isLoading: true } });
-  results = login(username, password);
-
-  const username = results.username;
-  const token = results.token;
-  setTimeout(
-    () =>
-      dispatch({
-        type: "LOG_IN_SUCCESS",
-        payload: {
-          isLoading: false,
-          isAuthenticated: true,
-          token: token,
-          email: username,
-          message: "Loged in successfully"
-        }
-      }),
-    3000
-  );
+  login(email, password)
+  .then(results => {
+    // const { user, token, profile } = results;
+    const {
+      token,
+      email,
+    } = results;
+    dispatch({
+      type: "LOG_IN_SUCCESS",
+      payload: {
+        token,
+        email,
+        isAuthenticated: true,
+        isLoading: false,
+        message: "Iniciar sesión correctamente"
+      }
+    });
+  })
+  .catch(err => {
+    dispatch({ type: "LOGIN_FAILED", payload: { message: err.message } });
+  });
 };
 
-export const _registerUser = (username, password) => dispatch => {
-  dispatch({ type: "LOGIN_SENT", payload: { isLoading: true } });
-  results = register(username, password);
-
-  const username = results.username;
-  const token = results.token;
-  dispatch({
-    type: "REGISTER_SUCCESS",
-    payload: {
-      isLoading: false,
-      isAuthenticated: true,
-      token: token,
-      email: username,
-      message: "Registered successfully"
-    }
+export const _registerUser = (email, username,first_name,last_name, password) => dispatch => {
+  dispatch({ type: "REGISTER_SENT", payload: { isLoading: true } });
+  register(email, username, first_name, last_name, password)
+  .then(results => {
+    // const { user, token, profile } = results;
+    const {
+      token,
+      email,
+    } = results;
+    dispatch({
+      type: "REGISTER_SUCCESS",
+      payload: {
+        token,
+        email,
+        isAuthenticated: true,
+        isLoading: false,
+        message: "Te registras exitosamente"
+      }
+    });
+  })
+  .catch(err => {
+    dispatch({ type: "REGISTER_FAILED", payload: { message: err.message } });
   });
 };
 
@@ -71,6 +84,11 @@ export const _fetchProducts = () => dispatch => {
         products: results,
         message: "Fetching products finished successfully"
       }
+    });
+  }).catch(err => {
+    dispatch({
+      type: "FETCHING_PROS_FAILED",
+      payload: { message: err.message }
     });
   });
 };
@@ -92,8 +110,39 @@ export const _fetchCategories = () => dispatch => {
         message: "Fetching categories finished successfully"
       }
     });
+  }).catch(err => {
+    dispatch({
+      type: "FETCHING_CATS_FAILED",
+      payload: { message: err.message }
+    });
   });
 };
+
+export const _fetchSubCategories = (id) => dispatch => {
+  dispatch({
+    type: "FETCHING_SUB_CATS_STARTED",
+    payload: {
+      isLoading: true,
+      message: "Fetching request is in progress"
+    }
+  });
+  fetchSubCategories(id).then(results => {
+    dispatch({
+      type: "FETCHING_SUB_CATS_SUCCESS",
+      payload: {
+        isLoading: false,
+        subCategories: results,
+        message: "Fetching categories finished successfully"
+      }
+    });
+  }).catch(err => {
+    dispatch({
+      type: "FETCHING_SUB_CATS_FAILED",
+      payload: { message: err.message }
+    });
+  });
+};
+
 
 export const _fetchVendors = () => dispatch => {
   dispatch({
@@ -111,6 +160,11 @@ export const _fetchVendors = () => dispatch => {
         vendors: results,
         message: "Fetching Vendors finished successfully"
       }
+    });
+  }).catch(err => {
+    dispatch({
+      type: "FETCHING_VENDORS_FAILED",
+      payload: { message: err.message }
     });
   });
 };
@@ -130,6 +184,11 @@ export const _fetchOneVendor = id => dispatch => {
         vendor: results,
         message: "Fetching news finished successfully"
       }
+    });
+  }).catch(err => {
+    dispatch({
+      type: "FETCHING_ONE_VENDOR_FAILED",
+      payload: { message: err.message }
     });
   });
 };
@@ -151,6 +210,11 @@ export const _fetchNews = () => dispatch => {
         message: "Fetching news finished successfully"
       }
     });
+  }).catch(err => {
+    dispatch({
+      type: "FETCHING_NEWS_FAILED",
+      payload: { message: err.message }
+    });
   });
 };
 
@@ -171,6 +235,11 @@ export const _fetchOneProduct = id => dispatch => {
         message: "Fetching product finished successfully"
       }
     });
+  }).catch(err => {
+    dispatch({
+      type: "FETCHING_ONE_PRODUCT_FAILED",
+      payload: { message: err.message }
+    });
   });
 };
 
@@ -183,13 +252,73 @@ export const _fetchCart = () => dispatch => {
     }
   });
   fetchCart().then(results => {
+    
     dispatch({
       type: "FETCHING_CART_SUCCESS",
       payload: {
         isLoading: false,
-        cart: results,
+        cart: results.small_carts,
         message: "Fetching Cart finished successfully"
       }
     });
+  }).catch(err => {
+    dispatch({
+      type: "FETCHING_CART_FAILED",
+      payload: { message: err.message }
+    });
   });
+};
+
+
+export const _addToCart = (id, quantity) => dispatch => {
+  dispatch({
+    type: "ADD_TO_CART_STARTED",
+    payload: {
+      isLoading: true,
+      message: "adding to cart request is in progress"
+    }
+  });
+  addToCart(id, quantity).then(results => {
+    dispatch({
+      type: "ADD_TO_CART_SUCCESS",
+      payload: {
+        isLoading: false,
+        message: "Adding to Cart finished successfully"
+      }
+    });
+  }).catch(err => {
+    dispatch({
+      type: "ADD_TO_CART_FAILED",
+      payload: { message: err.message }
+    });
+  });
+};
+
+
+export const _fetchProductsBySubCat = (id) => dispatch => {
+  dispatch({
+    type: "FETCHING_SUB_CATS_PROS_STARTED",
+    payload: {
+      isLoading: true,
+      message: "fetching products request is in progress"
+    }
+  });
+  fetchProductsBySubCat(id).then(results => {
+    dispatch({
+      type: "FETCHING_SUB_CATS_PROS_SUCCESS",
+      payload: {
+        products:results,
+        isLoading: false,
+        message: "Fetching products by sub category finished successfully"
+      }
+    });
+  }).catch(err => {
+    dispatch({
+      type: "FETCHING_SUB_CATS_PROS_FAILED",
+      payload: { message: err.message }
+    });
+  });
+};
+export const connectionState = ({ status }) => {
+  return { type: 'CHANGE_CONNECTION_STATUS', isConnected: status };
 };

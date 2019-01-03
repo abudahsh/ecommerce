@@ -24,6 +24,7 @@ import CategoryDetailScreen from "./screens/CategoryDetailScreen";
 import AuthScreen from "./screens/AuthScreen";
 import VendorListScreen from "./screens/VendorsListScreen";
 import ProgrammersScreen from "./screens/ProgrammersScreen";
+import OrderScreen from "./screens/OrderScreen";
 sHeight = Dimensions.get("window").height;
 
 stackNav = {
@@ -77,7 +78,13 @@ const ContactStack = createStackNavigator(
   }
 );
 const ProductStack = createStackNavigator(
+  
   {
+    Order:{screen:OrderScreen, 
+    navigationOptions:{
+      title:"Order"
+    }
+    },
     Home: {
       screen: HomeScreen,
       navigationOptions: {

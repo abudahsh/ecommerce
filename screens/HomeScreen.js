@@ -8,13 +8,15 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
-  Animated
+  Animated,
+  NetInfo
 } from "react-native";
 import { connect } from "react-redux";
 import ProductRow from "./../components/ProductRow";
 import { _fetchProducts } from "./../redux/actions";
-import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
+import {connectionState} from './../redux/actions'
+import { ReduxNetworkProvider } from 'react-native-offline';
 
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
@@ -24,7 +26,7 @@ class HomeScreen extends Component {
       headerRight: <HeaderBar />
     };
   };
-
+  
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
@@ -57,6 +59,7 @@ class HomeScreen extends Component {
       );
     } else {
       return (
+        
         <View style={styles.container}>
           <FlatList
             data={this.props.products}

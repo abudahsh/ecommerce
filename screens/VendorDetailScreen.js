@@ -40,11 +40,7 @@ class VendorDetailScreen extends Component {
       starCount: rating
     });
   }
-  componentDidMount() {
-    const { navigation } = this.props;
-    const id = navigation.getParam("id", "1");
-    this.props._fetchOneVendor(id);
-  }
+ 
   render() {
     let {
       avatar,

@@ -8,6 +8,8 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 import StarRating from "react-native-star-rating";
+import { _fetchOneVendor } from "../redux/actions";
+import { connect } from "react-redux";
 import { withNavigation } from "react-navigation";
 sHight = Dimensions.get("screen").height;
 sWidth = Dimensions.get("screen").width;
@@ -16,7 +18,10 @@ class VendorRow extends Component {
     super(props);
     this.state = { starCount: 3 };
   }
-
+  handlePress=()=>{
+    this.props._fetchOneVendor(this.props.id)
+    this.props.navigation.navigate("VendorDetail")
+  }
   render() {
     return (
       <View
@@ -30,7 +35,7 @@ class VendorRow extends Component {
         }}
       >
         <TouchableWithoutFeedback
-          onPress={() => this.props.navigation.navigate("VendorDetail")}
+          onPress={this.handlePress}
           style={{
             paddingBottom: 5,
             justifyContent: "center"
@@ -47,9 +52,9 @@ class VendorRow extends Component {
           />
         </TouchableWithoutFeedback>
         <View style={{ width: 0.55 * sWidth }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View >
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("VendorDetail")}
+              onPress={this.handlePress}
             >
               <Text
                 style={{
@@ -76,14 +81,25 @@ class VendorRow extends Component {
               starSize={18}
             />
           </View>
-
-          <Text style={{ color: "#e48d31", height: 0.2 * sHight }}>
+            <View style={{maxHeight:0.12 * sHight}}>
+            <Text style={{ color: "#e48d31", maxHeight: 0.12 * sHight }}>
             {this.props.description}
           </Text>
+            </View>
+          
         </View>
       </View>
     );
   }
 }
+const mapStateToProps = state => ({
+  isLoading: state.client.isLoading
+});
+const mapDispatchToProps = dispatch => ({
+  _fetchOneVendor: id => dispatch(_fetchOneVendor(id))
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withNavigation(VendorRow));
 
-export default withNavigation(VendorRow);

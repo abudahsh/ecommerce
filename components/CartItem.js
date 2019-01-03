@@ -1,56 +1,55 @@
 import React, { Component } from "react";
-import { View, Text, Image, TouchableWithoutFeedback } from "react-native";
+import { View, Text, Image, TouchableWithoutFeedback, Dimensions } from "react-native";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
+import {connect} from 'react-redux'
+import { _fetchCart, _addToCart } from "../redux/actions";
+sWidth = Dimensions.get('window').width
+sHeight = Dimensions.get('window').height
 class CartItem extends Component {
   constructor(props) {
     super(props);
-    this.state = { count: 1 };
+    this.state = { count: this.props.quantity };
   }
-
+ 
   handleMinus = () => {
     if (this.state.count > 0) {
-      this.setState({ count: this.state.count - 1 });
+      this.props._addToCart(this.props.product.id, -1)
+      this.props._fetchCart()
     }
   };
   handlePlus = () => {
-    this.setState({ count: this.state.count + 1 });
+    this.props._addToCart(this.props.product.id, 1)
+    this.props._fetchCart()
   };
+  componentWillReceiveProps(nextProps){
+    console.log('props',nextProps)
+    this.setState({count:nextProps.quantity})
+  }
   render() {
     return (
       <View
         style={{
           flexDirection: "row",
-          flex: 1,
-          marginHorizontal: 20,
-          marginVertical: 7,
+          flex: 1,          
           justifyContent: "space-around",
           alignItems: "center",
-          backgroundColor: "white",
-          borderRadius: 10,
-          paddingRight: 10,
-          shadowColor: "#000000",
-          shadowOffset: {
-            width: 0,
-            height: 3
-          },
-          shadowRadius: 5,
-          shadowOpacity: 1.0,
-          elevation: 5,
-          height: 110
+          backgroundColor: "#f7f6f5",
+          height: 0.15 * sHeight,
+          borderBottomColor:'#ffffff',
+          borderBottomWidth:1
         }}
       >
         <View>
           <Image
-            source={require("./../assets/product4.jpg")}
+            source={{uri:this.props.product.image}}
             style={{ width: 80, height: 70 }}
           />
         </View>
         <View>
-          <Text style={{ fontWeight: "bold", color: "#4b2727" }}>
-            Item Label
+          <Text style={{ fontWeight: "bold", color: "#4b2727", width:0.4* sWidth }}>
+            {this.props.product.name}
           </Text>
-          <Text style={{ color: "#4b2727" }}>Vendor Label</Text>
-          <Text style={{ color: "#e48d31" }}>300$</Text>
+          <Text style={{ color: "#e48d31" }}>{this.props.product.price}$</Text>
         </View>
         <View>
           <View style={{ flexDirection: "row", paddingRight: 3 }}>
@@ -76,7 +75,7 @@ class CartItem extends Component {
               justifyContent: "center"
             }}
           >
-            <Text>600$</Text>
+            <Text>{(this.props.product.price * this.props.quantity).toFixed(2)}$</Text>
           </View>
         </View>
       </View>
@@ -84,4 +83,14 @@ class CartItem extends Component {
   }
 }
 
-export default CartItem;
+const mapStateToProps = state => ({
+  isLoading: state.client.isLoading
+});
+const mapDispatchToProps = dispatch => ({
+  _fetchCart: () => dispatch(_fetchCart()),
+  _addToCart: (product_id, quantity) => dispatch(_addToCart(product_id, quantity))
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CartItem);

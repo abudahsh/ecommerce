@@ -9,7 +9,7 @@ import {
   View
 } from "react-native";
 import { connect } from "react-redux";
-import { store } from "./../redux/store";
+import  store  from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
 
 class ProfileScreen extends Component {
@@ -21,7 +21,7 @@ class ProfileScreen extends Component {
   state = {
     email: store.getState().user.email,
     firstName: store.getState().user.firstName,
-    surName: store.getState().user.surName,
+    lastName: store.getState().user.lastName,
     phone: store.getState().user.phone
   };
   componentWillMount() {
@@ -49,8 +49,8 @@ class ProfileScreen extends Component {
           <TextInput
             style={styles.textInputStyle}
             underlineColorAndroid="transparent"
-            value={this.state.surName}
-            onChangeText={surName => this.setState({ surName })}
+            value={this.state.lastName}
+            onChangeText={lastName => this.setState({ lastName })}
           />
           <TextInput
             style={styles.textInputStyle}

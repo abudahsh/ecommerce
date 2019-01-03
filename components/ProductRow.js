@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { withNavigation } from "react-navigation";
+import { _fetchOneProduct, _addToCart } from "../redux/actions";
+import {connect} from 'react-redux'
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 class ProductRow extends React.Component {
@@ -16,7 +18,11 @@ class ProductRow extends React.Component {
 
   render() {
     return (
-      <View>
+      <View  style={{
+        width: 0.46 * sWidth,
+        maxHeight: 0.38 * sHeight,
+  
+      }}>
         <TouchableWithoutFeedback
           onPress={() =>
             this.props.navigation.navigate("ProductDetail", {
@@ -25,7 +31,6 @@ class ProductRow extends React.Component {
               // describtion: this.props.description,
               price: this.props.price,
               vendorName: this.props.seller_name,
-              vendorDesc: "Somos el artesano más antiguo de la ciudad. "
             })
           }
         >
@@ -33,10 +38,11 @@ class ProductRow extends React.Component {
             <Image
               source={{ uri: this.props.first_image }}
               style={{
-                width: 0.46 * sWidth,
-                height: 0.28 * sHeight,
+                width: 0.45 * sWidth,
+                height: 0.25 * sHeight,
                 borderTopRightRadius: 15,
-                borderTopLeftRadius: 15
+                borderTopLeftRadius: 15,
+                marginTop:5
               }}
             />
             <View>
@@ -66,6 +72,7 @@ class ProductRow extends React.Component {
                   {this.props.price} $
                 </Text>
                 <TouchableOpacity
+                onPress={()=>this.props._addToCart(this.props.id, 1)}
                   style={{
                     backgroundColor: "#e48d31",
                     paddingLeft: 10,
@@ -102,5 +109,15 @@ class ProductRow extends React.Component {
     );
   }
 }
-
-export default withNavigation(ProductRow);
+const mapStateToProps = state => ({
+  
+  isLoading: state.client.isLoading
+});
+const mapDispatchToProps = dispatch => ({
+  _fetchOneProduct: id => dispatch(_fetchOneProduct(id)),
+  _addToCart: (id , quantity)=> dispatch(_addToCart(id , quantity))
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withNavigation(ProductRow));

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ImageBackground
 } from "react-native";
-import { store } from "./../redux/store";
+import  store  from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;

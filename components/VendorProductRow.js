@@ -10,7 +10,12 @@ class VendorProductRow extends Component {
   state = {};
   handlePress = () => {
     this.props._fetchOneProduct(this.props.id);
-    this.props.navigation.navigate("ProductDetail");
+    this.props.navigation.navigate("ProductDetail",{
+      id: this.props.id,
+      name: this.props.name,
+      // describtion: this.props.description,
+      price: this.props.price,
+    });
   };
   render() {
     return (

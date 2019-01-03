@@ -1,42 +1,47 @@
-host = "http://ricardoooo123123123.pythonanywhere.com";
+import  store  from "../redux/store";
+
+const host = "http://www.artesaniasdeboyaca.com";
 export const login = async (email, password) => {
   console.log("fired");
 
-  const response = await fetch(`${localIp}/userprofile/api/login/`, {
+  const response = await fetch(`${host}/userprofile/api/login/`, {
     method: "POST",
     headers: {
       "content-type": "application/json"
     },
     body: JSON.stringify({
-      username: email,
+      username:email,
       password
     })
   });
   if (response.ok) {
     const results = await response.json();
-    console.log(results);
+    
     return results;
   }
   const errMessage = await response.text();
   console.log("normal error message", errMessage);
   throw new Error(errMessage);
 };
-export const register = async (email, password) => {
+export const register = async (email,username,first_name,last_name, password) => {
   console.log("fired");
 
-  const response = await fetch(`${localIp}/userprofile/api/login/`, {
+  const response = await fetch(`${host}/userprofile/api/register/`, {
     method: "POST",
     headers: {
       "content-type": "application/json"
     },
     body: JSON.stringify({
       email,
+      username,
+      first_name,
+      last_name,
       password
     })
   });
   if (response.ok) {
     const results = await response.json();
-    console.log(results);
+    
     return results;
   }
   const errMessage = await response.text();
@@ -44,13 +49,10 @@ export const register = async (email, password) => {
   throw new Error(errMessage);
 };
 
-export const register = (username, password) => {
-  token = "kjlerweryhierywerywriuyrwuyrwrrw776r7wr7w";
-  return username, token;
-};
+
 
 export const fetchProducts = async () => {
-  request = await fetch(`${host}/products/api/productlist/`);
+  request = await fetch(`${host}/products/api/productlist/`)
   response = await request.json();
 
   return response;
@@ -68,36 +70,77 @@ export const fetchOneVendor = async id => {
   return response;
 };
 export const fetchCart = async () => {
-  request = await fetch(`${host}/products/api/cartlist/`);
-  response = await request.json();
-  return response;
+  token = store.getState().user.token;
+  const headers = {
+    "Content-Type": "application/json"
+  };
+  if (token) {
+    headers.Authorization = `Token ${token}`;
+  }
+  response = await fetch(`${host}/products/api/cartformobile/`, {headers:headers});
+  if (response.ok) {
+    const results = await response.json();
+    return results;
+  }
+  const errMessage = await response.text();
+  throw new Error(errMessage);
 };
 export const fetchCategories = async () => {
-  request = await fetch(
-    "http://ecommerce-ricardo.herokuapp.com/public/api/categories"
+  response = await fetch(
+     `${host}/products/api/categories/`
   );
-  response = await request.json();
-  results = await response.data;
+  if (response.ok) {
+    const results = await response.json();
 
-  return results;
+    
+    return results;
+  }
+  const errMessage = await response.text();
+  throw new Error(errMessage);
 };
 
-export const fetchNews = async () => {
-  request = await fetch(` ${host}/news/api/postlist/`);
-  response = await request.json();
+export const fetchSubCategories = async (id) => {
+  response = await fetch(
+     `${host}/products/api/subcatincat/${id}/`
+  );
+  if (response.ok) {
+    const results = await response.json();
 
-  return response;
+    
+    return results;
+  }
+  const errMessage = await response.text();
+  throw new Error(errMessage);
+};
+export const fetchNews = async () => {
+  response = await fetch(` ${host}/news/api/postlist/`);
+  if (response.ok) {
+    const results = await response.json();
+
+    
+    return results;
+  }
+  const errMessage = await response.text();
+  throw new Error(errMessage);
 };
 
 export const fetchOneProduct = async id => {
-  request = await fetch(`${host}/products/api/product/${id}/`);
-  response = await request.json();
-  console.log("results", response);
-  return response;
+  response = await fetch(`${host}/products/api/product/${id}/`);
+  if (response.ok) {
+    const results = await response.json();
+
+    
+    return results;
+  }
+  const errMessage = await response.text();
+  throw new Error(errMessage);
 };
 
 export const addToCart = async (product_id, quantity) => {
   token = store.getState().user.token;
+  const headers = {
+    "Content-Type": "application/json"
+  };
   if (token) {
     headers.Authorization = `Token ${token}`;
 }
@@ -112,7 +155,18 @@ export const addToCart = async (product_id, quantity) => {
   if (response.ok) {
     const results = await response.json();
 
-    console.log(results);
+    
+    return results;
+  }
+  const errMessage = await response.text();
+  throw new Error(errMessage);
+};
+
+export const fetchProductsBySubCat = async (id) => {
+  response = await fetch('http://www.artesaniasdeboyaca.com/products/api/subcategoryproducts/'+id+'/');
+  if (response.ok) {
+    const results = await response.json();
+
     return results;
   }
   const errMessage = await response.text();

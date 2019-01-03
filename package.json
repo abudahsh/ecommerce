@@ -12,6 +12,7 @@
     "react-native": "^0.55.4",
     "react-native-gesture-handler": "^1.0.9",
     "react-native-modalbox": "^1.6.0",
+    "react-native-offline": "^4.1.1",
     "react-native-star-rating": "^1.0.9",
     "react-native-swiper": "^1.5.13",
     "react-native-tab-view": "^1.0.2",

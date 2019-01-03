@@ -14,7 +14,6 @@ import {
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import LottieView from "lottie-react-native";
-import { store } from "./../redux/store";
 import HeaderBar from "./../components/HeaderBar";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;

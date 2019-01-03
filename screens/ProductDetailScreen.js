@@ -19,7 +19,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import ProdctTabs from "../components/ProductTabs";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
-import { _fetchOneProduct } from "./../redux/actions";
+import { _fetchOneProduct, _addToCart , _fetchOneVendor} from "./../redux/actions";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 falseData = [{}, {}, {}, {}];
@@ -53,12 +53,18 @@ class ProductDetailScreen extends Component {
       starCount: rating
     });
   }
+  handleAddToCart=()=>{
+    this.props._addToCart(this.props.product.id, this.state.num)
+  }
+  handleNavToVendor = ()=>{
+    this.props._fetchOneVendor(this.props.product.seller.id)
+    this.props.navigation.navigate('VendorDetail')
+  }
   render() {
     const { navigation } = this.props;
 
     const price = navigation.getParam("price", "00.0");
-    const vendorName = navigation.getParam("vendorName", "vendor name");
-    if (this.props.isLoading) {
+    if (!this.props.product.seller) {
       return (
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
@@ -90,7 +96,7 @@ class ProductDetailScreen extends Component {
                 ))}
               </Swiper>
             ) : (
-              <Text>Loading</Text>
+              <Text>Loading..</Text>
             )}
           </View>
           <View
@@ -178,7 +184,9 @@ class ProductDetailScreen extends Component {
               alignItems: "center"
             }}
           >
-            <TouchableOpacity>
+            <TouchableOpacity
+            onPress={this.handleAddToCart}
+            >
               <View
                 style={{
                   padding: 15,
@@ -219,10 +227,7 @@ class ProductDetailScreen extends Component {
           </View>
 
           <TouchableOpacity
-            onPress={() =>
-              this.props.navigation.navigate("VendorDetail", {
-                id: this.props.product.seller.id
-              })
+            onPress={this.handleNavToVendor
             }
           >
             <View style={{ flexDirection: "row", flex: 1, margin: 10 }}>
@@ -251,7 +256,7 @@ class ProductDetailScreen extends Component {
                       color: "#4b2727"
                     }}
                   >
-                    {vendorName}
+                    {this.props.product.seller.name}
                   </Text>
                   <StarRating
                     disabled={true}
@@ -315,7 +320,9 @@ const mapStateToProps = state => ({
   isLoading: state.client.isLoading
 });
 const mapDispatchToProps = dispatch => ({
-  _fetchOneProduct: id => dispatch(_fetchOneProduct(id))
+  _fetchOneProduct: id => dispatch(_fetchOneProduct(id)),
+  _addToCart: (id , quantity)=> dispatch(_addToCart(id , quantity)),
+  _fetchOneVendor : (id) => dispatch(_fetchOneVendor(id))
 });
 export default connect(
   mapStateToProps,

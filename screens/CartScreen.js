@@ -10,9 +10,8 @@ import {
   TextInput,
   Dimensions,
   ActivityIndicator,
-  Platform
+  SectionList
 } from "react-native";
-import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
 import CartItem from "../components/CartItem";
 import { connect } from "react-redux";
@@ -27,10 +26,10 @@ class CartScreen extends Component {
     };
   };
   state = {};
-  _renderItem = () => {
-    return <CartItem />;
+  _renderItem = ({item}) => {
+    return <CartItem {...item} />;
   };
-  _keyExtractor = (item, index) => item.id;
+  
   componentDidMount() {
     this.props._fetchCart();
   }
@@ -41,19 +40,51 @@ class CartScreen extends Component {
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
           <ActivityIndicator
-            size={Platform.OS === "android" ? 30 : 1}
+            size='large'
             color="orange"
           />
         </View>
       );
     }
+    else{
+    
     return (
       <View style={{ flex: 1, backgroundColor: "white" }}>
-        <FlatList
-          data={this.props.cart}
-          renderItem={this._renderItem}
-          keyExtractor={this._keyExtractor}
-        />
+    
+      
+        <SectionList
+        contentContainerStyle={{marginLeft:15, marginRight:15, }}
+        renderItem={({item, index, section}) => <CartItem {...item} />}
+        renderSectionHeader={({section: {seller, number_of_products}}) => (
+          <View style={{height:30, backgroundColor:'#4b2727',flexDirection:'row', marginTop:20, justifyContent:'space-between', alignItems:'center'}}>
+              <Text style={{fontWeight: 'bold', color:'white', paddingLeft:5}}>vendedor: {seller.substring(0,25)}</Text>
+              <Text style={{fontWeight: 'bold', color:'white', paddingRight:5}}>Products({number_of_products})</Text>
+          </View>
+          
+        )}
+        renderSectionFooter={({section:{payment_form, amount, }})=>(
+      
+            <View style={{flexDirection:'row', backgroundColor:'#f7f6f5', justifyContent:'space-between', paddingBottom:15, paddingHorizontal:10, borderBottomLeftRadius:45, borderBottomRightRadius:45, alignItems:'center'}}>
+              <View style={{flexDirection:'row', alignItems:'center'}}>
+              <Text style={{color:'#4b2727', marginRight:5}}>Total Amount: </Text>
+              <Text style={{color:'#e48d31', fontSize:16, padding:5}}>{amount}</Text>
+              </View>
+              <TouchableOpacity style={{backgroundColor:'#4b2727', justifyContent:'center', alignItems:'center',  height:30, marginLeft:30, borderRadius:10}}
+              onPress={()=>this.props.navigation.navigate('Order', {html:payment_form})}
+              >
+                <Text style={{color:'white', padding:5}}>Proceder con pago</Text>
+              </TouchableOpacity>
+              </View>
+          
+        )}
+        sections={this.props.cart}
+        keyExtractor={(item, index) => item + index}
+      />
+         
+        {/*
+        
+      
+        
         <View
           style={{
             flex: 1,
@@ -102,9 +133,11 @@ class CartScreen extends Component {
             <Text style={styles.textStyle}>1800$</Text>
           </View>
         </View>
+        */}
       </View>
     );
   }
+}
 }
 
 const styles = StyleSheet.create({
@@ -119,7 +152,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  cart: state.cart,
+  cart: state.cart.cart,
   isLoading: state.client.isLoading
 });
 const mapDispatchToProps = dispatch => ({

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { _getStarted } from "./../redux/actions";
-import { store } from "./../redux/store";
+import  store  from "./../redux/store";
 import Swiper from "react-native-swiper";
 class GetStartScreen extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class GetStartScreen extends Component {
   render() {
     return (
       <Swiper
-        index={2}
+        index={0}
         loop={false}
         showsPagination={!store.getState().client.gotStarted}
         activeDotStyle={{
@@ -34,12 +34,15 @@ class GetStartScreen extends Component {
       >
         <View style={styles.container1}>
           <Text>WE CAME</Text>
+          <Text>(texto necesario)</Text>
         </View>
         <View style={styles.container2}>
           <Text>WE SAW</Text>
+          <Text>(texto necesario)</Text>
         </View>
         <View style={styles.container}>
           <Text>We CONQUER</Text>
+          <Text>(texto necesario)</Text>
           <TouchableOpacity
             style={{
               position: "absolute",

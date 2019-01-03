@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Ionicon from "react-native-vector-icons/Ionicons";
-import { store } from "./../redux/store";
 import { withNavigation } from "react-navigation";
 import { connect } from "react-redux";
 class HeaderBar extends React.Component {

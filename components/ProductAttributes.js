@@ -19,11 +19,12 @@ class ProductAttributes extends React.Component {
                 {data.name}: {data.value}
               </Text>
             ))}
-            <Text style={{ color: "#4b2727" }}>Material: Paper</Text>
-            <Text style={{ color: "#4b2727" }}>Material: Paper</Text>
+
           </View>
         ) : (
-          <View />
+          <View style={{justifyContent:'center', alignItems:'center'}} >
+            <Text>sin atributos</Text>
+          </View>
         )}
       </View>
     );

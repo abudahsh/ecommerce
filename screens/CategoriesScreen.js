@@ -7,51 +7,16 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from "react-native";
 import CategoryRow from "./../components/CategoryRow";
-import { store } from "./../redux/store";
 import { _fetchCategories } from "./../redux/actions";
 import { connect } from "react-redux";
 import HeaderBar from "../components/HeaderBar";
 sWidth = Dimensions.get("window").width;
 sheight = Dimensions.get("window").height;
-anotherData = [
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {}
-];
+
 
 class CategoriesScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -75,14 +40,21 @@ class CategoriesScreen extends Component {
   render() {
     return (
       <View style={{ flex: 1, width: sWidth }}>
-        {this.props.categories ? (
-          <FlatList
-            data={this.props.categories}
-            renderItem={this._renderItem}
-            keyExtractor={this._keyExtractor}
-          />
+        {this.props.isLoading ? (
+           <View style={{
+            flex:1,
+            justifyContent:'center',
+            alignItems:'center'
+          }}>
+          <ActivityIndicator size="large" color="orange" />
+          </View>
         ) : (
-          <Text>Loading ....</Text>
+          <FlatList
+          data={this.props.categories}
+          renderItem={this._renderItem}
+          keyExtractor={this._keyExtractor}
+        />
+         
         )}
       </View>
     );
@@ -96,7 +68,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  categories: state.categories,
+  categories: state.categories.categoriesList,
   isLoading: state.client.isLoading
 });
 const mapDispatchToProps = dispatch => ({

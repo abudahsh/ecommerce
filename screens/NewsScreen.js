@@ -5,9 +5,9 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  FlatList
+  FlatList,
+  ActivityIndicator
 } from "react-native";
-import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
 import NewsRow from "./../components/NewsRow";
 import { connect } from "react-redux";
@@ -38,11 +38,21 @@ class NewsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+      {this.props.isLoading? 
+       <View style={{
+        flex:1,
+        justifyContent:'center',
+        alignItems:'center'
+      }}>
+      <ActivityIndicator size="large" color="orange" />
+      </View>
+      : 
         <FlatList
           data={this.props.news}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
         />
+      }
       </View>
     );
   }
