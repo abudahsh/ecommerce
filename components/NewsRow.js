@@ -63,7 +63,7 @@ class NewsRow extends React.Component {
               source={{ uri: this.props.image }}
               style={{ width: sWidth, height: 0.4 * sHeight }}
             />
-            <Text>{this.props.modified_at}</Text>
+            <Text>{this.props.modified_at.substring(0, 10)}</Text>
             <Text style={{ marginHorizontal: 5 }}>{this.props.details}</Text>
           </ScrollView>
         </Modal>

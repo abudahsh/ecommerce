@@ -18,10 +18,10 @@ class VendorRow extends Component {
     super(props);
     this.state = { starCount: 3 };
   }
-  handlePress=()=>{
-    this.props._fetchOneVendor(this.props.id)
-    this.props.navigation.navigate("VendorDetail")
-  }
+  handlePress = () => {
+    this.props._fetchOneVendor(this.props.id);
+    this.props.navigation.navigate("VendorDetail");
+  };
   render() {
     return (
       <View
@@ -52,10 +52,8 @@ class VendorRow extends Component {
           />
         </TouchableWithoutFeedback>
         <View style={{ width: 0.55 * sWidth }}>
-          <View >
-            <TouchableOpacity
-              onPress={this.handlePress}
-            >
+          <View>
+            <TouchableOpacity onPress={this.handlePress}>
               <Text
                 style={{
                   fontWeight: "bold",
@@ -75,18 +73,17 @@ class VendorRow extends Component {
               halfStar={"ios-star-half"}
               iconSet={"Ionicons"}
               maxStars={5}
-              rating={this.state.starCount}
+              rating={this.props.rate}
               selectedStar={rating => this.onStarRatingPress(rating)}
               fullStarColor={"#ffd203"}
               starSize={18}
             />
           </View>
-            <View style={{maxHeight:0.12 * sHight}}>
+          <View style={{ maxHeight: 0.125 * sHight }}>
             <Text style={{ color: "#e48d31", maxHeight: 0.12 * sHight }}>
-            {this.props.description}
-          </Text>
-            </View>
-          
+              {this.props.description}
+            </Text>
+          </View>
         </View>
       </View>
     );
@@ -102,4 +99,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withNavigation(VendorRow));
-

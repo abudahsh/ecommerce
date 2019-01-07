@@ -7,7 +7,9 @@ import {
   Text,
   Image,
   Dimensions,
-  ActivityIndicator
+  ActivityIndicator,
+  ScrollView,
+  KeyboardAvoidingView
 } from "react-native";
 import { _loginUser } from "./../redux/actions";
 import { connect } from "react-redux";
@@ -17,27 +19,24 @@ import { withNavigation } from "react-navigation";
 sWidth = Dimensions.get("window").width;
 
 class LoginScreen extends React.Component {
-  
-  
   state = {
-    email: "mohamedabdelhameed34@gmail.com",
-    Password: "hh",
-
-  }
+    email: "",
+    Password: ""
+  };
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: <HeaderBar />
     };
-  }
+  };
   handleLogin = () => {
-    this.props._loginUser(this.state.email, this.state.Password);  
+    this.props._loginUser(this.state.email, this.state.Password);
   };
   componentWillUpdate() {
     if (this.props.isAuthenticated) {
       this.props.navigation.navigate("Home");
     }
   }
- 
+
   render() {
     if (this.props.isLoading) {
       return (
@@ -47,7 +46,7 @@ class LoginScreen extends React.Component {
       );
     } else {
       return (
-        <View style={styles.loginContainer}>
+        <ScrollView contentContainerStyle={styles.loginContainer}>
           <TextInput
             style={{
               width: 0.6 * sWidth,
@@ -55,10 +54,10 @@ class LoginScreen extends React.Component {
               height: 40,
               backgroundColor: "#e4e4e4",
               marginBottom: 5,
-              textAlign:'center'
+              textAlign: "center"
             }}
             value={this.state.email}
-            placeholder="Email"
+            placeholder="correo electrónico"
             autoCapitalize="none"
             onChangeText={email => this.setState({ email })}
             underlineColorAndroid="transparent"
@@ -69,9 +68,9 @@ class LoginScreen extends React.Component {
               borderRadius: 10,
               height: 40,
               backgroundColor: "#e4e4e4",
-              textAlign:'center'
+              textAlign: "center"
             }}
-            placeholder="Password"
+            placeholder="contraseña"
             value={this.state.Password}
             onChangeText={Password => this.setState({ Password })}
             autoCapitalize="none"
@@ -92,11 +91,7 @@ class LoginScreen extends React.Component {
           >
             <Text style={{ color: "#e48d31", fontWeight: "bold" }}>Entrar</Text>
           </TouchableOpacity>
-          {this.props.isConnected?
-        <Text>Online</Text>  :
-        <Text>Offline</Text>
-        }
-        </View>
+        </ScrollView>
       );
     }
   }
@@ -104,9 +99,8 @@ class LoginScreen extends React.Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.client.isAuthenticated,
-  isConnected:state.client.isConnected,
-  isLoading: state.client.isLoading,
-  isConnected: state.network.isConnected
+  isConnected: state.client.isConnected,
+  isLoading: state.client.isLoading
 });
 
 const mapDispatchToProps = dispatch => ({

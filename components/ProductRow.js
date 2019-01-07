@@ -10,7 +10,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { withNavigation } from "react-navigation";
 import { _fetchOneProduct, _addToCart } from "../redux/actions";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 class ProductRow extends React.Component {
@@ -18,11 +18,12 @@ class ProductRow extends React.Component {
 
   render() {
     return (
-      <View  style={{
-        width: 0.46 * sWidth,
-        maxHeight: 0.38 * sHeight,
-  
-      }}>
+      <View
+        style={{
+          width: 0.46 * sWidth,
+          maxHeight: 0.38 * sHeight
+        }}
+      >
         <TouchableWithoutFeedback
           onPress={() =>
             this.props.navigation.navigate("ProductDetail", {
@@ -30,7 +31,7 @@ class ProductRow extends React.Component {
               name: this.props.name,
               // describtion: this.props.description,
               price: this.props.price,
-              vendorName: this.props.seller_name,
+              vendorName: this.props.seller_name
             })
           }
         >
@@ -42,7 +43,7 @@ class ProductRow extends React.Component {
                 height: 0.25 * sHeight,
                 borderTopRightRadius: 15,
                 borderTopLeftRadius: 15,
-                marginTop:5
+                marginTop: 5
               }}
             />
             <View>
@@ -58,7 +59,7 @@ class ProductRow extends React.Component {
                     fontWeight: "bold"
                   }}
                 >
-                  {this.props.name}
+                  {this.props.name.substring(0, 24)}
                 </Text>
               </View>
               <View
@@ -72,7 +73,7 @@ class ProductRow extends React.Component {
                   {this.props.price} $
                 </Text>
                 <TouchableOpacity
-                onPress={()=>this.props._addToCart(this.props.id, 1)}
+                  onPress={() => this.props._addToCart(this.props.id, 1)}
                   style={{
                     backgroundColor: "#e48d31",
                     paddingLeft: 10,
@@ -99,7 +100,7 @@ class ProductRow extends React.Component {
                   style={{ height: 15, width: 15 }}
                 />
                 <Text style={{ fontSize: 12, color: "black" }}>
-                  {this.props.seller_name}
+                  {this.props.seller_name.substring(0, 24)}
                 </Text>
               </View>
             </View>
@@ -110,12 +111,11 @@ class ProductRow extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  
   isLoading: state.client.isLoading
 });
 const mapDispatchToProps = dispatch => ({
   _fetchOneProduct: id => dispatch(_fetchOneProduct(id)),
-  _addToCart: (id , quantity)=> dispatch(_addToCart(id , quantity))
+  _addToCart: (id, quantity) => dispatch(_addToCart(id, quantity))
 });
 export default connect(
   mapStateToProps,

@@ -6,7 +6,7 @@ class ProductAttributes extends React.Component {
   render() {
     return (
       <View style={{ paddingHorizontal: 25 }}>
-        {this.props.product.seller ? (
+        {this.props.product.additional_attributes.length > 0 ? (
           <View
             style={{
               flexDirection: "row",
@@ -14,15 +14,14 @@ class ProductAttributes extends React.Component {
               flexWrap: "wrap"
             }}
           >
-            {this.props.product.additional_attributes.map(data => (
-              <Text style={{ color: "#4b2727" }}>
+            {this.props.product.additional_attributes.map((data, index) => (
+              <Text style={{ color: "#4b2727" }} key={index}>
                 {data.name}: {data.value}
               </Text>
             ))}
-
           </View>
         ) : (
-          <View style={{justifyContent:'center', alignItems:'center'}} >
+          <View style={{ justifyContent: "center", alignItems: "center" }}>
             <Text>sin atributos</Text>
           </View>
         )}

@@ -19,7 +19,11 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import ProdctTabs from "../components/ProductTabs";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { connect } from "react-redux";
-import { _fetchOneProduct, _addToCart , _fetchOneVendor} from "./../redux/actions";
+import {
+  _fetchOneProduct,
+  _addToCart,
+  _fetchOneVendor
+} from "./../redux/actions";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 falseData = [{}, {}, {}, {}];
@@ -41,10 +45,9 @@ class ProductDetailScreen extends Component {
       style={{ width: 150, height: 200 }}
     />
   );
-  componentDidMount() {
+  componentWillMount() {
     const { navigation } = this.props;
     const id = navigation.getParam("id", "1");
-    console.warn(id);
     this.props._fetchOneProduct(id);
   }
   //enables users to change rating, remove it in this page and keep it only in vendor screen
@@ -53,51 +56,33 @@ class ProductDetailScreen extends Component {
       starCount: rating
     });
   }
-  handleAddToCart=()=>{
-    this.props._addToCart(this.props.product.id, this.state.num)
-  }
-  handleNavToVendor = ()=>{
-    this.props._fetchOneVendor(this.props.product.seller.id)
-    this.props.navigation.navigate('VendorDetail')
-  }
+  handleAddToCart = () => {
+    this.props._addToCart(this.props.product.id, this.state.num);
+  };
+  handleNavToVendor = () => {
+    this.props._fetchOneVendor(this.props.product.seller.id);
+    this.props.navigation.navigate("VendorDetail");
+  };
   render() {
-    const { navigation } = this.props;
-
-    const price = navigation.getParam("price", "00.0");
-    if (!this.props.product.seller) {
-      return (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <ActivityIndicator
-            size={Platform.OS === "android" ? 30 : 1}
-            color="orange"
-          />
-        </View>
-      );
-    } else {
+    if (this.props.product.images) {
       return (
         <ScrollView style={styles.container}>
           <View style={{ height: 0.3 * sHeight }}>
-            {this.props.product.images ? (
-              <Swiper
-                width={sWidth}
-                dotStyle={{ backgroundColor: "white" }}
-                activeDotStyle={{
-                  backgroundColor: "#e48d31"
-                }}
-              >
-                {this.props.product.images.map(data => (
-                  <Image
-                    key={data.order}
-                    source={{ uri: data.image }}
-                    style={{ width: sWidth, height: 0.3 * sHeight }}
-                  />
-                ))}
-              </Swiper>
-            ) : (
-              <Text>Loading..</Text>
-            )}
+            <Swiper
+              width={sWidth}
+              dotStyle={{ backgroundColor: "white" }}
+              activeDotStyle={{
+                backgroundColor: "#e48d31"
+              }}
+            >
+              {this.props.product.images.map(data => (
+                <Image
+                  key={data.order}
+                  source={{ uri: data.image }}
+                  style={{ width: sWidth, height: 0.3 * sHeight }}
+                />
+              ))}
+            </Swiper>
           </View>
           <View
             style={{
@@ -122,7 +107,7 @@ class ProductDetailScreen extends Component {
               <Text
                 style={{ fontWeight: "bold", fontSize: 17, color: "#e48d31" }}
               >
-                {price} $
+                {this.props.product.price} $
               </Text>
             </View>
 
@@ -184,9 +169,7 @@ class ProductDetailScreen extends Component {
               alignItems: "center"
             }}
           >
-            <TouchableOpacity
-            onPress={this.handleAddToCart}
-            >
+            <TouchableOpacity onPress={this.handleAddToCart}>
               <View
                 style={{
                   padding: 15,
@@ -226,18 +209,11 @@ class ProductDetailScreen extends Component {
             </Text>
           </View>
 
-          <TouchableOpacity
-            onPress={this.handleNavToVendor
-            }
-          >
+          <TouchableOpacity onPress={this.handleNavToVendor}>
             <View style={{ flexDirection: "row", flex: 1, margin: 10 }}>
               <View>
                 <Image
-                  source={
-                    this.props.product.seller
-                      ? { uri: this.props.product.seller.avatar }
-                      : require("./../assets/product2.jpg")
-                  }
+                  source={{ uri: this.props.product.seller.avatar }}
                   style={{
                     width: 70,
                     height: 70,
@@ -248,7 +224,7 @@ class ProductDetailScreen extends Component {
                 />
               </View>
               <View style={{ justifyContent: "center", alignItems: "center" }}>
-                <View style={{ flexDirection: "row", paddingBottom: 5 }}>
+                <View style={{ width: 0.7 * sWidth }}>
                   <Text
                     style={{
                       fontWeight: "bold",
@@ -265,14 +241,11 @@ class ProductDetailScreen extends Component {
                     halfStar={"ios-star-half"}
                     iconSet={"Ionicons"}
                     maxStars={5}
-                    rating={
-                      this.props.product.seller
-                        ? this.props.product.seller.rate
-                        : 0
-                    }
+                    rating={this.props.product.seller.rate}
                     selectedStar={rating => this.onStarRatingPress(rating)}
                     fullStarColor={"#ffd203"}
                     starSize={25}
+                    containerStyle={{ width: 0.3 * sWidth }}
                   />
                 </View>
 
@@ -296,15 +269,21 @@ class ProductDetailScreen extends Component {
                   }}
                 >
                   <Text style={{ paddingHorizontal: 6 }}>
-                    {this.props.product.seller
-                      ? this.props.product.seller.description
-                      : "Loading..."}
+                    {this.props.product.seller.description}
                   </Text>
                 </View>
               </View>
             </View>
           </TouchableOpacity>
         </ScrollView>
+      );
+    } else {
+      return (
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <ActivityIndicator size={"large"} color="orange" />
+        </View>
       );
     }
   }
@@ -321,8 +300,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   _fetchOneProduct: id => dispatch(_fetchOneProduct(id)),
-  _addToCart: (id , quantity)=> dispatch(_addToCart(id , quantity)),
-  _fetchOneVendor : (id) => dispatch(_fetchOneVendor(id))
+  _addToCart: (id, quantity) => dispatch(_addToCart(id, quantity)),
+  _fetchOneVendor: id => dispatch(_fetchOneVendor(id))
 });
 export default connect(
   mapStateToProps,

@@ -9,14 +9,15 @@ import {
   Image,
   TextInput,
   Animated,
-  NetInfo
+  NetInfo,
+  ActivityIndicator
 } from "react-native";
 import { connect } from "react-redux";
 import ProductRow from "./../components/ProductRow";
 import { _fetchProducts } from "./../redux/actions";
 import HeaderBar from "../components/HeaderBar";
-import {connectionState} from './../redux/actions'
-import { ReduxNetworkProvider } from 'react-native-offline';
+import { connectionState } from "./../redux/actions";
+import { ReduxNetworkProvider } from "react-native-offline";
 
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
@@ -26,7 +27,7 @@ class HomeScreen extends Component {
       headerRight: <HeaderBar />
     };
   };
-  
+
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
@@ -51,15 +52,14 @@ class HomeScreen extends Component {
   }
 
   render() {
-    if (!this.props.products) {
+    if (this.props.isLoading) {
       return (
         <View style={styles.container}>
-          <Text>Loading...</Text>
+          <ActivityIndicator size="large" color="orange" />
         </View>
       );
-    } else {
+    } else if (this.props.products) {
       return (
-        
         <View style={styles.container}>
           <FlatList
             data={this.props.products}
@@ -75,7 +75,9 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 

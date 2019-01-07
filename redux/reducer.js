@@ -1,17 +1,17 @@
 import { combineReducers } from "redux";
-import { reducer as network } from 'react-native-offline';
+import { reducer as network } from "react-native-offline";
 initialState = {
   user: {
     email: "example@yahoo.com",
     firstName: "Mohammed",
     lastName: "Salah",
     phone: "0102023231",
-    token : ''
+    token: ""
   },
   products: [],
   categories: {
-    categoriesList:[],
-    subCategoriesList:[]
+    categoriesList: [],
+    subCategoriesList: []
   },
   vendors: [],
   news: [],
@@ -19,7 +19,7 @@ initialState = {
     isLoading: false,
     isAuthenticated: false,
     gotStarted: false,
-    isConnected:false,
+    isConnected: false,
     message: "zZZZZ"
   }
 };
@@ -47,6 +47,7 @@ const clientReducer = (state = initialState.client, action) => {
     case "ADD_TO_CART_STARTED":
     case "FETCHING_SUB_CATS_STARTED":
     case "FETCHING_SUB_CATS_PROS_STARTED":
+    case "ADD_TO_CART_STARTED":
       return { ...state, isLoading: true };
 
     case "FETCHING_PROS_SUCCESS":
@@ -69,11 +70,13 @@ const clientReducer = (state = initialState.client, action) => {
     case "FETCHING_SUB_CATS_FAILED":
     case "FETCHING_SUB_CATS_PROS_SUCCESS":
     case "FETCHING_SUB_CATS_PROS_FAILED":
+    case "ADD_TO_CART_SUCCESS":
+    case "ADD_TO_CART_FAILED":
       return { ...state, isLoading: false };
     case "CHANGE_CONNECTION_STATUS":
-      return {...state, isConnected:action.payload.isConnected}
+      return { ...state, isConnected: action.payload.isConnected };
   }
-    
+
   return state;
 };
 
@@ -108,9 +111,9 @@ const productReducer = (state = initialState.products, action) => {
 const categoriesReducer = (state = initialState.categories, action) => {
   switch (action.type) {
     case "FETCHING_CATS_SUCCESS":
-      return {...state, categoriesList: action.payload.categories}
+      return { ...state, categoriesList: action.payload.categories };
     case "FETCHING_SUB_CATS_SUCCESS":
-      return {...state, subCategoriesList: action.payload.subCategories}
+      return { ...state, subCategoriesList: action.payload.subCategories };
   }
   return state;
 };
@@ -121,16 +124,19 @@ const vendorsReducer = (state = initialState.vendors, action) => {
   }
   return state;
 };
-const cartReducer = (state = { cart: [
-  { title: "section1", data: {} },
-  { title: "section2", data: {} },
-  { title: "section3", data: {} }
-]
-}, action) => {
-  
+const cartReducer = (
+  state = {
+    cart: [
+      { title: "section1", data: {} },
+      { title: "section2", data: {} },
+      { title: "section3", data: {} }
+    ]
+  },
+  action
+) => {
   switch (action.type) {
     case "FETCHING_CART_SUCCESS":
-      return {...state, cart:action.payload.cart}
+      return { ...state, cart: action.payload.cart };
   }
   return state;
 };
@@ -155,13 +161,13 @@ const currentVendorReducer = (state = {}, action) => {
   }
   return state;
 };
-const subCategoryProductsReducer = (state={}, action) =>{
-  switch (action.type){
+const subCategoryProductsReducer = (state = {}, action) => {
+  switch (action.type) {
     case "FETCHING_SUB_CATS_PROS_SUCCESS":
-    return action.payload.products
+      return action.payload.products;
   }
-  return state
-}
+  return state;
+};
 const reducer = combineReducers({
   client: clientReducer,
   user: userReducer,
@@ -172,7 +178,7 @@ const reducer = combineReducers({
   currentProduct: currentProductReducer,
   currentVendor: currentVendorReducer,
   cart: cartReducer,
-  subCategoryProducts:subCategoryProductsReducer,
+  subCategoryProducts: subCategoryProductsReducer,
   network
 });
 

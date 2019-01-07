@@ -4,16 +4,17 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Text
+  Text,
+  ScrollView
 } from "react-native";
 import { withNavigation } from "react-navigation";
 
 import { connect } from "react-redux";
 import { _registerUser } from "./../redux/actions";
-import  store  from "./../redux/store";
+import store from "./../redux/store";
 class RegisterScreen extends React.Component {
   handleLogin = () => {
-    var {email, username, firstName, lastName, Password} = this.state
+    var { email, username, firstName, lastName, Password } = this.state;
     this.props._registerUser(email, username, firstName, lastName, Password);
   };
   componentWillUpdate() {
@@ -23,7 +24,7 @@ class RegisterScreen extends React.Component {
   }
   state = {
     email: "",
-    username:'',
+    username: "",
     firstName: "",
     lastName: "",
     phone: "",
@@ -31,7 +32,7 @@ class RegisterScreen extends React.Component {
   };
   render() {
     return (
-      <View style={styles.loginContainer}>
+      <ScrollView contentContainerStyle={styles.loginContainer}>
         <TextInput
           style={{
             width: 0.6 * sWidth,
@@ -39,9 +40,9 @@ class RegisterScreen extends React.Component {
             height: 40,
             backgroundColor: "#e4e4e4",
             marginBottom: 5,
-            textAlign:'center'
+            textAlign: "center"
           }}
-          placeholder="Email"
+          placeholder="correo electrónico"
           autoCapitalize="none"
           value={this.state.email}
           onChangeText={email => this.setState({ email })}
@@ -54,9 +55,9 @@ class RegisterScreen extends React.Component {
             height: 40,
             backgroundColor: "#e4e4e4",
             marginBottom: 5,
-            textAlign:'center'
+            textAlign: "center"
           }}
-          placeholder="username"
+          placeholder="nombre de usuario"
           value={this.state.username}
           onChangeText={username => this.setState({ username })}
           underlineColorAndroid="transparent"
@@ -68,9 +69,9 @@ class RegisterScreen extends React.Component {
             height: 40,
             backgroundColor: "#e4e4e4",
             marginBottom: 5,
-            textAlign:'center'
+            textAlign: "center"
           }}
-          placeholder="firstName"
+          placeholder="nombre de pila"
           value={this.state.firstName}
           onChangeText={firstName => this.setState({ firstName })}
           underlineColorAndroid="transparent"
@@ -82,9 +83,9 @@ class RegisterScreen extends React.Component {
             height: 40,
             backgroundColor: "#e4e4e4",
             marginBottom: 5,
-            textAlign:'center'
+            textAlign: "center"
           }}
-          placeholder="surName"
+          placeholder="apellido"
           value={this.state.lastName}
           onChangeText={lastName => this.setState({ lastName })}
           underlineColorAndroid="transparent"
@@ -97,9 +98,9 @@ class RegisterScreen extends React.Component {
             height: 40,
             backgroundColor: "#e4e4e4",
             marginBottom: 5,
-            textAlign:'center'
+            textAlign: "center"
           }}
-          placeholder="phone"
+          placeholder="número de teléfono"
           keyboardType="numeric"
           value={this.state.phone}
           onChangeText={phone => this.setState({ phone })}
@@ -111,9 +112,9 @@ class RegisterScreen extends React.Component {
             borderRadius: 10,
             height: 40,
             backgroundColor: "#e4e4e4",
-            textAlign:'center'
+            textAlign: "center"
           }}
-          placeholder="Password"
+          placeholder="contraseña"
           value={this.state.Password}
           onChangeText={Password => this.setState({ Password })}
           secureTextEntry={true}
@@ -132,7 +133,7 @@ class RegisterScreen extends React.Component {
         >
           <Text style={{ color: "#e48d31", fontWeight: "bold" }}>Guardor</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -141,7 +142,8 @@ const mapStateToProps = state => ({
   isLoading: state.client.isLoading
 });
 const mapDispatchToProps = dispatch => ({
-  _registerUser: (email, username, firstName, lastName, Password) => dispatch(_registerUser(email, username, firstName, lastName, Password))
+  _registerUser: (email, username, firstName, lastName, Password) =>
+    dispatch(_registerUser(email, username, firstName, lastName, Password))
 });
 export default connect(
   mapStateToProps,

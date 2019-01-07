@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Text,
   Dimensions,
-  Image
+  Image,
+  ScrollView
 } from "react-native";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import LoginScreen from "./LoginScreen";
@@ -62,8 +63,8 @@ export default class AuthScreen extends React.Component {
           {props.navigationState.routes.map((route, i) => {
             const color = props.position.interpolate({
               inputRange,
-              outputRange: inputRange.map(
-                inputIndex => (inputIndex === i ? "#e48d31" : "white")
+              outputRange: inputRange.map(inputIndex =>
+                inputIndex === i ? "#e48d31" : "white"
               )
             });
             return (

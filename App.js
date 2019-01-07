@@ -7,9 +7,11 @@
  */
 
 import React, { Component } from "react";
-import { Provider } from "react-redux";
-import  store  from "./redux/store";
+import { Provider, connect } from "react-redux";
+import store from "./redux/store";
+import { NetworkProvider } from "react-native-offline";
 import WelcomeSwitch from "./navigators";
+
 //console.disableYellowBox = true;
 
 export default class App extends Component {
@@ -21,4 +23,3 @@ export default class App extends Component {
     );
   }
 }
-
