@@ -25,7 +25,7 @@ class CategoryRow extends React.Component {
         onPress={this.handleClick}
       >
         <ImageBackground
-          source={require("./../assets/category1.jpg")}
+          source={{uri:this.props.image}}
           style={{
             width: sWidth,
             height: 0.2 * sHeight,
@@ -43,7 +43,7 @@ class CategoryRow extends React.Component {
           >
             <View style={{ borderWidth: 1, borderColor: "white" }}>
               <Text
-                style={{ fontWeight: "bold", color: "white", fontSize: 32 }}
+                style={{ fontWeight: "bold", color: "white", fontSize: 32, padding:10 }}
               >
                 {this.props.name}
               </Text>

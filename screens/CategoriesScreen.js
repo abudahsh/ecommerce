@@ -24,10 +24,13 @@ class CategoriesScreen extends Component {
       headerRight: <HeaderBar />
     };
   };
-  state = {};
+  state = {
+    refreshing:false
+  };
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
+    key={item.key}
       style={{ borderColor: "#D3D3D3", borderWidth: StyleSheet.hairlineWidth }}
     >
       <CategoryRow {...item} />
@@ -35,6 +38,9 @@ class CategoriesScreen extends Component {
   );
 
   componentDidMount() {
+    this.hydrateCategories()
+  }
+  hydrateCategories = ()=>{
     this.props._fetchCategories();
   }
   render() {
@@ -53,6 +59,8 @@ class CategoriesScreen extends Component {
           data={this.props.categories}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
+          onRefresh={this.hydrateCategories}
+          refreshing={this.state.refreshing}
         />
          
         )}

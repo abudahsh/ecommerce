@@ -9,12 +9,13 @@ import {
   Dimensions,
   ActivityIndicator,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  ToastAndroid
 } from "react-native";
 import { _loginUser } from "./../redux/actions";
 import { connect } from "react-redux";
 import HeaderBar from "../components/HeaderBar";
-
+import Toast from 'react-native-simple-toast'
 import { withNavigation } from "react-navigation";
 sWidth = Dimensions.get("window").width;
 
@@ -35,8 +36,13 @@ class LoginScreen extends React.Component {
     if (this.props.isAuthenticated) {
       this.props.navigation.navigate("Home");
     }
+    
   }
-
+  componentWillReceiveProps(nextProps){
+    if (nextProps.isAuthenticated ==false){
+      Toast.show(nextProps.message, Toast.SHORT)
+    }
+  }
   render() {
     if (this.props.isLoading) {
       return (
@@ -99,8 +105,8 @@ class LoginScreen extends React.Component {
 
 const mapStateToProps = state => ({
   isAuthenticated: state.client.isAuthenticated,
-  isConnected: state.client.isConnected,
-  isLoading: state.client.isLoading
+  isLoading: state.client.isLoading,
+  message:state.client.message
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -12,6 +12,7 @@ import { withNavigation } from "react-navigation";
 import { connect } from "react-redux";
 import { _registerUser } from "./../redux/actions";
 import store from "./../redux/store";
+import Toast from 'react-native-simple-toast'
 class RegisterScreen extends React.Component {
   handleLogin = () => {
     var { email, username, firstName, lastName, Password } = this.state;
@@ -30,6 +31,11 @@ class RegisterScreen extends React.Component {
     phone: "",
     Password: ""
   };
+  componentWillReceiveProps(nextProps){
+    if (nextProps.message){
+      Toast.show(nextProps.message, Toast.SHORT)
+    }
+  }
   render() {
     return (
       <ScrollView contentContainerStyle={styles.loginContainer}>
@@ -59,6 +65,7 @@ class RegisterScreen extends React.Component {
           }}
           placeholder="nombre de usuario"
           value={this.state.username}
+          autoCapitalize="none"
           onChangeText={username => this.setState({ username })}
           underlineColorAndroid="transparent"
         />
@@ -139,7 +146,8 @@ class RegisterScreen extends React.Component {
 }
 const mapStateToProps = state => ({
   isAuthenticated: state.client.isAuthenticated,
-  isLoading: state.client.isLoading
+  isLoading: state.client.isLoading,
+  message:state.client.message
 });
 const mapDispatchToProps = dispatch => ({
   _registerUser: (email, username, firstName, lastName, Password) =>

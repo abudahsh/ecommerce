@@ -10,8 +10,13 @@ import {
   fetchOneProduct,
   addToCart,
   fetchSubCategories,
-  fetchProductsBySubCat
+  fetchProductsBySubCat,
+  fetchProfile,
+  updateProfile,
+  changePassword,
+  contactMessage
 } from "./../components/apis";
+import store from "./store";
 
 export const _getStarted = () => ({
   type: "GOT_STARTED",
@@ -19,19 +24,19 @@ export const _getStarted = () => ({
 });
 
 export const _loginUser = (email, password) => dispatch => {
+  const isConnected = store.getState().network.isConnected
   dispatch({ type: "LOGIN_SENT", payload: { isLoading: true } });
-  login(email, password)
+  if(isConnected){
+    login(email, password)
   .then(results => {
     // const { user, token, profile } = results;
     const {
       token,
-      email,
     } = results;
     dispatch({
       type: "LOG_IN_SUCCESS",
       payload: {
         token,
-        email,
         isAuthenticated: true,
         isLoading: false,
         message: "Iniciar sesión correctamente"
@@ -41,10 +46,19 @@ export const _loginUser = (email, password) => dispatch => {
   .catch(err => {
     dispatch({ type: "LOGIN_FAILED", payload: { message: err.message } });
   });
+  }
+  else {
+    dispatch({type:"CONNECTION_OFFLINE", payload:{message:'Disconnected'}})
+  }
 };
 
 export const _registerUser = (email, username,first_name,last_name, password) => dispatch => {
+  
   dispatch({ type: "REGISTER_SENT", payload: { isLoading: true } });
+  const isConnected = store.getState().network.isConnected
+  if (isConnected){
+
+  
   register(email, username, first_name, last_name, password)
   .then(results => {
     // const { user, token, profile } = results;
@@ -65,10 +79,15 @@ export const _registerUser = (email, username,first_name,last_name, password) =>
   })
   .catch(err => {
     dispatch({ type: "REGISTER_FAILED", payload: { message: err.message } });
-  });
+  })
+}
+else{
+  dispatch({type:"CONNECTION_OFFLINE", payload:{message:'Disconnected'}})
+}
 };
 
-export const _fetchProducts = () => dispatch => {
+export const _fetchProducts = () => async dispatch => {
+  
   dispatch({
     type: "FETCHING_PROS_STARTED",
     payload: {
@@ -81,18 +100,20 @@ export const _fetchProducts = () => dispatch => {
       type: "FETCHING_PROS_SUCCESS",
       payload: {
         isLoading: false,
-        products: results,
-        message: "Fetching products finished successfully"
-      }
+        products: results
+      },
     });
   }).catch(err => {
     dispatch({
       type: "FETCHING_PROS_FAILED",
       payload: { message: err.message }
     });
-  });
-};
+  })
+  
 
+};
+_fetchProducts.interceptInOffline= true
+_fetchProducts.meta={retry:true}
 export const _fetchCategories = () => dispatch => {
   dispatch({
     type: "FETCHING_CATS_STARTED",
@@ -106,8 +127,7 @@ export const _fetchCategories = () => dispatch => {
       type: "FETCHING_CATS_SUCCESS",
       payload: {
         isLoading: false,
-        categories: results,
-        message: "Fetching categories finished successfully"
+        categories: results
       }
     });
   }).catch(err => {
@@ -131,8 +151,7 @@ export const _fetchSubCategories = (id) => dispatch => {
       type: "FETCHING_SUB_CATS_SUCCESS",
       payload: {
         isLoading: false,
-        subCategories: results,
-        message: "Fetching categories finished successfully"
+        subCategories: results
       }
     });
   }).catch(err => {
@@ -157,8 +176,7 @@ export const _fetchVendors = () => dispatch => {
       type: "FETCHING_VENDORS_SUCCESS",
       payload: {
         isLoading: false,
-        vendors: results,
-        message: "Fetching Vendors finished successfully"
+        vendors: results
       }
     });
   }).catch(err => {
@@ -181,8 +199,7 @@ export const _fetchOneVendor = id => dispatch => {
       type: "FETCHING_ONE_VENDOR_SUCCESS",
       payload: {
         isLoading: false,
-        vendor: results,
-        message: "Fetching news finished successfully"
+        vendor: results
       }
     });
   }).catch(err => {
@@ -206,8 +223,7 @@ export const _fetchNews = () => dispatch => {
       type: "FETCHING_NEWS_SUCCESS",
       payload: {
         isLoading: false,
-        news: results,
-        message: "Fetching news finished successfully"
+        news: results
       }
     });
   }).catch(err => {
@@ -231,8 +247,7 @@ export const _fetchOneProduct = id => dispatch => {
       type: "FETCHING_ONE_PRODUCT_SUCCESS",
       payload: {
         isLoading: false,
-        product: results,
-        message: "Fetching product finished successfully"
+        product: results
       }
     });
   }).catch(err => {
@@ -257,8 +272,7 @@ export const _fetchCart = () => dispatch => {
       type: "FETCHING_CART_SUCCESS",
       payload: {
         isLoading: false,
-        cart: results.small_carts,
-        message: "Fetching Cart finished successfully"
+        cart: results.small_carts
       }
     });
   }).catch(err => {
@@ -283,7 +297,7 @@ export const _addToCart = (id, quantity) => dispatch => {
       type: "ADD_TO_CART_SUCCESS",
       payload: {
         isLoading: false,
-        message: "Adding to Cart finished successfully"
+        message: "La adición al carrito terminó con éxito"
       }
     });
   }).catch(err => {
@@ -308,8 +322,7 @@ export const _fetchProductsBySubCat = (id) => dispatch => {
       type: "FETCHING_SUB_CATS_PROS_SUCCESS",
       payload: {
         products:results,
-        isLoading: false,
-        message: "Fetching products by sub category finished successfully"
+        isLoading: false
       }
     });
   }).catch(err => {
@@ -319,6 +332,121 @@ export const _fetchProductsBySubCat = (id) => dispatch => {
     });
   });
 };
-export const connectionState = ({ status }) => {
-  return { type: 'CHANGE_CONNECTION_STATUS', isConnected: status };
+
+
+export const _fetchProfile = () => dispatch => {
+  dispatch({
+    type: "FETCHING_PROFILE_STARTED",
+    payload: {
+      isLoading: true,
+      message: "Fetching request is in progress"
+    }
+  });
+  fetchProfile().then(results => {
+    
+    dispatch({
+      type: "FETCHING_PROFILE_SUCCESS",
+      payload: {
+        isLoading: false,
+        username:results.user_name,
+        email:results.email,
+        firstName:results.first_name,
+        lastName:results.last_name,
+        phone: results.phone_number,
+        address:results.address
+      }
+    });
+  }).catch(err => {
+    dispatch({
+      type: "FETCHING_PROFILE_FAILED",
+      payload: { message: err.message }
+    });
+  });
+};
+
+export const _updateProfile = (first_name, last_name, phone_number, address) => dispatch => {
+  dispatch({
+    type: "UPDATING_PROFILE_STARTED",
+    payload: {
+      isLoading: true,
+      message: "UPDATING request is in progress"
+    }
+  });
+  updateProfile(first_name, last_name, phone_number, address).then(results => {
+    
+    dispatch({
+      type: "UPDATING_PROFILE_SUCCESS",
+      payload: {
+        isLoading: false,
+        username:results.user_name,
+        email:results.email,
+        firstName:results.first_name,
+        lastName:results.last_name,
+        phone: results.phone_number,
+        address:results.address,
+        message: "La actualización del perfil terminó con éxito"
+      }
+    });
+  }).catch(err => {
+    dispatch({
+      type: "UPDATING_PROFILE_FAILED",
+      payload: { message: err.message }
+    });
+  });
+};
+
+export const _logoutUser = ()=>({
+  type:"LOGGED_OUT",
+  payload:{token:null}
+})
+
+
+export const _changePassword = (old_password, new_password) => dispatch => {
+  dispatch({
+    type: "CHANGE_PASSWORD_STARTED",
+    payload: {
+      isLoading: true,
+      message: "changing password request is in progress"
+    }
+  });
+  changePassword(old_password, new_password).then(results => {
+    
+    dispatch({
+      type: "CHANGE_PASSWORD_SUCCESS",
+      payload: {
+        isLoading: false,
+        token:results.token,
+        message: "Contraseña cambiada con éxito"
+      }
+    });
+  }).catch(err => {
+    dispatch({
+      type: "CHANGE_PASSWORD_FAILED",
+      payload: { message: err.message }
+    });
+  });
+};
+export const _contactMessage= (name, phone, email, message) => dispatch => {
+  dispatch({
+    type: "SEND_CONTACT_MESSAGE_STARTED",
+    payload: {
+      isLoading: true,
+      message: "contact message request is in progress"
+    }
+  });
+  contactMessage(name, phone, email, message).then(results => {
+    
+    dispatch({
+      type: "SEND_CONTACT_MESSAGE_SUCCESS",
+      payload: {
+        isLoading: false,
+        message: "Mensaje enviado con éxito"
+      }
+    });
+  }).catch(err => {
+    dispatch({
+      type: "SEND_CONTACT_MESSAGE_FAILED",
+      payload: { message: err.message }
+    });
+  });
 };

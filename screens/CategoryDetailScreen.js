@@ -29,6 +29,7 @@ class CategoryDetailScreen extends PureComponent {
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
+    key={item.id.toString()}
       style={{
         backgroundColor: "white",
         borderColor: "#e5e5e5",
@@ -47,16 +48,19 @@ class CategoryDetailScreen extends PureComponent {
   );
 
 
-componentDidMount(){
+componentWillMount(){
   
     this.props._fetchSubCategories(this.id)
     this.props._fetchProductsBySubCat(this.firstSub)
 }
- 
+ hydrateProducts=()=>{
+   this.props._fetchProductsBySubCat(this.firstSub)
+ }
   render() {
     
       return (
-        <ScrollView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+        {this.props.subCategories?
           <ScrollView
             horizontal={true}
             alwaysBounceHorizontal={true}
@@ -68,6 +72,7 @@ componentDidMount(){
           >
             {this.props.subCategories.map(data => (
               <ImageBackground
+              key={data.id.toString()}
                 source={{uri:data.image}}
                 style={{
                   width: 90,
@@ -91,7 +96,11 @@ componentDidMount(){
                 </TouchableOpacity>
               </ImageBackground>
             ))}
+            
           </ScrollView>
+          :
+          <View/>
+        }
           {this.props.isLoading?
             <View
             style={{
@@ -109,21 +118,21 @@ componentDidMount(){
             renderItem={this._renderItem}
             keyExtractor={this._keyExtractor}
             numColumns={2}
+            refreshing={false}
+            onRefresh={this.hydrateProducts}
           />
           }
-        </ScrollView>
+        </View>
       );
     
   }
 }
 const mapStateToProps = state => ({
-  products: state.products, //need to be changed with category products fetch
   subCategories: state.categories.subCategoriesList,
   subProducts:state.subCategoryProducts,
   isLoading: state.client.isLoading
 });
 const mapDispatchToProps = dispatch => ({
-  //need to be changed with category products fetch
   _fetchProductsBySubCat: (id) => dispatch(_fetchProductsBySubCat(id)),
   _fetchSubCategories : (id) => dispatch(_fetchSubCategories(id))
 });

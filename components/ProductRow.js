@@ -21,7 +21,7 @@ class ProductRow extends React.Component {
       <View
         style={{
           width: 0.46 * sWidth,
-          maxHeight: 0.38 * sHeight
+          maxHeight: 0.4 * sHeight
         }}
       >
         <TouchableWithoutFeedback
@@ -94,7 +94,7 @@ class ProductRow extends React.Component {
                   />
                 </TouchableOpacity>
               </View>
-              <View style={{ flexDirection: "row", justifyContent: "center" }}>
+              <View style={{ flexDirection: "row", justifyContent: "center", paddingVertical:10 }}>
                 <Image
                   source={require("./../assets/Icons/profile.png")}
                   style={{ height: 15, width: 15 }}

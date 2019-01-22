@@ -30,50 +30,13 @@ class HeaderBar extends React.Component {
 
   render() {
     return (
-      <Animated.View
+      <View
         style={{
           flexDirection: "row",
           paddingHorizontal: 15,
           alignItems: "center"
         }}
       >
-        <TouchableOpacity style={{ marginRight: 10 }}>
-          <Ionicon
-            name="ios-arrow-down"
-            size={35}
-            color="white"
-            style={{ paddingTop: 3 }}
-          />
-        </TouchableOpacity>
-        <Animated.View
-          style={{
-            position: "absolute",
-            width: this.state.searchWidth,
-            opacity: this.state.searchOpacity
-          }}
-        >
-          <TextInput placeholder="Search" />
-        </Animated.View>
-
-        <TouchableOpacity
-          onPress={this.searchClicked}
-          style={{
-            backgroundColor: "white",
-            width: 26,
-            height: 26,
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 13
-          }}
-        >
-          <Icon
-            name="search"
-            size={17}
-            color="#4b2727"
-            style={{ paddingBottom: 2 }}
-          />
-        </TouchableOpacity>
-
         <TouchableOpacity
           style={{
             backgroundColor: "white",
@@ -118,7 +81,7 @@ class HeaderBar extends React.Component {
         >
           <Icon name="user" size={20} color="#4b2727" />
         </TouchableOpacity>
-      </Animated.View>
+      </View>
     );
   }
 }

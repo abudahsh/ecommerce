@@ -16,7 +16,7 @@ class OrderScreen extends Component {
         originWhitelist={['*']}
         source={{html:this.orderHtml}} 
         scalesPageToFit={true}
-        
+        javaScriptEnabled={true}
 
         >
         

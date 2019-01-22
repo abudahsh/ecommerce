@@ -2,10 +2,10 @@ import { combineReducers } from "redux";
 import { reducer as network } from "react-native-offline";
 initialState = {
   user: {
-    email: "example@yahoo.com",
-    firstName: "Mohammed",
-    lastName: "Salah",
-    phone: "0102023231",
+    email: "",
+    firstName: "",
+    lastName: "",
+    phone: "",
     token: ""
   },
   products: [],
@@ -19,8 +19,7 @@ initialState = {
     isLoading: false,
     isAuthenticated: false,
     gotStarted: false,
-    isConnected: false,
-    message: "zZZZZ"
+    message: ""
   }
 };
 const clientReducer = (state = initialState.client, action) => {
@@ -48,6 +47,11 @@ const clientReducer = (state = initialState.client, action) => {
     case "FETCHING_SUB_CATS_STARTED":
     case "FETCHING_SUB_CATS_PROS_STARTED":
     case "ADD_TO_CART_STARTED":
+    case "FETCHING_PROFILE_STARTED":
+    case "UPDATING_PROFILE_STARTED":
+    case "CHANGE_PASSWORD_STARTED":
+    case "SEND_CONTACT_MESSAGE_STARTED":
+    case "FETCHING_NEWS_STARTED":
       return { ...state, isLoading: true };
 
     case "FETCHING_PROS_SUCCESS":
@@ -72,9 +76,26 @@ const clientReducer = (state = initialState.client, action) => {
     case "FETCHING_SUB_CATS_PROS_FAILED":
     case "ADD_TO_CART_SUCCESS":
     case "ADD_TO_CART_FAILED":
-      return { ...state, isLoading: false };
-    case "CHANGE_CONNECTION_STATUS":
-      return { ...state, isConnected: action.payload.isConnected };
+    case "FETCHING_PROFILE_SUCCESS":
+    case "FETCHING_PROFILE_FAILED":
+    case "UPDATING_PROFILE_SUCCESS":
+    case "UPDATING_PROFILE_FAILED":
+    case "CHANGE_PASSWORD_SUCCESS":
+    case "CHANGE_PASSWORD_FAILED":
+    case "SEND_CONTACT_MESSAGE_SUCCESS":
+    case "SEND_CONTACT_MESSAGE_FAILED":
+    case "FETCHING_NEWS_SUCCESS":
+    case "FETCHING_NEWS_FAILED":
+      return { ...state, isLoading: false,  message: action.payload.message };
+    
+
+
+    case "CONNECTION_OFFLINE":
+      return {...state, message:action.payload.message, isLoading:false}
+
+    
+    case "LOGGED_OUT":
+      return {...state, isAuthenticated:false}
   }
 
   return state;
@@ -87,15 +108,32 @@ const userReducer = (state = initialState.user, action) => {
         ...state,
         email: action.payload.email,
         token: action.payload.token,
-        message: action.payload.message
+       
       };
     case "REGISTER_SUCCESS":
       return {
         ...state,
         email: action.payload.email,
         token: action.payload.token,
-        message: action.payload.message
+       
       };
+      case "FETCHING_PROFILE_SUCCESS":
+      case "UPDATING_PROFILE_SUCCESS":
+      return {
+        ...state,
+        email:action.payload.email,
+        username:action.payload.username,
+        firstName:action.payload.firstName,
+        lastName:action.payload.lastName,
+        phone:action.payload.phone,
+        address:action.payload.address,
+
+      }
+      case "LOGGED_OUT":
+      case "CHANGE_PASSWORD_SUCCESS":
+      return {...state, token:action.payload.token}
+
+      
   }
   return state;
 };

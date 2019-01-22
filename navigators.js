@@ -25,6 +25,7 @@ import AuthScreen from "./screens/AuthScreen";
 import VendorListScreen from "./screens/VendorsListScreen";
 import ProgrammersScreen from "./screens/ProgrammersScreen";
 import OrderScreen from "./screens/OrderScreen";
+import ChangePasswordScreen from "./screens/ChangePasswordScreen";
 sHeight = Dimensions.get("window").height;
 
 stackNav = {
@@ -132,6 +133,12 @@ const ProductStack = createStackNavigator(
       screen: ProgrammersScreen,
       navigationOptions: {
         title: "Programa"
+      }
+    },
+    ChangePassword:{
+      screen: ChangePasswordScreen,
+      navigationOptions: {
+        title: "Cambia la contraseña"
       }
     }
   },
