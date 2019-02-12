@@ -12,24 +12,29 @@ import {
 import HeaderBar from "../components/HeaderBar";
 import { connect } from "react-redux";
 import ProductRow from "./../components/ProductRow";
-import { _fetchProducts, _fetchSubCategories, _fetchProductsBySubCat } from "./../redux/actions";
+import {
+  _fetchProducts,
+  _fetchSubCategories,
+  _fetchProductsBySubCat
+} from "./../redux/actions";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 class CategoryDetailScreen extends PureComponent {
   state = {
-    products:[]
+    products: []
   };
   static navigationOptions = ({ navigation }) => {
     return {
-      headerRight: <HeaderBar />
+      headerRight: <HeaderBar />,
+      title: navigation.getParam("firstName", "detalle")
     };
   };
-  id = this.props.navigation.getParam('id')
-  firstSub= this.props.navigation.getParam('firstSub')
+  id = this.props.navigation.getParam("id");
+  firstSub = this.props.navigation.getParam("firstSub");
   _keyExtractor = (item, index) => item.id;
   _renderItem = ({ item }) => (
     <View
-    key={item.id.toString()}
+      key={item.id.toString()}
       style={{
         backgroundColor: "white",
         borderColor: "#e5e5e5",
@@ -47,20 +52,17 @@ class CategoryDetailScreen extends PureComponent {
     </View>
   );
 
-
-componentWillMount(){
-  
-    this.props._fetchSubCategories(this.id)
-    this.props._fetchProductsBySubCat(this.firstSub)
-}
- hydrateProducts=()=>{
-   this.props._fetchProductsBySubCat(this.firstSub)
- }
+  componentWillMount() {
+    this.props._fetchSubCategories(this.id);
+    this.props._fetchProductsBySubCat(this.firstSub);
+  }
+  hydrateProducts = () => {
+    this.props._fetchProductsBySubCat(this.firstSub);
+  };
   render() {
-    
-      return (
-        <View style={{ flex: 1 }}>
-        {this.props.subCategories?
+    return (
+      <View style={{ flex: 1 }}>
+        {this.props.subCategories ? (
           <ScrollView
             horizontal={true}
             alwaysBounceHorizontal={true}
@@ -72,8 +74,8 @@ componentWillMount(){
           >
             {this.props.subCategories.map(data => (
               <ImageBackground
-              key={data.id.toString()}
-                source={{uri:data.image}}
+                key={data.id.toString()}
+                source={{ uri: data.image }}
                 style={{
                   width: 90,
                   height: 45,
@@ -82,7 +84,7 @@ componentWillMount(){
                 }}
               >
                 <TouchableOpacity
-                onPress={()=>this.props._fetchProductsBySubCat(data.id)}
+                  onPress={() => this.props._fetchProductsBySubCat(data.id)}
                   style={{
                     flex: 1,
                     backgroundColor: "rgba(75,39,39, 0.4)",
@@ -90,29 +92,27 @@ componentWillMount(){
                     alignItems: "center"
                   }}
                 >
-                  <View style={{ borderWidth: 1, borderColor: "white" }}>
+                  <View>
                     <Text style={{ color: "white" }}>{data.name}</Text>
                   </View>
                 </TouchableOpacity>
               </ImageBackground>
             ))}
-            
           </ScrollView>
-          :
-          <View/>
-        }
-          {this.props.isLoading?
-            <View
+        ) : (
+          <View />
+        )}
+        {this.props.isLoading ? (
+          <View
             style={{
               flex: 1,
               justifyContent: "center",
-              alignItems: "center",
-              
+              alignItems: "center"
             }}
           >
             <ActivityIndicator size="large" color="orange" />
           </View>
-            :
+        ) : (
           <FlatList
             data={this.props.subProducts}
             renderItem={this._renderItem}
@@ -121,20 +121,19 @@ componentWillMount(){
             refreshing={false}
             onRefresh={this.hydrateProducts}
           />
-          }
-        </View>
-      );
-    
+        )}
+      </View>
+    );
   }
 }
 const mapStateToProps = state => ({
   subCategories: state.categories.subCategoriesList,
-  subProducts:state.subCategoryProducts,
+  subProducts: state.subCategoryProducts,
   isLoading: state.client.isLoading
 });
 const mapDispatchToProps = dispatch => ({
-  _fetchProductsBySubCat: (id) => dispatch(_fetchProductsBySubCat(id)),
-  _fetchSubCategories : (id) => dispatch(_fetchSubCategories(id))
+  _fetchProductsBySubCat: id => dispatch(_fetchProductsBySubCat(id)),
+  _fetchSubCategories: id => dispatch(_fetchSubCategories(id))
 });
 export default connect(
   mapStateToProps,

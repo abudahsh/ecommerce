@@ -41,7 +41,7 @@ const NewsStack = createStackNavigator(
     News: {
       screen: NewsScreen,
       navigationOptions: {
-        title: "News"
+        title: "Novedades"
       }
     }
   },
@@ -55,7 +55,7 @@ const AboutStack = createStackNavigator(
     About: {
       screen: AboutScreen,
       navigationOptions: {
-        title: "About"
+        title: "Información"
       }
     }
   },
@@ -79,12 +79,12 @@ const ContactStack = createStackNavigator(
   }
 );
 const ProductStack = createStackNavigator(
-  
   {
-    Order:{screen:OrderScreen, 
-    navigationOptions:{
-      title:"Order"
-    }
+    Order: {
+      screen: OrderScreen,
+      navigationOptions: {
+        title: "Orden"
+      }
     },
     Home: {
       screen: HomeScreen,
@@ -93,10 +93,7 @@ const ProductStack = createStackNavigator(
       }
     },
     ProductDetail: {
-      screen: ProductDetailScreen,
-      navigationOptions: {
-        title: "detalle"
-      }
+      screen: ProductDetailScreen
     },
     VendorDetail: {
       screen: VendorDetailScreen,
@@ -108,7 +105,7 @@ const ProductStack = createStackNavigator(
     Cart: {
       screen: CartScreen,
       navigationOptions: {
-        title: "carrito"
+        title: "Carrito"
       }
     },
     Auth: {
@@ -126,7 +123,7 @@ const ProductStack = createStackNavigator(
     Vendors: {
       screen: VendorListScreen,
       navigationOptions: {
-        title: "Artesanos "
+        title: "Artesanos"
       }
     },
     Programmers: {
@@ -135,7 +132,7 @@ const ProductStack = createStackNavigator(
         title: "Programa"
       }
     },
-    ChangePassword:{
+    ChangePassword: {
       screen: ChangePasswordScreen,
       navigationOptions: {
         title: "Cambia la contraseña"
@@ -153,14 +150,11 @@ const CatStack = createStackNavigator(
     CategoriesList: {
       screen: CategoriesScreen,
       navigationOptions: {
-        title: "categorías"
+        title: "Categorías"
       }
     },
     CategoryDetail: {
-      screen: CategoryDetailScreen,
-      navigationOptions: {
-        title: "detalle de categorias"
-      }
+      screen: CategoryDetailScreen
     }
   },
   {

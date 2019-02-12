@@ -1,4 +1,4 @@
-import store from "../redux/store";
+import { store } from "../redux/store";
 
 const host = "http://www.artesaniasdeboyaca.com";
 export const login = async (email, password) => {
@@ -16,7 +16,7 @@ export const login = async (email, password) => {
   });
   if (response.ok) {
     const results = await response.json();
-    console.log(results)
+    console.log(results);
     return results;
   }
   const errMessage = await response.text();
@@ -191,7 +191,7 @@ export const fetchProfile = async () => {
     headers.Authorization = `Token ${token}`;
   }
   response = await fetch(`${host}/userprofile/api/profile/`, {
-    headers: headers,
+    headers: headers
   });
   if (response.ok) {
     const results = await response.json();
@@ -202,7 +202,12 @@ export const fetchProfile = async () => {
   throw new Error(errMessage);
 };
 
-export const updateProfile = async (first_name, last_name, phone_number, address) => {
+export const updateProfile = async (
+  first_name,
+  last_name,
+  phone_number,
+  address
+) => {
   token = store.getState().user.token;
   const headers = {
     "Content-Type": "application/json"

@@ -15,7 +15,7 @@ import {
 import { _loginUser } from "./../redux/actions";
 import { connect } from "react-redux";
 import HeaderBar from "../components/HeaderBar";
-import Toast from 'react-native-simple-toast'
+import Toast from "react-native-simple-toast";
 import { withNavigation } from "react-navigation";
 sWidth = Dimensions.get("window").width;
 
@@ -36,11 +36,10 @@ class LoginScreen extends React.Component {
     if (this.props.isAuthenticated) {
       this.props.navigation.navigate("Home");
     }
-    
   }
-  componentWillReceiveProps(nextProps){
-    if (nextProps.isAuthenticated ==false){
-      Toast.show(nextProps.message, Toast.SHORT)
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isAuthenticated == false) {
+      Toast.show(nextProps.message, Toast.SHORT);
     }
   }
   render() {
@@ -63,7 +62,7 @@ class LoginScreen extends React.Component {
               textAlign: "center"
             }}
             value={this.state.email}
-            placeholder="correo electrónico"
+            placeholder="correo/ nombre de usuario"
             autoCapitalize="none"
             onChangeText={email => this.setState({ email })}
             underlineColorAndroid="transparent"
@@ -106,7 +105,7 @@ class LoginScreen extends React.Component {
 const mapStateToProps = state => ({
   isAuthenticated: state.client.isAuthenticated,
   isLoading: state.client.isLoading,
-  message:state.client.message
+  message: state.client.message
 });
 
 const mapDispatchToProps = dispatch => ({

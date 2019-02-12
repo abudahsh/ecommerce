@@ -17,7 +17,6 @@ import HeaderBar from "../components/HeaderBar";
 sWidth = Dimensions.get("window").width;
 sheight = Dimensions.get("window").height;
 
-
 class CategoriesScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -25,12 +24,12 @@ class CategoriesScreen extends Component {
     };
   };
   state = {
-    refreshing:false
+    refreshing: false
   };
-  _keyExtractor = (item, index) => item.id;
+  _keyExtractor = (item, index) => item.id.toString();
   _renderItem = ({ item }) => (
     <View
-    key={item.key}
+      key={item.key}
       style={{ borderColor: "#D3D3D3", borderWidth: StyleSheet.hairlineWidth }}
     >
       <CategoryRow {...item} />
@@ -38,31 +37,32 @@ class CategoriesScreen extends Component {
   );
 
   componentDidMount() {
-    this.hydrateCategories()
+    this.hydrateCategories();
   }
-  hydrateCategories = ()=>{
+  hydrateCategories = () => {
     this.props._fetchCategories();
-  }
+  };
   render() {
     return (
       <View style={{ flex: 1, width: sWidth }}>
         {this.props.isLoading ? (
-           <View style={{
-            flex:1,
-            justifyContent:'center',
-            alignItems:'center'
-          }}>
-          <ActivityIndicator size="large" color="orange" />
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <ActivityIndicator size="large" color="orange" />
           </View>
         ) : (
           <FlatList
-          data={this.props.categories}
-          renderItem={this._renderItem}
-          keyExtractor={this._keyExtractor}
-          onRefresh={this.hydrateCategories}
-          refreshing={this.state.refreshing}
-        />
-         
+            data={this.props.categories}
+            renderItem={this._renderItem}
+            keyExtractor={this._keyExtractor}
+            onRefresh={this.hydrateCategories}
+            refreshing={this.state.refreshing}
+          />
         )}
       </View>
     );

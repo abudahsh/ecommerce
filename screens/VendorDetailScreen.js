@@ -40,7 +40,7 @@ class VendorDetailScreen extends Component {
       starCount: rating
     });
   }
- 
+
   render() {
     let {
       avatar,
@@ -82,15 +82,15 @@ class VendorDetailScreen extends Component {
             </View>
             <View style={{ width: 0.5 * sWidth }}>
               <View style={{ flexDirection: "row" }}>
-                <Text style={styles.textStyle}>Name: </Text>
+                <Text style={styles.textStyle}>Nombre: </Text>
                 <Text style={styles.infoStyle}>{name}</Text>
               </View>
               <View style={{ flexDirection: "row" }}>
-                <Text style={styles.textStyle}>Adress: </Text>
+                <Text style={styles.textStyle}>Dirección: </Text>
                 <Text style={styles.infoStyle}>{address}</Text>
               </View>
               <View style={{ flexDirection: "row" }}>
-                <Text style={styles.textStyle}>Telephone: </Text>
+                <Text style={styles.textStyle}>Teléfono: </Text>
                 <Text style={styles.infoStyle}>{phone_number}</Text>
               </View>
               <View style={{ flexDirection: "row" }}>
@@ -121,7 +121,7 @@ class VendorDetailScreen extends Component {
                 fontSize: 16
               }}
             >
-              Description :
+              Descripción:
             </Text>
             <Text
               style={{
@@ -143,7 +143,7 @@ class VendorDetailScreen extends Component {
                 marginBottom: 10
               }}
             >
-              Products
+              Productos
             </Text>
             <View
               style={{

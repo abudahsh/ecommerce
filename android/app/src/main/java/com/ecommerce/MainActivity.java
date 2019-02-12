@@ -1,4 +1,4 @@
-package com.ecommerce;
+package com.rtnbit.artesaniasdeboyaca;
 
 import com.facebook.react.ReactActivity;
 

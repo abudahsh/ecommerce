@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import ProductRow from "./../components/ProductRow";
 import { _fetchProducts } from "./../redux/actions";
 import HeaderBar from "../components/HeaderBar";
-import Toast from 'react-native-simple-toast';
+import Toast from "react-native-simple-toast";
 
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
@@ -27,7 +27,7 @@ class HomeScreen extends Component {
     };
   };
 
-  _keyExtractor = (item, index) => item.id;
+  _keyExtractor = (item, index) => item.id.toString();
   _renderItem = ({ item }) => (
     <View
       key={item.index}
@@ -48,25 +48,24 @@ class HomeScreen extends Component {
     </View>
   );
   componentDidMount() {
-    this.hydratePage()
+    this.hydratePage();
   }
-  hydratePage=()=>{
+  hydratePage = () => {
     this.props._fetchProducts();
-  }
-  componentWillReceiveProps(nextProps){
-    if (nextProps.message){
-      Toast.show(nextProps.message, Toast.SHORT)
+  };
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.message) {
+      Toast.show(nextProps.message, Toast.SHORT);
     }
   }
   render() {
-     if (this.props.isLoading) {
+    if (this.props.isLoading) {
       return (
         <View style={styles.container}>
           <ActivityIndicator size="large" color="orange" />
         </View>
       );
-    }
-     else if (this.props.products.length>0){
+    } else if (this.props.products.length > 0) {
       return (
         <View style={styles.container}>
           <FlatList
@@ -76,21 +75,20 @@ class HomeScreen extends Component {
             numColumns={2}
             refreshing={false}
             onRefresh={this.hydratePage}
-/>
+          />
+        </View>
+      );
+    } else {
+      return (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <TouchableOpacity onPress={this.hydratePage}>
+            <Text>Reload</Text>
+          </TouchableOpacity>
         </View>
       );
     }
-    else{
-      return (
-        <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
-        <TouchableOpacity onPress={this.hydratePage}>
-            <Text>Reload</Text>
-        </TouchableOpacity>
-      </View>
-      )
-      
-    }
-    
   }
 }
 
@@ -105,8 +103,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => ({
   products: state.products,
   isLoading: state.client.isLoading,
-  isConnected:state.network.isConnected,
-  message:state.network.message
+  isConnected: state.network.isConnected,
+  message: state.network.message
 });
 const mapDispatchToProps = dispatch => ({
   _fetchProducts: () => dispatch(_fetchProducts())

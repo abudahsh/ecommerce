@@ -41,55 +41,57 @@ export default class AuthScreen extends React.Component {
     _renderIndicator = () => ({});
 
     return (
-      <View style={{ paddingTop: 10, backgroundColor: "#4b2727" }}>
-        <View
-          style={{
-            justifyContent: "center",
-            alignItems: "center",
-            alignSelf: "stretch"
-          }}
-        >
-          <Image
-            source={require("./../assets/Logodouble.png")}
+      <ScrollView style={{ flex: 1 }}>
+        <View style={{ paddingTop: 10, backgroundColor: "#4b2727" }}>
+          <View
             style={{
-              width: 0.8 * sWidth,
-              height: 0.4 * sWidth,
-              marginLeft: 20
+              justifyContent: "center",
+              alignItems: "center",
+              alignSelf: "stretch"
             }}
-          />
-        </View>
+          >
+            <Image
+              source={require("./../assets/Logodouble.png")}
+              style={{
+                width: 0.8 * sWidth,
+                height: 0.4 * sWidth,
+                marginLeft: 20
+              }}
+            />
+          </View>
 
-        <View style={styles.tabBar}>
-          {props.navigationState.routes.map((route, i) => {
-            const color = props.position.interpolate({
-              inputRange,
-              outputRange: inputRange.map(inputIndex =>
-                inputIndex === i ? "#e48d31" : "white"
-              )
-            });
-            return (
-              <TouchableOpacity
-                style={styles.tabItem}
-                onPress={() => this.setState({ index: i })}
-              >
-                <View>
-                  <Animated.Text style={{ color, paddingLeft: 30 }}>
-                    {route.title}
-                  </Animated.Text>
-                  <Animated.View
-                    style={{
-                      height: 2,
-                      backgroundColor: color,
-                      width: Dimensions.get("window").width / 2,
-                      marginTop: 10
-                    }}
-                  />
-                </View>
-              </TouchableOpacity>
-            );
-          })}
+          <View style={styles.tabBar}>
+            {props.navigationState.routes.map((route, i) => {
+              const color = props.position.interpolate({
+                inputRange,
+                outputRange: inputRange.map(inputIndex =>
+                  inputIndex === i ? "#e48d31" : "white"
+                )
+              });
+              return (
+                <TouchableOpacity
+                  style={styles.tabItem}
+                  onPress={() => this.setState({ index: i })}
+                >
+                  <View>
+                    <Animated.Text style={{ color, paddingLeft: 30 }}>
+                      {route.title}
+                    </Animated.Text>
+                    <Animated.View
+                      style={{
+                        height: 2,
+                        backgroundColor: color,
+                        width: Dimensions.get("window").width / 2,
+                        marginTop: 10
+                      }}
+                    />
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
         </View>
-      </View>
+      </ScrollView>
     );
   };
 

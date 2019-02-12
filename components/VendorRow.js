@@ -42,7 +42,7 @@ class VendorRow extends Component {
           }}
         >
           <Image
-            source={require("./../assets/product4.jpg")}
+            source={{ uri: this.props.avatar }}
             style={{
               height: 0.35 * sWidth,
               width: 0.35 * sWidth,

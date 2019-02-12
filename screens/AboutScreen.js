@@ -8,10 +8,11 @@ import {
   TouchableOpacity,
   ImageBackground
 } from "react-native";
-import  store  from "./../redux/store";
+import { store } from "./../redux/store";
 import HeaderBar from "../components/HeaderBar";
 sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
+var image = require("./../assets/about.jpg");
 class AboutScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -24,7 +25,7 @@ class AboutScreen extends Component {
     return (
       <View style={styles.container}>
         <ImageBackground
-          source={require("./../assets/about.jpg")}
+          source={image}
           style={{ width: sWidth, height: 0.9 * sHeight }}
         >
           <View
@@ -36,7 +37,7 @@ class AboutScreen extends Component {
             }}
           >
             <Text style={{ color: "white" }}>
-              ¡Conoce a todo el equipo de Boyacá ahora!
+              ¡Conoce a los líderes del proyecto!
             </Text>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate("Programmers")}
@@ -50,7 +51,7 @@ class AboutScreen extends Component {
               }}
             >
               <Text style={{ color: "white", fontWeight: "bold" }}>
-                Programa Artesanias de Boyaca
+                Programa de Artesanías de Boyacá
               </Text>
             </TouchableOpacity>
           </View>
@@ -63,7 +64,7 @@ class AboutScreen extends Component {
               marginLeft: 20
             }}
           >
-            <Text style={{ color: "white" }}>ver todos los vendedores</Text>
+            <Text style={{ color: "white" }}>Ver todos los artesanos</Text>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate("Vendors")}
               style={{
@@ -77,9 +78,14 @@ class AboutScreen extends Component {
               }}
             >
               <Text style={{ color: "white", fontWeight: "bold" }}>
-                P r e f i l e s
+                P e r f i l e s
               </Text>
             </TouchableOpacity>
+          </View>
+          <View style={{ position: "absolute", right: 20, bottom: 30 }}>
+            <Text style={{ color: "white", fontSize: 14 }}>
+              Desarrollado por RTNBIT S.A.S.{" "}
+            </Text>
           </View>
         </ImageBackground>
       </View>

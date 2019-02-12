@@ -26,10 +26,10 @@ class CartScreen extends Component {
     };
   };
   state = {};
-  _renderItem = ({item}) => {
+  _renderItem = ({ item }) => {
     return <CartItem {...item} />;
   };
-  
+
   componentDidMount() {
     this.props._fetchCart();
   }
@@ -39,49 +39,91 @@ class CartScreen extends Component {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <ActivityIndicator
-            size='large'
-            color="orange"
-          />
+          <ActivityIndicator size="large" color="orange" />
         </View>
       );
-    }
-    else{
-    
-    return (
-      <View style={{ flex: 1, backgroundColor: "white" }}>
-    
-      
-        <SectionList
-        contentContainerStyle={{marginLeft:15, marginRight:15, }}
-        renderItem={({item, index, section}) => <CartItem {...item} />}
-        renderSectionHeader={({section: {seller, number_of_products}}) => (
-          <View style={{height:30, backgroundColor:'#4b2727',flexDirection:'row', marginTop:20, justifyContent:'space-between', alignItems:'center'}}>
-              <Text style={{fontWeight: 'bold', color:'white', paddingLeft:5}}>vendedor: {seller.substring(0,25)}</Text>
-              <Text style={{fontWeight: 'bold', color:'white', paddingRight:5}}>Products({number_of_products})</Text>
-          </View>
-          
-        )}
-        renderSectionFooter={({section:{payment_form, amount, }})=>(
-      
-            <View style={{flexDirection:'row', backgroundColor:'#f7f6f5', justifyContent:'space-between', paddingBottom:15, paddingHorizontal:10, borderBottomLeftRadius:45, borderBottomRightRadius:45, alignItems:'center'}}>
-              <View style={{flexDirection:'row', alignItems:'center'}}>
-              <Text style={{color:'#4b2727', marginRight:5}}>Total Amount: </Text>
-              <Text style={{color:'#e48d31', fontSize:16, padding:5}}>{amount}</Text>
-              </View>
-              <TouchableOpacity style={{backgroundColor:'#4b2727', justifyContent:'center', alignItems:'center',  height:30, marginLeft:30, borderRadius:10}}
-              onPress={()=>this.props.navigation.navigate('Order', {html:payment_form})}
+    } else {
+      return (
+        <View style={{ flex: 1, backgroundColor: "white" }}>
+          <SectionList
+            contentContainerStyle={{ marginLeft: 15, marginRight: 15 }}
+            renderItem={({ item, index, section }) => <CartItem {...item} />}
+            renderSectionHeader={({
+              section: { seller, number_of_products }
+            }) => (
+              <View
+                style={{
+                  height: 30,
+                  backgroundColor: "#4b2727",
+                  flexDirection: "row",
+                  marginTop: 20,
+                  justifyContent: "space-between",
+                  alignItems: "center"
+                }}
               >
-                <Text style={{color:'white', padding:5}}>Proceder con pago</Text>
-              </TouchableOpacity>
+                <Text
+                  style={{ fontWeight: "bold", color: "white", paddingLeft: 5 }}
+                >
+                  {seller.substring(0, 25)}
+                </Text>
+                <Text
+                  style={{
+                    fontWeight: "bold",
+                    color: "white",
+                    paddingRight: 5
+                  }}
+                >
+                  Productos ({number_of_products})
+                </Text>
               </View>
-          
-        )}
-        sections={this.props.cart}
-        keyExtractor={(item, index) => item + index}
-      />
-         
-        {/*
+            )}
+            renderSectionFooter={({ section: { payment_form, amount } }) => (
+              <View
+                style={{
+                  flexDirection: "row",
+                  backgroundColor: "#f7f6f5",
+                  justifyContent: "space-between",
+                  paddingBottom: 15,
+                  paddingHorizontal: 10,
+                  borderBottomLeftRadius: 45,
+                  borderBottomRightRadius: 45,
+                  alignItems: "center"
+                }}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Text style={{ color: "#4b2727", marginRight: 5 }}>
+                    Total:{" "}
+                  </Text>
+                  <Text style={{ color: "#e48d31", fontSize: 16, padding: 5 }}>
+                    $ {amount}
+                  </Text>
+                </View>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: "#4b2727",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: 30,
+                    marginLeft: 30,
+                    marginRight: 5,
+                    marginTop: 5,
+                    borderRadius: 10
+                  }}
+                  onPress={() =>
+                    this.props.navigation.navigate("Order", {
+                      html: payment_form
+                    })
+                  }
+                >
+                  <Text style={{ color: "white", padding: 5 }}>Pagar</Text>
+                </TouchableOpacity>
+              </View>
+            )}
+            sections={this.props.cart}
+            keyExtractor={index => index}
+          />
+
+          {/*
         
       
         
@@ -134,10 +176,10 @@ class CartScreen extends Component {
           </View>
         </View>
         */}
-      </View>
-    );
+        </View>
+      );
+    }
   }
-}
 }
 
 const styles = StyleSheet.create({

@@ -59,7 +59,7 @@ class ProductRow extends React.Component {
                     fontWeight: "bold"
                   }}
                 >
-                  {this.props.name.substring(0, 24)}
+                  {this.props.name.substring(0, 21)}
                 </Text>
               </View>
               <View
@@ -70,7 +70,7 @@ class ProductRow extends React.Component {
                 }}
               >
                 <Text style={{ color: "black", paddingTop: 5, paddingLeft: 7 }}>
-                  {this.props.price} $
+                  $ {this.props.price}
                 </Text>
                 <TouchableOpacity
                   onPress={() => this.props._addToCart(this.props.id, 1)}
@@ -94,7 +94,13 @@ class ProductRow extends React.Component {
                   />
                 </TouchableOpacity>
               </View>
-              <View style={{ flexDirection: "row", justifyContent: "center", paddingVertical:10 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  paddingVertical: 10
+                }}
+              >
                 <Image
                   source={require("./../assets/Icons/profile.png")}
                   style={{ height: 15, width: 15 }}

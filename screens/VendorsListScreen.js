@@ -15,7 +15,7 @@ class VendorListScreen extends Component {
     super(props);
     this.state = {};
   }
-  _keyExtractor = (item, index) => item.id;
+  _keyExtractor = (item, index) => item.id.toString();
   _renderItem = ({ item }) => (
     <View>
       <VendorRow {...item} />

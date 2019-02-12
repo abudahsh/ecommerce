@@ -1,4 +1,4 @@
-package com.ecommerce;
+package com.rtnbit.artesaniasdeboyaca;
 
 import android.app.Application;
 

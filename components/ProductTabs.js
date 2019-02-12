@@ -18,8 +18,8 @@ export default class ProdctTabs extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: "first", title: "descripción" },
-      { key: "second", title: "detalles " }
+      { key: "first", title: "Descripción" },
+      { key: "second", title: "Detalles " }
     ]
   };
 
@@ -36,8 +36,8 @@ export default class ProdctTabs extends React.Component {
           {props.navigationState.routes.map((route, i) => {
             const color = props.position.interpolate({
               inputRange,
-              outputRange: inputRange.map(
-                inputIndex => (inputIndex === i ? "#e48d31" : "#b7a195")
+              outputRange: inputRange.map(inputIndex =>
+                inputIndex === i ? "#e48d31" : "#b7a195"
               )
             });
             return (

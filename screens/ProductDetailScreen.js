@@ -30,7 +30,8 @@ falseData = [{}, {}, {}, {}];
 class ProductDetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerRight: <HeaderBar />
+      headerRight: <HeaderBar />,
+      title: navigation.getParam("name", "Detalle")
     };
   };
 
@@ -107,7 +108,7 @@ class ProductDetailScreen extends Component {
               <Text
                 style={{ fontWeight: "bold", fontSize: 17, color: "#e48d31" }}
               >
-                {this.props.product.price} $
+                $ {this.props.product.price}
               </Text>
             </View>
 
@@ -136,8 +137,13 @@ class ProductDetailScreen extends Component {
               />
               <View>
                 <TouchableOpacity
-                  onPress={() =>
-                    this.setState({ num: String(Number(this.state.num) + 1) })
+                  onPress={
+                    this.state.num < 99
+                      ? () =>
+                          this.setState({
+                            num: String(Number(this.state.num) + 1)
+                          })
+                      : () => null
                   }
                 >
                   <MaterialIcons
@@ -147,8 +153,13 @@ class ProductDetailScreen extends Component {
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() =>
-                    this.setState({ num: String(Number(this.state.num) - 1) })
+                  onPress={
+                    this.state.num > 1
+                      ? () =>
+                          this.setState({
+                            num: String(Number(this.state.num) - 1)
+                          })
+                      : () => null
                   }
                 >
                   <MaterialIcons
@@ -187,7 +198,7 @@ class ProductDetailScreen extends Component {
                 <Text
                   style={{ fontWeight: "bold", paddingLeft: 6, color: "white" }}
                 >
-                  añadir a la cesta
+                  Añadir al Carrito
                 </Text>
               </View>
             </TouchableOpacity>
