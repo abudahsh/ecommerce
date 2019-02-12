@@ -64,8 +64,17 @@ class ProductDetailScreen extends Component {
     this.props._fetchOneVendor(this.props.product.seller.id);
     this.props.navigation.navigate("VendorDetail");
   };
+
   render() {
-    if (this.props.product.images) {
+    if (this.props.isLoading) {
+      return (
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <ActivityIndicator size={"large"} color="orange" />
+        </View>
+      );
+    } else if (this.props.product.images) {
       return (
         <ScrollView style={styles.container}>
           <View style={{ height: 0.3 * sHeight }}>

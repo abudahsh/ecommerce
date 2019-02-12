@@ -42,6 +42,7 @@ export default class ProdctTabs extends React.Component {
             });
             return (
               <TouchableOpacity
+                key={i}
                 style={styles.tabItem}
                 onPress={() => this.setState({ index: i })}
               >

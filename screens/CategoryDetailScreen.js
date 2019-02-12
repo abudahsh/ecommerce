@@ -84,7 +84,10 @@ class CategoryDetailScreen extends PureComponent {
                 }}
               >
                 <TouchableOpacity
-                  onPress={() => this.props._fetchProductsBySubCat(data.id)}
+                  onPress={() => {
+                    this.props._fetchProductsBySubCat(data.id);
+                    this.props.navigation.setParams({ firstName: data.name });
+                  }}
                   style={{
                     flex: 1,
                     backgroundColor: "rgba(75,39,39, 0.4)",
