@@ -31,7 +31,7 @@ class VendorDetailScreen extends Component {
     starCount: 3.5
   };
   _renderItem = ({ item }) => (
-    <View style={{ marginLeft: 0.1 * sWidth, marginBottom: 0.08 * sWidth }}>
+    <View key={item.id.toString()} style={{ marginLeft: 0.1 * sWidth, marginBottom: 0.08 * sWidth }}>
       <VendorProductRow {...item} />
     </View>
   );
@@ -72,7 +72,7 @@ class VendorDetailScreen extends Component {
           >
             <View>
               <Image
-                source={require("./../assets/product3.jpg")}
+                source={{ uri: avatar }}
                 style={{
                   height: 0.25 * sWidth,
                   width: 0.25 * sWidth,

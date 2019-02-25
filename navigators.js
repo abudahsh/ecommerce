@@ -26,6 +26,7 @@ import VendorListScreen from "./screens/VendorsListScreen";
 import ProgrammersScreen from "./screens/ProgrammersScreen";
 import OrderScreen from "./screens/OrderScreen";
 import ChangePasswordScreen from "./screens/ChangePasswordScreen";
+import CategoryProductDetailScreen from "./screens/CategoryProductDetailScreen";
 sHeight = Dimensions.get("window").height;
 
 stackNav = {
@@ -155,7 +156,9 @@ const CatStack = createStackNavigator(
     },
     CategoryDetail: {
       screen: CategoryDetailScreen
-    }
+    },
+    CategoryProductDetail: { screen: CategoryProductDetailScreen }
+
   },
   {
     initialRouteName: "CategoriesList",

@@ -10,7 +10,7 @@ class VendorProductRow extends Component {
   state = {};
   handlePress = () => {
     this.props._fetchOneProduct(this.props.id);
-    this.props.navigation.navigate("ProductDetail",{
+    this.props.navigation.navigate("ProductDetail", {
       id: this.props.id,
       name: this.props.name,
       // describtion: this.props.description,
@@ -35,9 +35,9 @@ class VendorProductRow extends Component {
         <Image
           source={{ uri: this.props.image }}
           style={{
-            width: 0.25 * sWidth,
-            height: 0.25 * sWidth,
-            borderRadius: 0.175 * sWidth,
+            width: 100,
+            height: 100,
+            borderRadius: 50,
             marginVertical: 9
           }}
         />

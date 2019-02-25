@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 class ProductDesc extends React.Component {
   render() {
     return (
-      <ScrollView style={{ marginHorizontal: 25, flex: 1 }}>
-        <Text style={{ color: "#4b2727" }}>
+      <ScrollView showsVerticalScrollIndicator={true} style={{ marginHorizontal: 25, flex: 1 }}>
+        <Text style={{ color: "#4b2727", textAlign: 'justify' }}>
           {this.props.product.description}
         </Text>
       </ScrollView>

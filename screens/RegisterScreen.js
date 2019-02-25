@@ -70,8 +70,8 @@ class RegisterScreen extends React.Component {
               marginBottom: 5,
               textAlign: "center"
             }}
-            key={"nombre de usuario"}
-            placeholder="nombre de usuario"
+            key={"Usuario"}
+            placeholder="Usuario"
             value={this.state.username}
             autoCapitalize="none"
             onChangeText={username => this.setState({ username })}
@@ -88,8 +88,8 @@ class RegisterScreen extends React.Component {
               marginBottom: 5,
               textAlign: "center"
             }}
-            key={"nombre de pila"}
-            placeholder="nombre de pila"
+            key={"Nombres"}
+            placeholder="Nombres"
             value={this.state.firstName}
             onChangeText={firstName => this.setState({ firstName })}
             underlineColorAndroid="transparent"
@@ -105,8 +105,8 @@ class RegisterScreen extends React.Component {
               marginBottom: 5,
               textAlign: "center"
             }}
-            key="apellido"
-            placeholder="apellido"
+            key="Apellidos"
+            placeholder="Apellidos"
             value={this.state.lastName}
             onChangeText={lastName => this.setState({ lastName })}
             underlineColorAndroid="transparent"
@@ -123,8 +123,8 @@ class RegisterScreen extends React.Component {
               marginBottom: 5,
               textAlign: "center"
             }}
-            key="número de teléfono"
-            placeholder="número de teléfono"
+            key="Teléfono"
+            placeholder="Teléfono"
             keyboardType="numeric"
             value={this.state.phone}
             onChangeText={phone => this.setState({ phone })}
@@ -141,7 +141,7 @@ class RegisterScreen extends React.Component {
               textAlign: "center"
             }}
             key={"contraseña"}
-            placeholder="contraseña"
+            placeholder="Contraseña"
             value={this.state.Password}
             onChangeText={Password => this.setState({ Password })}
             secureTextEntry={true}

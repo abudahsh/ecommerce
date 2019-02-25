@@ -43,7 +43,7 @@ class NewsRow extends React.Component {
           <Text style={{ fontWeight: "bold", fontSize: 18 }}>
             {this.props.title}
           </Text>
-          <Text style={{ marginHorizontal: 5 }}>
+          <Text style={{ marginHorizontal: 5, textAlign: 'justify', marginTop: 10 }}>
             {this.props.details.substring(0, 100)}
           </Text>
         </TouchableOpacity>
@@ -64,7 +64,7 @@ class NewsRow extends React.Component {
               style={{ width: sWidth, height: 0.4 * sHeight }}
             />
             <Text>{this.props.modified_at.substring(0, 10)}</Text>
-            <Text style={{ marginHorizontal: 5 }}>{this.props.details}</Text>
+            <Text style={{ marginHorizontal: 20, textAlign: 'justify', marginTop: 20 }}>{this.props.details}</Text>
           </ScrollView>
         </Modal>
       </View>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
 
   modal: {
     width: sWidth,
-    height: sHeight,
+    height: sHeight - 70,
     zIndex: 100,
     marginTop: 20
   },
@@ -119,6 +119,8 @@ const styles = StyleSheet.create({
 
   text: {
     color: "black",
-    fontSize: 22
+    fontSize: 22,
+    textAlign: 'justify',
+    marginHorizontal: 20
   }
 });

@@ -79,14 +79,14 @@ class ProfileScreen extends Component {
               style={styles.textInputStyle}
               underlineColorAndroid="transparent"
               value={this.state.email}
-              placeholder="Email"
+              placeholder="Correo Electronico"
               onChangeText={email => this.setState({ email })}
               editable={false}
             />
             <TextInput
               style={styles.textInputStyle}
               underlineColorAndroid="transparent"
-              placeholder="Username"
+              placeholder="Usuario"
               value={this.state.username}
               onChangeText={username => this.setState({ username })}
               editable={false}
@@ -95,30 +95,30 @@ class ProfileScreen extends Component {
               style={styles.textInputStyle}
               underlineColorAndroid="transparent"
               value={this.state.firstName}
-              placeholder="First Name"
+              placeholder="Nombres"
               onChangeText={firstName => this.setState({ firstName })}
-              editable={false}
+              editable={true}
             />
             <TextInput
               style={styles.textInputStyle}
               underlineColorAndroid="transparent"
               value={this.state.lastName}
-              placeholder="Last Name"
+              placeholder="Apellidos"
               onChangeText={lastName => this.setState({ lastName })}
-              editable={false}
+              editable={true}
             />
             <TextInput
               style={styles.textInputStyle}
               underlineColorAndroid="transparent"
               value={this.state.phone}
-              placeholder="phone"
+              placeholder="Teléfono"
               onChangeText={phone => this.setState({ phone })}
             />
             <TextInput
               style={styles.textInputStyle}
               underlineColorAndroid="transparent"
               value={this.state.address}
-              placeholder="address"
+              placeholder="Dirección"
               onChangeText={address => this.setState({ address })}
             />
             <TouchableOpacity

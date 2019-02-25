@@ -52,6 +52,7 @@ const clientReducer = (state = initialState.client, action) => {
     case "CHANGE_PASSWORD_STARTED":
     case "SEND_CONTACT_MESSAGE_STARTED":
     case "FETCHING_NEWS_STARTED":
+    case "FETCHING_CATEGORY_ONE_PRODUCT_STARTED":
       return { ...state, isLoading: true };
 
     case "FETCHING_PROS_SUCCESS":
@@ -86,16 +87,18 @@ const clientReducer = (state = initialState.client, action) => {
     case "SEND_CONTACT_MESSAGE_FAILED":
     case "FETCHING_NEWS_SUCCESS":
     case "FETCHING_NEWS_FAILED":
-      return { ...state, isLoading: false,  message: action.payload.message };
-    
+    case "FETCHING_CATEGORY_ONE_PRODUCT_SUCCESS":
+    case "FETCHING_CATEGORY_ONE_PRODUCT_FAILED":
+      return { ...state, isLoading: false, message: action.payload.message };
+
 
 
     case "CONNECTION_OFFLINE":
-      return {...state, message:action.payload.message, isLoading:false}
+      return { ...state, message: action.payload.message, isLoading: false }
 
-    
+
     case "LOGGED_OUT":
-      return {...state, isAuthenticated:false}
+      return { ...state, isAuthenticated: false }
   }
 
   return state;
@@ -108,32 +111,32 @@ const userReducer = (state = initialState.user, action) => {
         ...state,
         email: action.payload.email,
         token: action.payload.token,
-       
+
       };
     case "REGISTER_SUCCESS":
       return {
         ...state,
         email: action.payload.email,
         token: action.payload.token,
-       
+
       };
-      case "FETCHING_PROFILE_SUCCESS":
-      case "UPDATING_PROFILE_SUCCESS":
+    case "FETCHING_PROFILE_SUCCESS":
+    case "UPDATING_PROFILE_SUCCESS":
       return {
         ...state,
-        email:action.payload.email,
-        username:action.payload.username,
-        firstName:action.payload.firstName,
-        lastName:action.payload.lastName,
-        phone:action.payload.phone,
-        address:action.payload.address,
+        email: action.payload.email,
+        username: action.payload.username,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        phone: action.payload.phone,
+        address: action.payload.address,
 
       }
-      case "LOGGED_OUT":
-      case "CHANGE_PASSWORD_SUCCESS":
-      return {...state, token:action.payload.token}
+    case "LOGGED_OUT":
+    case "CHANGE_PASSWORD_SUCCESS":
+      return { ...state, token: action.payload.token }
 
-      
+
   }
   return state;
 };
@@ -192,6 +195,13 @@ const currentProductReducer = (state = {}, action) => {
   }
   return state;
 };
+const currentCategoryProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FETCHING_CATEGORY_ONE_PRODUCT_SUCCESS":
+      return action.payload.product;
+  }
+  return state;
+};
 const currentVendorReducer = (state = {}, action) => {
   switch (action.type) {
     case "FETCHING_ONE_VENDOR_SUCCESS":
@@ -217,6 +227,7 @@ const reducer = combineReducers({
   currentVendor: currentVendorReducer,
   cart: cartReducer,
   subCategoryProducts: subCategoryProductsReducer,
+  currentCategoryProduct: currentCategoryProductReducer,
   network
 });
 

@@ -45,38 +45,43 @@ class CartScreen extends Component {
     } else {
       return (
         <View style={{ flex: 1, backgroundColor: "white" }}>
+          <View style={{ marginHorizontal: 20, marginTop: 10 }}>
+            <Text style={{ color: '#9b0116', textAlign: 'justify' }}>Nota: Por políticas cada pago se realiza a la cuenta de cada
+vendedor, por lo que deberá realizar tantos pagos como vendedores tenga en el carrito de
+compras.</Text>
+          </View>
           <SectionList
             contentContainerStyle={{ marginLeft: 15, marginRight: 15 }}
             renderItem={({ item, index, section }) => <CartItem {...item} />}
             renderSectionHeader={({
               section: { seller, number_of_products }
             }) => (
-              <View
-                style={{
-                  height: 30,
-                  backgroundColor: "#4b2727",
-                  flexDirection: "row",
-                  marginTop: 20,
-                  justifyContent: "space-between",
-                  alignItems: "center"
-                }}
-              >
-                <Text
-                  style={{ fontWeight: "bold", color: "white", paddingLeft: 5 }}
-                >
-                  {seller.substring(0, 25)}
-                </Text>
-                <Text
+                <View
                   style={{
-                    fontWeight: "bold",
-                    color: "white",
-                    paddingRight: 5
+                    height: 30,
+                    backgroundColor: "#4b2727",
+                    flexDirection: "row",
+                    marginTop: 20,
+                    justifyContent: "space-between",
+                    alignItems: "center"
                   }}
                 >
-                  Productos ({number_of_products})
+                  <Text
+                    style={{ fontWeight: "bold", color: "white", paddingLeft: 5 }}
+                  >
+                    {seller.substring(0, 25)}
+                  </Text>
+                  <Text
+                    style={{
+                      fontWeight: "bold",
+                      color: "white",
+                      paddingRight: 5
+                    }}
+                  >
+                    Productos ({number_of_products})
                 </Text>
-              </View>
-            )}
+                </View>
+              )}
             renderSectionFooter={({ section: { payment_form, amount } }) => (
               <View
                 style={{

@@ -15,7 +15,30 @@ sWidth = Dimensions.get("window").width;
 sHeight = Dimensions.get("window").height;
 class ProductRow extends React.Component {
   state = {};
+  componentDidMount() {
 
+    console.warn(this.props.navigation.state.routeName)
+  }
+  handleNavigation = () => {
+    if (this.props.navigation.state.routeName === "Home") {
+      this.props.navigation.navigate("ProductDetail", {
+        id: this.props.id,
+        name: this.props.name,
+        // describtion: this.props.description,
+        price: this.props.price,
+        vendorName: this.props.seller_name
+      })
+    }
+    else if (this.props.navigation.state.routeName === "CategoryDetail") {
+      this.props.navigation.navigate("CategoryProductDetail", {
+        id: this.props.id,
+        name: this.props.name,
+        // describtion: this.props.description,
+        price: this.props.price,
+        vendorName: this.props.seller_name
+      })
+    }
+  }
   render() {
     return (
       <View
@@ -25,15 +48,7 @@ class ProductRow extends React.Component {
         }}
       >
         <TouchableWithoutFeedback
-          onPress={() =>
-            this.props.navigation.navigate("ProductDetail", {
-              id: this.props.id,
-              name: this.props.name,
-              // describtion: this.props.description,
-              price: this.props.price,
-              vendorName: this.props.seller_name
-            })
-          }
+          onPress={this.handleNavigation}
         >
           <View>
             <Image

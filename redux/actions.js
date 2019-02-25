@@ -272,7 +272,31 @@ export const _fetchOneProduct = id => dispatch => {
       });
     });
 };
-
+export const _fetchCategoryOneProduct = id => dispatch => {
+  dispatch({
+    type: "FETCHING_CATEGORY_ONE_PRODUCT_STARTED",
+    payload: {
+      isLoading: true,
+      message: "Fetching product request is in progress"
+    }
+  });
+  fetchOneProduct(id)
+    .then(results => {
+      dispatch({
+        type: "FETCHING_CATEGORY_ONE_PRODUCT_SUCCESS",
+        payload: {
+          isLoading: false,
+          product: results
+        }
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: "FETCHING_CATEGORY_ONE_PRODUCT_FAILED",
+        payload: { message: err.message }
+      });
+    });
+};
 export const _fetchCart = () => dispatch => {
   dispatch({
     type: "FETCHING_CART_STARTED",

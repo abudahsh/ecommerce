@@ -135,13 +135,14 @@ class ProductDetailScreen extends Component {
                 value={this.state.num}
                 onChangeText={num => this.setState({ num })}
                 style={{
-                  width: 30,
-                  height: 36,
+                  minWidth: 36,
+                  height: 40,
 
                   justifyContent: "center",
                   alignItems: "center",
                   borderRadius: 15,
-                  paddingLeft: 10
+                  paddingLeft: 10,
+                  paddingVertical: 0
                 }}
               />
               <View>
@@ -149,9 +150,9 @@ class ProductDetailScreen extends Component {
                   onPress={
                     this.state.num < 99
                       ? () =>
-                          this.setState({
-                            num: String(Number(this.state.num) + 1)
-                          })
+                        this.setState({
+                          num: String(Number(this.state.num) + 1)
+                        })
                       : () => null
                   }
                 >
@@ -165,9 +166,9 @@ class ProductDetailScreen extends Component {
                   onPress={
                     this.state.num > 1
                       ? () =>
-                          this.setState({
-                            num: String(Number(this.state.num) - 1)
-                          })
+                        this.setState({
+                          num: String(Number(this.state.num) - 1)
+                        })
                       : () => null
                   }
                 >
@@ -316,6 +317,7 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = state => ({
   product: state.currentProduct,
+
   isLoading: state.client.isLoading
 });
 const mapDispatchToProps = dispatch => ({

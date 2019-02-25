@@ -170,8 +170,8 @@ export const addToCart = async (product_id, quantity) => {
 export const fetchProductsBySubCat = async id => {
   response = await fetch(
     "http://www.artesaniasdeboyaca.com/products/api/subcategoryproducts/" +
-      id +
-      "/"
+    id +
+    "/"
   );
   if (response.ok) {
     const results = await response.json();
@@ -216,18 +216,26 @@ export const updateProfile = async (
     headers.Authorization = `Token ${token}`;
   }
   response = await fetch(`${host}/userprofile/api/profile/`, {
-    method: "PUT",
+    method: "PATCH",
     headers: headers,
     body: JSON.stringify({
-      first_name,
-      last_name,
       phone_number,
       address
     })
   });
-  if (response.ok) {
-    const results = await response.json();
-
+  otherResponse = await fetch(`${host}/userprofile/api/patching_profile/`, {
+    method: "PATCH",
+    headers: headers,
+    body: JSON.stringify({
+      first_name,
+      last_name
+    })
+  });
+  if (response.ok && otherResponse.ok) {
+    const firstResults = await response.json();
+    const otherResults = await otherResponse.json()
+    const results = { ...firstResults, first_name: otherResults.first_name, last_name: otherResults.last_name }
+    console.warn(results)
     return results;
   }
   const errMessage = await response.text();

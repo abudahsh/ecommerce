@@ -62,7 +62,7 @@ class LoginScreen extends React.Component {
               textAlign: "center"
             }}
             value={this.state.email}
-            placeholder="correo/ nombre de usuario"
+            placeholder="Correo Electronico/Usuario"
             autoCapitalize="none"
             onChangeText={email => this.setState({ email })}
             underlineColorAndroid="transparent"
@@ -75,7 +75,7 @@ class LoginScreen extends React.Component {
               backgroundColor: "#e4e4e4",
               textAlign: "center"
             }}
-            placeholder="contraseña"
+            placeholder="Contraseña"
             value={this.state.Password}
             onChangeText={Password => this.setState({ Password })}
             autoCapitalize="none"

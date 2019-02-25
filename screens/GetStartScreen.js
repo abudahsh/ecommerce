@@ -17,14 +17,9 @@ class GetStartScreen extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
-    if (store.getState().client.gotStarted) {
-      this.props.navigation.navigate("Tabs");
-    }
-  }
+
   handleClick = () => {
     this.props._getStarted();
-    console.log("state" + store.getState().client.gotStarted);
 
     this.props.navigation.navigate("Tabs");
   };
@@ -34,7 +29,7 @@ class GetStartScreen extends Component {
       <Swiper
         index={0}
         loop={false}
-        showsPagination={!store.getState().client.gotStarted}
+        showsPagination={true}
         activeDotStyle={{
           backgroundColor: "#e48d31"
         }}
@@ -75,13 +70,14 @@ class GetStartScreen extends Component {
                 alignItems: "center"
               }}
             >
-              <View style={{ width: 0.9 * sWidth, marginTop: -50 }}>
+              <View style={{ width: 0.90 * sWidth, marginTop: -30, maxHeight: 0.6 * sHeight }}>
                 <Text
                   style={{
                     fontWeight: "bold",
                     color: "white",
-                    fontSize: 20,
-                    padding: 10
+                    fontSize: 18,
+                    fontFamily: 'Arial',
+                    textAlign: 'justify'
                   }}
                 >
                   El producto artesanal de Boyacá involucra cultura, tradición y
@@ -133,13 +129,14 @@ class GetStartScreen extends Component {
                 alignItems: "center"
               }}
             >
-              <View style={{ width: 0.9 * sWidth, marginTop: -50 }}>
+              <View style={{ width: 0.90 * sWidth, marginTop: -30, maxHeight: 0.6 * sHeight }}>
                 <Text
                   style={{
                     fontWeight: "bold",
                     color: "white",
-                    fontSize: 20,
-                    padding: 10
+                    fontFamily: 'Arial',
+                    fontSize: 18,
+                    textAlign: 'justify'
                   }}
                 >
                   La importancia de buscar la cercanía entre las artesanías
@@ -189,13 +186,14 @@ class GetStartScreen extends Component {
                 alignItems: "center"
               }}
             >
-              <View style={{ width: 0.9 * sWidth, marginTop: -50 }}>
+              <View style={{ width: 0.90 * sWidth, marginTop: -30, maxHeight: 0.6 * sHeight }}>
                 <Text
                   style={{
                     fontWeight: "bold",
                     color: "white",
-                    fontSize: 22,
-                    padding: 10
+                    fontFamily: 'Arial',
+                    fontSize: 18,
+                    textAlign: 'justify'
                   }}
                 >
                   La oportunidad central está en que los artesanos de la región
