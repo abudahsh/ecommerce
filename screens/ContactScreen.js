@@ -33,7 +33,7 @@ class ContactScreen extends Component {
     message: ""
   };
   componentDidMount() {
-    this.animation ? this.animation.play(0, 100) : null
+    this.animation ? this.animation.play(0, 100) : null;
   }
   handleSubmit = () => {
     let { name, phone, email, message } = this.state;

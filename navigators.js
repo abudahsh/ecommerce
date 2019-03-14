@@ -70,7 +70,7 @@ const ContactStack = createStackNavigator(
     Contact: {
       screen: ContactScreen,
       navigationOptions: {
-        title: "Contact"
+        title: "Contacto"
       }
     }
   },
@@ -118,7 +118,7 @@ const ProductStack = createStackNavigator(
     Profile: {
       screen: ProfileScreen,
       navigationOptions: {
-        title: "perfil"
+        title: "Perfil"
       }
     },
     Vendors: {
@@ -158,7 +158,6 @@ const CatStack = createStackNavigator(
       screen: CategoryDetailScreen
     },
     CategoryProductDetail: { screen: CategoryProductDetailScreen }
-
   },
   {
     initialRouteName: "CategoriesList",

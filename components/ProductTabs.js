@@ -11,14 +11,16 @@ import {
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import ProductAttributes from "./ProductAttributes";
 import ProductDesc from "./ProductDesc";
-const FirstRoute = () => <ProductDesc />;
-const SecondRoute = () => <ProductAttributes />;
 
 export default class ProdctTabs extends React.Component {
   state = {
     index: 0,
     routes: [
-      { key: "first", title: "Descripción" },
+      {
+        key: "first",
+        title: "Descripción",
+        description: this.props.description
+      },
       { key: "second", title: "Detalles " }
     ]
   };
@@ -68,8 +70,8 @@ export default class ProdctTabs extends React.Component {
   };
 
   _renderScene = SceneMap({
-    first: FirstRoute,
-    second: SecondRoute
+    first: () => <ProductDesc description={this.props.description} />,
+    second: () => <ProductAttributes attributes={this.props.attributes} />
   });
 
   render() {

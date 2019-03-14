@@ -23,8 +23,8 @@ class ProfileScreen extends Component {
   state = {
     email: "",
     username: "",
-    firstName: "",
-    lastName: "",
+    fullName: "",
+    nationalID: "",
     phone: "",
     address: ""
   };
@@ -40,8 +40,8 @@ class ProfileScreen extends Component {
     this.setState({
       email: nextProps.user.email,
       username: nextProps.user.username,
-      firstName: nextProps.user.firstName,
-      lastName: nextProps.user.lastName,
+      fullName: nextProps.user.fullName,
+      nationalID: nextProps.user.nationalID,
       phone: nextProps.user.phone,
       address: nextProps.user.address
     });
@@ -55,8 +55,8 @@ class ProfileScreen extends Component {
     }
   }
   handleUpdate = () => {
-    let { firstName, lastName, phone, address } = this.state;
-    this.props._updateProfile(firstName, lastName, phone, address);
+    let { fullName, nationalID, address, phone } = this.state;
+    this.props._updateProfile(fullName, nationalID, address, phone);
   };
   handleLogout = () => {
     this.props._logoutUser();
@@ -94,17 +94,17 @@ class ProfileScreen extends Component {
             <TextInput
               style={styles.textInputStyle}
               underlineColorAndroid="transparent"
-              value={this.state.firstName}
-              placeholder="Nombres"
-              onChangeText={firstName => this.setState({ firstName })}
+              value={this.state.fullName}
+              placeholder="Nombre completo"
+              onChangeText={fullName => this.setState({ fullName })}
               editable={true}
             />
             <TextInput
               style={styles.textInputStyle}
               underlineColorAndroid="transparent"
-              value={this.state.lastName}
-              placeholder="Apellidos"
-              onChangeText={lastName => this.setState({ lastName })}
+              value={this.state.nationalID}
+              placeholder="Identificación nacional"
+              onChangeText={nationalID => this.setState({ nationalID })}
               editable={true}
             />
             <TextInput
@@ -188,8 +188,8 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   _fetchProfile: () => dispatch(_fetchProfile()),
-  _updateProfile: (first_name, last_name, phone_number, address) =>
-    dispatch(_updateProfile(first_name, last_name, phone_number, address)),
+  _updateProfile: (fullName, nationalID, address, phone_number) =>
+    dispatch(_updateProfile(fullName, nationalID, address, phone_number)),
   _logoutUser: () => dispatch(_logoutUser())
 });
 export default connect(

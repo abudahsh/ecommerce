@@ -40,10 +40,19 @@ class NewsRow extends React.Component {
             source={{ uri: this.props.image }}
             style={{ width: sWidth - 52, height: 0.2 * sHeight, margin: 5 }}
           />
-          <Text style={{ fontWeight: "bold", fontSize: 18 }}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 18,
+              color: "#e48d31",
+              textAlign: "justify"
+            }}
+          >
             {this.props.title}
           </Text>
-          <Text style={{ marginHorizontal: 5, textAlign: 'justify', marginTop: 10 }}>
+          <Text
+            style={{ marginHorizontal: 5, textAlign: "justify", marginTop: 10 }}
+          >
             {this.props.details.substring(0, 100)}
           </Text>
         </TouchableOpacity>
@@ -61,10 +70,34 @@ class NewsRow extends React.Component {
             <Text style={styles.text}>{this.props.title}</Text>
             <Image
               source={{ uri: this.props.image }}
-              style={{ width: sWidth, height: 0.4 * sHeight }}
+              style={{
+                width: sWidth - 40,
+                height: 0.3 * sHeight,
+                marginLeft: 20,
+                resizeMode: "contain"
+              }}
             />
-            <Text>{this.props.modified_at.substring(0, 10)}</Text>
-            <Text style={{ marginHorizontal: 20, textAlign: 'justify', marginTop: 20 }}>{this.props.details}</Text>
+            <Text style={{ marginLeft: 20, color: "#4b2727" }}>
+              {this.props.modified_at.substring(0, 10)}
+            </Text>
+            <View
+              style={{
+                width: sWidth - 40,
+                marginLeft: 20,
+                height: 1,
+                backgroundColor: "#D3D3D3",
+                marginTop: 10
+              }}
+            />
+            <Text
+              style={{
+                marginHorizontal: 20,
+                textAlign: "justify",
+                marginTop: 20
+              }}
+            >
+              {this.props.details}
+            </Text>
           </ScrollView>
         </Modal>
       </View>
@@ -118,9 +151,9 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    color: "black",
+    color: "#e48d31",
     fontSize: 22,
-    textAlign: 'justify',
+    textAlign: "justify",
     marginHorizontal: 20
   }
 });

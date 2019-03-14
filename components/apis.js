@@ -2,8 +2,6 @@ import { store } from "../redux/store";
 
 const host = "http://www.artesaniasdeboyaca.com";
 export const login = async (email, password) => {
-  console.log("fired");
-
   const response = await fetch(`${host}/userprofile/api/login/`, {
     method: "POST",
     headers: {
@@ -16,22 +14,19 @@ export const login = async (email, password) => {
   });
   if (response.ok) {
     const results = await response.json();
-    console.log(results);
     return results;
+  } else {
+    const errMessage = await response.text();
+    throw new Error(errMessage);
   }
-  const errMessage = await response.text();
-  console.log("normal error message", errMessage);
-  throw new Error(errMessage);
 };
 export const register = async (
   email,
   username,
-  first_name,
-  last_name,
-  password
+  password,
+  national_id,
+  full_name
 ) => {
-  console.log("fired");
-
   const response = await fetch(`${host}/userprofile/api/register/`, {
     method: "POST",
     headers: {
@@ -40,19 +35,21 @@ export const register = async (
     body: JSON.stringify({
       email,
       username,
-      first_name,
-      last_name,
-      password
+      password,
+      national_id,
+      full_name
     })
   });
   if (response.ok) {
-    const results = await response.json();
-
-    return results;
+    const initialResults = await response.json();
+    if (initialResults.status === "ok") {
+      results = await login(email, password);
+      return results;
+    }
+  } else {
+    const errMessage = await response.text();
+    throw new Error(errMessage);
   }
-  const errMessage = await response.text();
-  console.log("normal error message", errMessage);
-  throw new Error(errMessage);
 };
 
 export const fetchProducts = async () => {
@@ -170,8 +167,8 @@ export const addToCart = async (product_id, quantity) => {
 export const fetchProductsBySubCat = async id => {
   response = await fetch(
     "http://www.artesaniasdeboyaca.com/products/api/subcategoryproducts/" +
-    id +
-    "/"
+      id +
+      "/"
   );
   if (response.ok) {
     const results = await response.json();
@@ -197,16 +194,17 @@ export const fetchProfile = async () => {
     const results = await response.json();
 
     return results;
+  } else {
+    const errMessage = await response.text();
+    throw new Error(errMessage);
   }
-  const errMessage = await response.text();
-  throw new Error(errMessage);
 };
 
 export const updateProfile = async (
-  first_name,
-  last_name,
-  phone_number,
-  address
+  full_name,
+  national_id,
+  address,
+  phone_number
 ) => {
   token = store.getState().user.token;
   const headers = {
@@ -215,31 +213,24 @@ export const updateProfile = async (
   if (token) {
     headers.Authorization = `Token ${token}`;
   }
-  response = await fetch(`${host}/userprofile/api/profile/`, {
+  response = await fetch(`${host}/userprofile/api/patching_profile/`, {
     method: "PATCH",
     headers: headers,
     body: JSON.stringify({
-      phone_number,
-      address
+      full_name,
+      national_id,
+      address,
+      phone_number
     })
   });
-  otherResponse = await fetch(`${host}/userprofile/api/patching_profile/`, {
-    method: "PATCH",
-    headers: headers,
-    body: JSON.stringify({
-      first_name,
-      last_name
-    })
-  });
-  if (response.ok && otherResponse.ok) {
-    const firstResults = await response.json();
-    const otherResults = await otherResponse.json()
-    const results = { ...firstResults, first_name: otherResults.first_name, last_name: otherResults.last_name }
-    console.warn(results)
+
+  if (response.ok) {
+    const results = await response.json();
     return results;
+  } else {
+    const errMessage = await response.text();
+    throw new Error(errMessage);
   }
-  const errMessage = await response.text();
-  throw new Error(errMessage);
 };
 
 export const changePassword = async (old_password, new_password) => {

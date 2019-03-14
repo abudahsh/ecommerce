@@ -3,9 +3,10 @@ import { reducer as network } from "react-native-offline";
 initialState = {
   user: {
     email: "",
-    firstName: "",
-    lastName: "",
+    fullName: "",
+    nationalID: "",
     phone: "",
+    address: "",
     token: ""
   },
   products: [],
@@ -91,14 +92,11 @@ const clientReducer = (state = initialState.client, action) => {
     case "FETCHING_CATEGORY_ONE_PRODUCT_FAILED":
       return { ...state, isLoading: false, message: action.payload.message };
 
-
-
     case "CONNECTION_OFFLINE":
-      return { ...state, message: action.payload.message, isLoading: false }
-
+      return { ...state, message: action.payload.message, isLoading: false };
 
     case "LOGGED_OUT":
-      return { ...state, isAuthenticated: false }
+      return { ...state, isAuthenticated: false };
   }
 
   return state;
@@ -109,16 +107,12 @@ const userReducer = (state = initialState.user, action) => {
     case "LOG_IN_SUCCESS":
       return {
         ...state,
-        email: action.payload.email,
-        token: action.payload.token,
-
+        token: action.payload.token
       };
     case "REGISTER_SUCCESS":
       return {
         ...state,
-        email: action.payload.email,
-        token: action.payload.token,
-
+        token: action.payload.token
       };
     case "FETCHING_PROFILE_SUCCESS":
     case "UPDATING_PROFILE_SUCCESS":
@@ -126,17 +120,14 @@ const userReducer = (state = initialState.user, action) => {
         ...state,
         email: action.payload.email,
         username: action.payload.username,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
+        fullName: action.payload.fullName,
+        nationalID: action.payload.nationalID,
         phone: action.payload.phone,
-        address: action.payload.address,
-
-      }
+        address: action.payload.address
+      };
     case "LOGGED_OUT":
     case "CHANGE_PASSWORD_SUCCESS":
-      return { ...state, token: action.payload.token }
-
-
+      return { ...state, token: action.payload.token };
   }
   return state;
 };

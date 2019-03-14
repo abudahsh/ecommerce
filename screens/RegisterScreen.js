@@ -15,8 +15,8 @@ import { store } from "./../redux/store";
 import Toast from "react-native-simple-toast";
 class RegisterScreen extends React.Component {
   handleLogin = () => {
-    var { email, username, firstName, lastName, Password } = this.state;
-    this.props._registerUser(email, username, firstName, lastName, Password);
+    var { email, username, Password, nationalID, fullName } = this.state;
+    this.props._registerUser(email, username, Password, nationalID, fullName);
   };
   componentWillUpdate() {
     if (store.getState().client.isAuthenticated) {
@@ -26,9 +26,8 @@ class RegisterScreen extends React.Component {
   state = {
     email: "",
     username: "",
-    firstName: "",
-    lastName: "",
-    phone: "",
+    fullName: "",
+    nationalID: "",
     Password: ""
   };
   componentWillReceiveProps(nextProps) {
@@ -89,26 +88,9 @@ class RegisterScreen extends React.Component {
               textAlign: "center"
             }}
             key={"Nombres"}
-            placeholder="Nombres"
-            value={this.state.firstName}
-            onChangeText={firstName => this.setState({ firstName })}
-            underlineColorAndroid="transparent"
-            returnKeyLabel="siguiente"
-            returnKeyType="next"
-          />
-          <TextInput
-            style={{
-              width: 0.6 * sWidth,
-              borderRadius: 10,
-              height: 40,
-              backgroundColor: "#e4e4e4",
-              marginBottom: 5,
-              textAlign: "center"
-            }}
-            key="Apellidos"
-            placeholder="Apellidos"
-            value={this.state.lastName}
-            onChangeText={lastName => this.setState({ lastName })}
+            placeholder="Nombre completo"
+            value={this.state.fullName}
+            onChangeText={fullName => this.setState({ fullName })}
             underlineColorAndroid="transparent"
             returnKeyLabel="siguiente"
             returnKeyType="next"
@@ -123,11 +105,11 @@ class RegisterScreen extends React.Component {
               marginBottom: 5,
               textAlign: "center"
             }}
-            key="Teléfono"
-            placeholder="Teléfono"
+            key="nacional"
+            placeholder="Identificación nacional"
             keyboardType="numeric"
-            value={this.state.phone}
-            onChangeText={phone => this.setState({ phone })}
+            value={this.state.nationalID}
+            onChangeText={nationalID => this.setState({ nationalID })}
             underlineColorAndroid="transparent"
             returnKeyLabel="siguiente"
             returnKeyType="next"
@@ -183,8 +165,8 @@ const mapStateToProps = state => ({
   message: state.client.message
 });
 const mapDispatchToProps = dispatch => ({
-  _registerUser: (email, username, firstName, lastName, Password) =>
-    dispatch(_registerUser(email, username, firstName, lastName, Password))
+  _registerUser: (email, username, Password, nationalID, fullName) =>
+    dispatch(_registerUser(email, username, Password, nationalID, fullName))
 });
 export default connect(
   mapStateToProps,

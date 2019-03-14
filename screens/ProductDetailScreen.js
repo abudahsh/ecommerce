@@ -150,9 +150,9 @@ class ProductDetailScreen extends Component {
                   onPress={
                     this.state.num < 99
                       ? () =>
-                        this.setState({
-                          num: String(Number(this.state.num) + 1)
-                        })
+                          this.setState({
+                            num: String(Number(this.state.num) + 1)
+                          })
                       : () => null
                   }
                 >
@@ -166,9 +166,9 @@ class ProductDetailScreen extends Component {
                   onPress={
                     this.state.num > 1
                       ? () =>
-                        this.setState({
-                          num: String(Number(this.state.num) - 1)
-                        })
+                          this.setState({
+                            num: String(Number(this.state.num) - 1)
+                          })
                       : () => null
                   }
                 >
@@ -214,7 +214,10 @@ class ProductDetailScreen extends Component {
             </TouchableOpacity>
           </View>
           <View style={{ flexDirection: "row", flex: 1, height: 150 }}>
-            <ProdctTabs />
+            <ProdctTabs
+              description={this.props.product.description}
+              attributes={this.props.product.additional_attributes}
+            />
           </View>
           <View
             style={{
@@ -289,7 +292,7 @@ class ProductDetailScreen extends Component {
                     marginLeft: 2
                   }}
                 >
-                  <Text style={{ paddingHorizontal: 6 }}>
+                  <Text style={{ paddingHorizontal: 6, paddingVertical: 10 }}>
                     {this.props.product.seller.description}
                   </Text>
                 </View>
@@ -317,7 +320,6 @@ const styles = StyleSheet.create({
 });
 const mapStateToProps = state => ({
   product: state.currentProduct,
-
   isLoading: state.client.isLoading
 });
 const mapDispatchToProps = dispatch => ({

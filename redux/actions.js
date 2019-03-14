@@ -55,22 +55,21 @@ export const _loginUser = (email, password) => dispatch => {
 export const _registerUser = (
   email,
   username,
-  first_name,
-  last_name,
-  password
+  password,
+  national_id,
+  full_name
 ) => dispatch => {
   dispatch({ type: "REGISTER_SENT", payload: { isLoading: true } });
   const isConnected = store.getState().network.isConnected;
   if (isConnected) {
-    register(email, username, first_name, last_name, password)
+    register(email, username, password, national_id, full_name)
       .then(results => {
         // const { user, token, profile } = results;
-        const { token, email } = results;
+        const { token } = results;
         dispatch({
           type: "REGISTER_SUCCESS",
           payload: {
             token,
-            email,
             isAuthenticated: true,
             isLoading: false,
             message: "Te registras exitosamente"
@@ -391,10 +390,10 @@ export const _fetchProfile = () => dispatch => {
           isLoading: false,
           username: results.user_name,
           email: results.email,
-          firstName: results.first_name,
-          lastName: results.last_name,
+          fullName: results.full_name,
           phone: results.phone_number,
-          address: results.address
+          address: results.address,
+          nationalID: results.national_id
         }
       });
     })
@@ -407,10 +406,10 @@ export const _fetchProfile = () => dispatch => {
 };
 
 export const _updateProfile = (
-  first_name,
-  last_name,
-  phone_number,
-  address
+  full_name,
+  national_id,
+  address,
+  phone_number
 ) => dispatch => {
   dispatch({
     type: "UPDATING_PROFILE_STARTED",
@@ -419,7 +418,7 @@ export const _updateProfile = (
       message: "UPDATING request is in progress"
     }
   });
-  updateProfile(first_name, last_name, phone_number, address)
+  updateProfile(full_name, national_id, address, phone_number)
     .then(results => {
       dispatch({
         type: "UPDATING_PROFILE_SUCCESS",
@@ -427,10 +426,10 @@ export const _updateProfile = (
           isLoading: false,
           username: results.user_name,
           email: results.email,
-          firstName: results.first_name,
-          lastName: results.last_name,
+          fullName: results.full_name,
           phone: results.phone_number,
           address: results.address,
+          nationalID: national_id,
           message: "La actualización del perfil terminó con éxito"
         }
       });
