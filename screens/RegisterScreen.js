@@ -150,7 +150,7 @@ class RegisterScreen extends React.Component {
               }}
             >
               <Text style={{ color: "#e48d31", fontWeight: "bold" }}>
-                Guardor
+                Guardar
               </Text>
             </TouchableOpacity>
           </View>

@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
-  Dimensions
+  Dimensions,
+  Platform
 } from "react-native";
 import { connect } from "react-redux";
 import { _getStarted } from "./../redux/actions";
@@ -85,7 +86,7 @@ class GetStartScreen extends Component {
                     color: "white",
                     fontSize: 18,
                     fontFamily: "Arial",
-                    textAlign: "justify"
+                    textAlign: Platform.OS === "ios" ? "justify" : "center"
                   }}
                 >
                   El producto artesanal de Boyacá involucra cultura, tradición y
@@ -150,7 +151,7 @@ class GetStartScreen extends Component {
                     color: "white",
                     fontFamily: "Arial",
                     fontSize: 18,
-                    textAlign: "justify"
+                    textAlign: Platform.OS === "ios" ? "justify" : "center"
                   }}
                 >
                   La importancia de buscar la cercanía entre las artesanías
@@ -213,7 +214,7 @@ class GetStartScreen extends Component {
                     color: "white",
                     fontFamily: "Arial",
                     fontSize: 18,
-                    textAlign: "justify"
+                    textAlign: Platform.OS === "ios" ? "justify" : "center"
                   }}
                 >
                   La oportunidad central está en que los artesanos de la región

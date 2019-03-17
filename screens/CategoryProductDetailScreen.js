@@ -213,7 +213,13 @@ class CategoryProductDetailScreen extends Component {
               </View>
             </TouchableOpacity>
           </View>
-          <View style={{ flexDirection: "row", flex: 1, height: 150 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              flex: 1,
+              height: Platform.OS === "ios" ? 150 : 0.4 * sHeight
+            }}
+          >
             <ProdctTabs
               description={this.props.product.description}
               attributes={this.props.product.additional_attributes}
